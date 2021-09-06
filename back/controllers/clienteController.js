@@ -52,7 +52,7 @@ const login_cliente = async function(req,res){
 
         bcrypt.compare(data.email, user.email, async function(res,check){
             if(check){
-
+               /*  "camilo termine esta parte" */
             }
 
         });
