@@ -50,18 +50,16 @@ const login_cliente = async function(req,res){
     }else{
         let user = cliente_arr[0];
 
-        bcrypt.compare(data.email, user.email, async function(res,check){
+        bcrypt.compare(data.password, user.password, async function(error,check){
             if(check){
-               /*  "camilo termine esta parte" */
+                res.status(200).send({data:user});
+            }else{
+                res.status(200).send({message: 'La contraseña no coincide', data: undefined});
             }
 
         });
 
-        if(user.password == data.email){
-            res.status(200).send({data:user});
-        }else{
-            res.status(200).send({message: 'La contraseña no coincide', data: undefined});
-        }
+        
        
         
     }
