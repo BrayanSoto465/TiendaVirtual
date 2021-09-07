@@ -3,47 +3,34 @@
 var Cliente = require('../models/cliente');
 var bcrypt = require('bcrypt-nodejs');
 
-const registro_cliente = async function(req,res){
-    //
-    var data = req.body;
-    var clientes_arr =[];
+const clienteController = {}
 
-    clientes_arr = await Cliente.find({email:data.email});
 
-    if(clientes_arr.length == 0){
-        /*  */
+clienteController.createCliente = async (req, res) => {
+    const data = req.body;
+    const cliente = await Cliente.find({email: data.email});
 
+    if(cliente.length == 0){
         if(data.password){
-            bcrypt.hash(data.password,null,null, async function(err,hash){
+            bcrypt.hash(data.password, null, null, async function(err, hash) {
                 if(hash){
                     data.password = hash;
                     var reg = await Cliente.create(data);
-                    res.status(200).send({data:reg});
-                }else{
-                    res.status(200).send({message:'ERROR',data:undefined});
-                }
-            })
+                    res.status(200).send({mensaje:reg});
+                }    
+            });
         }else{
-            res.status(200).send({message:'no hay una contraseña',data:undefined});
+            res.status(200).send({mensaje:'no hay contraseña',data: undefined});
         }
-
-        
     }else{
-        res.status(200).send({message:'El correo ya existe',data:undefined});
-    }
-
-   
-    
-   
-
-    
+        res.status(200).send({mensaje:'Cliente ya existe',data: undefined});
+    } 
 }
+module.exports = clienteController;
 
-const login_cliente = async function(req,res){
-    var data = req.body;
-    var cliente_arr = [];
-
-    cliente_arr = await Cliente.find({email:data.email});
+const login = async function(req,res){
+    const data = req.body;
+    const cliente = await Cliente.find({email:data.email});
 
     if(cliente_arr.length == 0){
         res.status(200).send({message: 'No se encontro el correo', data: undefined});

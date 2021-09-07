@@ -1,10 +1,10 @@
 'use strict'
 
-var express = require('express');
-var adminController = require('../controllers/AdminController');
+const { Router } = require('express');
+const router = Router();
 
-var api = express.Router();
+const adminController = require('../controllers/cliente.controller');
 
-api.post('/registro_admin',adminController.registro_admin);
+router.post('/registro', adminController.createAdmin);
 
-module.exports = api;
+module.exports = router;

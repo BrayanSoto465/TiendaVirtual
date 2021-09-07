@@ -28,7 +28,7 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use('/api', require('./routers/admin.routes'));
-app.use('/api', require('./routers/cliente.routes'));
+app.use('/api/administrador', require('./routers/admin.routes'));
+app.use('/api/cliente', require('./routers/cliente.routes'));
 
 module.exports = app;
