@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt-nodejs');
 
 const adminController = {}
 
-adminController.createAdmin = async (req, res) => {
+
+adminController.create = async (req, res) => {
     const data = req.body;
     const admin = await Admin.find({email: data.email});
 
