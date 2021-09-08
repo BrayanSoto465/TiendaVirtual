@@ -27,4 +27,22 @@ adminController.create = async (req, res) => {
     }
 }
 
+adminController.login = async (req,res) => {
+    const data = req.body;
+    const administrador = await Admin.find({ email:data.email });
+    
+    if(administrador.length == 0){
+        res.status(200).send({message: 'No se encontro el correo', data: undefined});
+    }else{
+        let user = administrador[0];
+        bcrypt.compare(data.password, user.password, async function(error, check){
+            if(check){
+                res.status(200).send({message: user});
+            }else{
+                res.status(200).send({message: 'Contraseña no coincide', data: undefined});
+            }    
+        });
+    }   
+}
+
 module.exports = adminController;

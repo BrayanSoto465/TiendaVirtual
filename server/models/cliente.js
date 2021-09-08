@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var clienteSchema = Schema({
- nombresC: {type: String, required: true},
+ nombres: {type: String, required: true},
  email: {type: String, required: true},
  password: {type: String, required: true},
  perfil: {type: String, default: 'perfil.png', required: true},

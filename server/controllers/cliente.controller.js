@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt-nodejs');
 const clienteController = {}
 
 clienteController.create = async (req, res) => {
-    const data = req.body;
-    const cliente = await Cliente.find({email: data.email});
+    var data = req.body;
+    var cliente = await Cliente.find({email: data.email});
 
     if(cliente.length == 0){
         if(data.password){
@@ -28,27 +28,19 @@ clienteController.create = async (req, res) => {
 
 clienteController.login = async (req,res) => {
     const data = req.body;
-    const cliente = await Cliente.find({email:data.email});
+    const cliente = await Cliente.find({ email:data.email });
     
     if(cliente.length == 0){
         res.status(200).send({message: 'No se encontro el correo', data: undefined});
     }else{
         let user = cliente[0];
-
-        bcrypt.compare(data.email, user.email, async function(res,check){
+        bcrypt.compare(data.password, user.password, async function(error, check){
             if(check){
                 res.status(200).send({message: user});
             }else{
                 res.status(200).send({message: 'Contraseña no coincide', data: undefined});
-            }
-            
+            }    
         });
-        
-        if(user.password == data.email){
-            res.status(200).send({data:user});
-        }else{
-            res.status(200).send({message: 'La contraseña no coincide', data: undefined});
-        }
     }   
 }
 

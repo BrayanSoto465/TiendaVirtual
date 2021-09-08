@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var AdminSchema = Schema({
- nombresC: {type: String, required: true},
+ nombres: {type: String, required: true},
  email: {type: String, required: true},
  password: {type: String, required: true},
  telefono: {type: String, required: true},
@@ -12,4 +12,4 @@ var AdminSchema = Schema({
  
 });
 
-module.exports = mongoose.model('admin',AdminSchema);
+module.exports = mongoose.model('admin', AdminSchema);
