@@ -2,6 +2,7 @@
 
 const Cliente = require('../models/cliente');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('../helpers/jwt');
 
 const clienteController = {}
 
@@ -36,7 +37,10 @@ clienteController.login = async (req,res) => {
         let user = cliente[0];
         bcrypt.compare(data.password, user.password, async function(error, check){
             if(check){
-                res.status(200).send({message: user});
+                res.status(200).send({
+                    message: user,
+                    token: jwt.createToken(user)
+                });
             }else{
                 res.status(200).send({message: 'Contraseña no coincide', data: undefined});
             }    
