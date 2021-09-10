@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NgForm } from '@angular/forms'
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -13,18 +15,53 @@ declare var iziToast: any;
 })
 export class LoginComponent implements OnInit {
 
-  public user: any = { };
+  public user: any = {};
+  public usuario: any = {}; 
+  public token: any = '';
 
-  constructor() {   }
-
-  ngOnInit(): void {
+  constructor(private _adminServices: AdminService, private _router: Router) {
+    this.token = this._adminServices.getToken();
   }
 
-  login(loginForm : NgForm){
-    if(loginForm.valid){
-      console.log(this.user);
-      alert("Es Valido")
-    }else{
+  ngOnInit(): void {
+    if(this.token){
+      this._router.navigate(['/']);
+    }
+  }
+
+  login(loginForm: NgForm) {
+    if (loginForm.valid) {
+
+      let data = {
+        email: this.user.email,
+        password: this.user.password
+      }
+
+      this._adminServices.login(data).subscribe(
+        response => {
+          if (response.data == undefined) {
+            iziToast.show({
+              title: 'ERROR',
+              titleColor: '#FF0000',
+              class: 'text-danger',
+              position: 'topRight',
+              message: response.message
+            });
+          }else{
+            this.usuario = response.message;
+
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('_id', response.data._id);
+
+            this._router.navigate(['/']);
+          }
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
       iziToast.show({
         title: 'ERROR',
         titleColor: '#FF0000',

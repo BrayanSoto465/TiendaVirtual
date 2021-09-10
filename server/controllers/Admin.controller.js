@@ -39,7 +39,7 @@ adminController.login = async (req,res) => {
         bcrypt.compare(data.password, user.password, async function(error, check){
             if(check){
                 res.status(200).send({
-                    message: user,
+                    data: user,
                     token: jwt.createToken(user)
                 });
             }else{
