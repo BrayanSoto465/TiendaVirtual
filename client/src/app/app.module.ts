@@ -16,14 +16,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   declarations: [
     AppComponent,
     InicioComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     //HttpClient,
     HttpClientModule,
-    SidebarComponent,
+    //SidebarComponent,
     AppRoutingModule,
     routing
   ],
