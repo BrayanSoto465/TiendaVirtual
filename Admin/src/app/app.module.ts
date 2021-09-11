@@ -10,23 +10,23 @@ import { routing } from './app.routing';
 
 import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { IndexClienteComponent } from './components/clientes/index-cliente/index-cliente.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     LoginComponent,
+    IndexClienteComponent,
     SidebarComponent,
-    IndexClienteComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     //HttpClient,
     HttpClientModule,
-    SidebarComponent,
+    //SidebarComponent,
     AppRoutingModule,
     routing
   ],
