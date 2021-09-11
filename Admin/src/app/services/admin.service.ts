@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-
-import { GLOBAL } from './global'
+import { GLOBAL } from './GLOBAL';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,44 @@ export class AdminService {
 
   public url;
 
-  constructor(private _http: HttpClient) { 
+  constructor(private _http: HttpClient) {
     this.url = GLOBAL.url;
   }
 
-  login(data: Object): Observable<any>{
+  login(data: Object): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.post(this.url + 'administrador/login', data, {headers: headers});
+    return this._http.post(this.url + 'administrador/login', data, { headers: headers });
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
+
+  public isAuthenticated(allowRoles: string[]): boolean {
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const helper = new JwtHelperService();
+      var decodedToken = helper.decodeToken(token);
+
+      console.log(decodedToken);
+
+      if (!decodedToken) {
+        console.log('NO ACCCESO');
+        localStorage.removeItem('token');
+        return false;
+      }
+
+    } catch (error) {
+      localStorage.removeItem('token');
+      return false;
+    }
+    return allowRoles.includes(decodedToken['role']);
+  }
+
 }

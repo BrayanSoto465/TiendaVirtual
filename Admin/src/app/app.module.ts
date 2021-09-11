@@ -26,7 +26,7 @@ import { IndexClienteComponent } from './components/clientes/index-cliente/index
     FormsModule,
     //HttpClient,
     HttpClientModule,
-    //SidebarComponent,
+    SidebarComponent,
     AppRoutingModule,
     routing
   ],
