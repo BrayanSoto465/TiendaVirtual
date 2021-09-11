@@ -13,7 +13,7 @@ export class IndexClienteComponent implements OnInit {
   public filtro_correo = '';
 
   public page = 1;
-  public pageSize = 1;
+  public pageSize = 2;
 
   constructor(private _clienteService : ClienteService) { }
 
