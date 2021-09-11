@@ -48,4 +48,9 @@ clienteController.login = async (req,res) => {
     }   
 }
 
+clienteController.listarFiltro = async (req, res) => {
+    const reg = await Cliente.find();
+    res.status(200).send({data: reg});
+}
+
 module.exports = clienteController;
