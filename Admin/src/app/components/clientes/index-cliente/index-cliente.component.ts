@@ -8,60 +8,43 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class IndexClienteComponent implements OnInit {
 
-  public clientes : Array<any> = [];
-  public filtro_nombre = ''; 
-  public filtro_correo = '';
+  public clientes: Array<any> = [];
+  public filtro_Buscar = '';
 
   public page = 1;
   public pageSize = 2;
 
-  constructor(private _clienteService : ClienteService) { }
+  constructor(private _clienteService: ClienteService) { }
 
   ngOnInit(): void {
     this.init_data();
   }
 
-  init_data(){
-    this._clienteService.listar(null, null).subscribe(
-      response=>{
+  init_data() {
+    this._clienteService.listar(null).subscribe(
+      response => {
         this.clientes = response.data;
       },
-      error=>{
+      error => {
         console.log(error);
       }
     );
   }
 
-  filtro(tipo : String){
-    if(tipo == 'nombre'){
-      if(this.filtro_nombre){
-        this._clienteService.listar(tipo, this.filtro_nombre).subscribe(
-          response=>{
-            this.clientes = response.data;
-          },
-          error=>{
-            console.log(error);
-          }
-        );
-      }else{
-        this.init_data();
-      }
-    }else if(tipo == 'correo'){
-      if(this.filtro_correo){
-        this._clienteService.listar(tipo, this.filtro_correo).subscribe(
-          response=>{
-            this.clientes = response.data;
-          },
-          error=>{
-            console.log(error);
-          }
-        );
-      }else{
-        this.init_data();
-      }
+  filtro() {
+    if (this.filtro_Buscar) {
+      this._clienteService.listar(this.filtro_Buscar).subscribe(
+        response => {
+          this.clientes = response.data;
+          console.log(this.filtro_Buscar);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.init_data();
     }
-
-    
   }
 
 }
