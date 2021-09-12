@@ -15,7 +15,11 @@ export class IndexClienteComponent implements OnInit {
   constructor(private _clienteService : ClienteService) { }
 
   ngOnInit(): void {
-    this._clienteService.listar().subscribe(
+    this.init_data();
+  }
+
+  init_data(){
+    this._clienteService.listar(null, null).subscribe(
       response=>{
         this.clientes = response.data;
       },
@@ -26,9 +30,35 @@ export class IndexClienteComponent implements OnInit {
   }
 
   filtro(tipo : String){
-    console.log(tipo); 
-    console.log(this.filtro_nombre); 
-    console.log(this.filtro_correo); 
+    if(tipo == 'nombre'){
+      if(this.filtro_nombre){
+        this._clienteService.listar(tipo, this.filtro_nombre).subscribe(
+          response=>{
+            this.clientes = response.data;
+          },
+          error=>{
+            console.log(error);
+          }
+        );
+      }else{
+        this.init_data();
+      }
+    }else if(tipo == 'correo'){
+      if(this.filtro_correo){
+        this._clienteService.listar(tipo, this.filtro_correo).subscribe(
+          response=>{
+            this.clientes = response.data;
+          },
+          error=>{
+            console.log(error);
+          }
+        );
+      }else{
+        this.init_data();
+      }
+    }
+
+    
   }
 
 }
