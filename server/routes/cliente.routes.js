@@ -7,5 +7,6 @@ const clienteController = require('../controllers/cliente.controller');
 
 router.post('/registro', clienteController.create);
 router.post('/login', clienteController.login);
+router.get('/listar', clienteController.listarFiltro);
 
 module.exports = router;
