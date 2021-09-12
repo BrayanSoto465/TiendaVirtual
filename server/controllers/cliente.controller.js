@@ -49,8 +49,22 @@ clienteController.login = async (req,res) => {
 }
 
 clienteController.listarFiltro = async (req, res) => {
-    const reg = await Cliente.find();
-    res.status(200).send({data: reg});
+    let tipo = req.params['tipo'];
+    let filtro = req.params['filtro'];
+
+    if(tipo == null || tipo == 'null'){
+        const reg = await Cliente.find();
+        res.status(200).send({data: reg});
+    }else{
+        if(tipo == 'nombre'){
+            let reg = await Cliente.find({ nombres : new RegExp(filtro, 'i')});
+            res.status(200).send({data: reg});
+        }else if(tipo == 'correo'){
+            let reg = await Cliente.find({ email : new RegExp(filtro, 'i')});
+            res.status(200).send({data: reg});
+        }
+    }
+    
 }
 
 module.exports = clienteController;
