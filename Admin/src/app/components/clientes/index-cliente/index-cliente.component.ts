@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-index-cliente',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexClienteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _clienteService : ClienteService) { }
 
   ngOnInit(): void {
   }
