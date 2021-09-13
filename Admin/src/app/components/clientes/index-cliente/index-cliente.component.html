@@ -28,6 +28,7 @@
                         <th>#</th>
                         <th>Nombres</th>
                         <th>Correo</th>
+                        <th>Empresa</th>
                         <th>Telefono</th>
                     </tr>
                 </thead>
@@ -36,12 +37,13 @@
                         <td>{{indice + 1}}</td>
                         <td>{{cliente.nombres}}</td>
                         <td>{{cliente.email}}</td>
+                        <td>{{cliente.empresa}}</td>
                         <td>{{cliente.telefono}}</td>
                         <td>
                             <div class="btn-group dropdown d-inline-block mb-3 mb-2">
                                 <button type="button" class="btn  btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opciones
-                  </button>
+                                Opciones
+                                </button>
                                 <div class="dropdown-menu">
                                     <a href="#" class="dropdown-item">Editar cliente</a>
                                     <a href="#" class="dropdown-item">Eliminar cliente</a>
