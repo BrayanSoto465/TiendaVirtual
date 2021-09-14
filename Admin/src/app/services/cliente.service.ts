@@ -14,8 +14,13 @@ export class ClienteService {
     this.url = GLOBAL.url;
   }
 
-  listar(filtro:String | null): Observable<any> {
+  listar(filtro:string | null): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(this.url + 'cliente/listar/'+filtro, { headers: headers });
+  }
+
+  create_admin(data : Object,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.post(this.url + 'cliente/registro/administrador', data, { headers: headers });
   }
 }

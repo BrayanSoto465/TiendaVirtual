@@ -60,4 +60,25 @@ clienteController.listarFiltro = async(req, res) => {
     }
 }
 
+clienteController.createAdmin = async(req, res) => {
+    console.log(req.user);
+    if (req.user) {
+        console.log(req.user.role);
+        if (req.user.role == 'administrador') {
+            var data = req.body;
+
+            bcrpt.hash('123456789', null, null, async function(err, hash) {
+                if (hash) {
+                    data.password = hash;
+                    var reg = await Cliente.create(data);
+                    res.status(200).send({ data: reg });
+                } else {
+                    res.status(200).send({ message: 'Hubo un error en el servidor', data: undefined });
+                }
+            });
+        }
+    }
+}
+
+module.exports = clienteController;
 module.exports = clienteController;
