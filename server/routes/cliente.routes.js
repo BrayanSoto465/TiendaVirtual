@@ -6,10 +6,11 @@ const router = Router();
 var auth = require('../middlewares/authenticate');
 
 const clienteController = require('../controllers/cliente.controller');
+const auth = require('../middlewares/authenticate');
 
 router.post('/registro', clienteController.create);
 router.post('/login', clienteController.login);
-router.get('/listar/:filtro?', clienteController.listarFiltro);
+router.get('/listar/:filtro?', auth.auth, clienteController.listarFiltro);
 router.post('/registro/administrador', auth.auth, clienteController.createAdmin);
 
 module.exports = router;

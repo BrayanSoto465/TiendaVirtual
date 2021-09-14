@@ -8,7 +8,7 @@ import { CreateClienteComponent } from './components/clientes/create-cliente/cre
 import { AdminGuard } from "./guards/admin.guard";
 
 const appRoute : Routes = [
-    {path: '', component: InicioComponent, canActivate: [AdminGuard]},
+    {path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
     {path: 'panel', children: [
         {path: 'clientes', component: IndexClienteComponent, canActivate: [AdminGuard]} ,
         {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]}    

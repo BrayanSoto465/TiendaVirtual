@@ -49,14 +49,23 @@ clienteController.login = async(req, res) => {
 }
 
 clienteController.listarFiltro = async(req, res) => {
-    let filtro = req.params['filtro'];
-    if (filtro == 'null' || filtro == null) {
-        let reg = await Cliente.find({});
-        res.status(200).send({ data: reg });
+    console.log(req.user);
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            let filtro = req.params['filtro'];
+            if (filtro == 'null' || filtro == null) {
+                let reg = await Cliente.find({});
+                res.status(200).send({ data: reg });
+            } else {
+                let regExp = new RegExp(filtro, 'i');
+                let reg = await Cliente.find({ $or: [{ nombres: regExp }, { email: regExp }] });
+                res.status(200).send({ data: reg });
+            }
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
     } else {
-        let regExp = new RegExp(filtro, 'i');
-        let reg = await Cliente.find({ $or: [{ nombres: regExp }, { email: regExp }] });
-        res.status(200).send({ data: reg });
+        res.status(500).send({ message: 'NoAcces' });
     }
 }
 
