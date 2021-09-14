@@ -3,8 +3,6 @@
 const { Router } = require('express');
 const router = Router();
 
-var auth = require('../middlewares/authenticate');
-
 const clienteController = require('../controllers/cliente.controller');
 const auth = require('../middlewares/authenticate');
 

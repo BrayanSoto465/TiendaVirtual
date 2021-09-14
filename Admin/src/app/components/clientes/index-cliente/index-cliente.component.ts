@@ -14,11 +14,10 @@ export class IndexClienteComponent implements OnInit {
 
   public page = 1;
   public pageSize = 2;
-  public token;
+  public token: any = '';
 
   constructor(private _clienteService: ClienteService, private _adminService: AdminService ) {
     this.token = this._adminService.getToken();
-    
    }
   
 
