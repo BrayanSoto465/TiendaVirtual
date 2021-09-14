@@ -70,13 +70,11 @@ clienteController.listarFiltro = async(req, res) => {
 }
 
 clienteController.createAdmin = async(req, res) => {
-    console.log(req.user);
     if (req.user) {
-        console.log(req.user.role);
         if (req.user.role == 'administrador') {
             var data = req.body;
 
-            bcrpt.hash('123456789', null, null, async function(err, hash) {
+            bcrypt.hash('123456789', null, null, async function(err, hash) {
                 if (hash) {
                     data.password = hash;
                     var reg = await Cliente.create(data);
@@ -89,5 +87,4 @@ clienteController.createAdmin = async(req, res) => {
     }
 }
 
-module.exports = clienteController;
 module.exports = clienteController;
