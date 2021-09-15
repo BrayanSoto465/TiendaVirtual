@@ -45,31 +45,31 @@
                                 Opciones
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a   class="dropdown-item" [routerLink]="['/panel/clientes',cliente._id]" >Editar cliente</a>
-                                    <a  class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+cliente._id">Eliminar cliente</a>
+                                    <a class="dropdown-item" [routerLink]="['/panel/clientes',cliente._id]">Editar cliente</a>
+                                    <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+cliente._id">Eliminar cliente</a>
                                 </div>
                             </div>
 
-            
-                                <div class="modal fade" id="delete-{{cliente._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content">
+
+                            <div class="modal fade" id="delete-{{cliente._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar, {{cliente.nombres}} </h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar, {{cliente.nombres}} </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                           </button>
                                         </div>
                                         <div class="modal-body">
-                                          <p>Desea eliminar este cliente?</p>
+                                            <p>Desea eliminar este cliente?</p>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                          <button type="button" class="btn btn-primary" (click)="eliminar(cliente._id)">Si, eliminar</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary" (click)="eliminar(cliente._id)">Si, eliminar</button>
                                         </div>
-                                      </div>
                                     </div>
-                                  </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

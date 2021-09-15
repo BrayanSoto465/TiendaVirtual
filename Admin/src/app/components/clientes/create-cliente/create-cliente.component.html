@@ -27,24 +27,19 @@
 
                 <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Telefono</label>
-                    <input class="form-control" type="text" placeholder="Telefono" name="telefono" [(ngModel)]="cliente.telefono" required>
+                    <input class="form-control" type="number" placeholder="Telefono" name="telefono" [(ngModel)]="cliente.telefono" required>
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Fecha nacimiento</label>
                     <input class="form-control" type="date" placeholder="Fecha Nacimiento" name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento" required>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">DNI</label>
-                    <input class="form-control" type="number" placeholder="Documento" name="dni" [(ngModel)]="cliente.dni" required>
+                    <label for="validationCustom01" class="form-label">Cedula</label>
+                    <input class="form-control" type="number" placeholder="Documento" name="dni" [(ngModel)]="cliente.cedula" required>
                 </div>
-
-                <div class="col-md-4">
-                    <label for="validationCustom01" class="form-label">Genero</label>
-                    <select class="form-control custom-select" name="genero" [(ngModel)]="cliente.genero">
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </select>
+                <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Empresa</label>
+                    <input class="form-control" type="text" placeholder="Documento" name="empresa" [(ngModel)]="cliente.empresa" required>
                 </div>
             </div>
 

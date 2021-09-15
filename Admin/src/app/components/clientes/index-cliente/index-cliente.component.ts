@@ -59,7 +59,7 @@ export class IndexClienteComponent implements OnInit {
   }
 
   eliminar(id : string){
-    this._clienteService.EliminarAdmin(id,this.token).subscribe(
+    this._clienteService.eliminar_admin(id,this.token).subscribe(
       response=>{
         iziToast.show({
           title: 'SUCCESS',

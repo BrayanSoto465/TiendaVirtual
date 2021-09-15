@@ -33,8 +33,7 @@ export class EditClienteComponent implements OnInit {
       params=>{
         this.id = params['id'];
         
-
-        this._clienteService.clienteAdmin(this.id,this.token).subscribe(
+        this._clienteService.cliente_admin(this.id,this.token).subscribe(
           response=>{
             console.log(response);
             if(response.data == undefined){
@@ -44,7 +43,7 @@ export class EditClienteComponent implements OnInit {
             }
           },
           error=>{
-
+            console.log(error);
           }
         );
       }
@@ -53,7 +52,7 @@ export class EditClienteComponent implements OnInit {
 
   actualizar(updateForm : NgForm){
     if(updateForm.valid){
-      this._clienteService.actualizarAdmin(this.id,this.cliente,this.token).subscribe(
+      this._clienteService.actualizar_admin(this.id,this.cliente,this.token).subscribe(
         response=>{
           iziToast.show({
             title: 'SUCCESS',

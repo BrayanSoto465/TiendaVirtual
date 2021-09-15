@@ -15,7 +15,6 @@ declare var iziToast: any;
 })
 export class CreateClienteComponent implements OnInit {
   public cliente: any = {
-    genero: ''
   };
   public token: any = '';
 
@@ -31,7 +30,6 @@ export class CreateClienteComponent implements OnInit {
       console.log(this.cliente);
       this._clienteService.create_admin(this.cliente,this.token).subscribe(
         response=>{
-          
           iziToast.show({
             title: 'SUCCESS',
             titleColor: '#1DC74C',
