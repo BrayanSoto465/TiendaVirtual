@@ -6,13 +6,15 @@ import { IndexClienteComponent } from './components/clientes/index-cliente/index
 import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 
 import { AdminGuard } from "./guards/admin.guard";
+import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 
 const appRoute : Routes = [
     
     {path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
     {path: 'panel', children: [
         {path: 'clientes', component: IndexClienteComponent, canActivate: [AdminGuard]} ,
-        {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]}    
+        {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]},
+         {path: 'clientes/:id', component: EditClienteComponent, canActivate: [AdminGuard]}   
     ]},
     {path: 'login', component: LoginComponent}
 ];

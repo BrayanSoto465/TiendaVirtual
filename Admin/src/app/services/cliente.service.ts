@@ -23,4 +23,19 @@ export class ClienteService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.post(this.url + 'cliente/registro/administrador', data, { headers: headers });
   }
+
+  clienteAdmin(id : String,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/clienteAdmin/'+id,{ headers: headers });
+  }
+
+  actualizarAdmin(id : string,data : Object,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.put(this.url + 'cliente/actualizarAdmin/'+id, data, { headers: headers });
+  }
+
+  EliminarAdmin(id : string,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.delete(this.url + 'cliente/EliminarAdmin/'+id, { headers: headers });
+  } 
 }

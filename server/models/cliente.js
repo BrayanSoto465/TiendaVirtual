@@ -10,6 +10,7 @@ var clienteSchema = Schema({
  perfil: {type: String, default: 'perfil.png', required: true},
  telefono: {type: String, required: false},
  empresa: {type: String, required: false},
+ createdAt: {type:Date, default: Date.now, require: true}
 });
 
 module.exports = mongoose.model('cliente',clienteSchema);
