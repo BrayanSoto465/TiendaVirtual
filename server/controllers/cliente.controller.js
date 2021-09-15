@@ -83,7 +83,73 @@ clienteController.createAdmin = async(req, res) => {
                     res.status(200).send({ message: 'Hubo un error en el servidor', data: undefined });
                 }
             });
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
         }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.clienteAdmin = async function(req, res) {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            var id = req.params['id'];
+
+            try {
+                var reg = await Cliente.findById({ _id: id });
+                res.status(200).send({ data: reg });
+            } catch (error) {
+                res.status(200).send({ data: undefined });
+            }
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.actualizarAdmin = async function(req, res) {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            var id = req.params['id'];
+            var data = req.body;
+
+            var reg = await Cliente.findByIdAndUpdate({ _id: id }, {
+                nombres: data.nombres,
+                email: data.email,
+                password: data.password,
+                telefono: data.telefono,
+                empresa: data.empresa
+
+            })
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.eliminarAdmin = async function(req, res) {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            var id = req.params['id'];
+            let reg = await Cliente.findByIdAndRemove({ _id: id });
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
     }
 }
 
