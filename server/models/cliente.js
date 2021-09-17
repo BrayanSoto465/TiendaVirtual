@@ -12,7 +12,7 @@ var clienteSchema = Schema({
     cedula: { type: String, required: true },
     empresa: { type: String, required: false },
     created: { type: Date, default: Date.now, require: true },
-    f_nacimiento: { type: Date, required: true }
+    f_nacimiento: { type: String, required: true }
 });
 
 module.exports = mongoose.model('cliente', clienteSchema);

@@ -58,7 +58,7 @@ clienteController.listarFiltro = async(req, res) => {
                 res.status(200).send({ data: reg });
             } else {
                 let regExp = new RegExp(filtro, 'i');
-                let reg = await Cliente.find({ $or: [{ nombres: regExp }, { email: regExp }] });
+                let reg = await Cliente.find({ $or: [{ nombres: regExp }, { email: regExp }, { empresa: regExp }] });
                 res.status(200).send({ data: reg });
             }
         } else {

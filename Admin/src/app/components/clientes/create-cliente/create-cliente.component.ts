@@ -14,9 +14,9 @@ declare var iziToast: any;
   styleUrls: ['./create-cliente.component.css']
 })
 export class CreateClienteComponent implements OnInit {
-  public cliente: any = {
-  };
+  public cliente: any = {};
   public token: any = '';
+  public load_btn = false;
 
   constructor(private _clienteService: ClienteService, private _adminService: AdminService, private _router: Router) { 
     this.token = this._adminService.getToken();
@@ -28,6 +28,7 @@ export class CreateClienteComponent implements OnInit {
   registro(registroForm: NgForm){
     if(registroForm.valid){
       console.log(this.cliente);
+      this.load_btn = true;
       this._clienteService.create_admin(this.cliente,this.token).subscribe(
         response=>{
           iziToast.show({
@@ -47,6 +48,7 @@ export class CreateClienteComponent implements OnInit {
             dni: ''
           };
 
+          this.load_btn = false;
           this._router.navigate(['panel/clientes']);
         },
         error=>{

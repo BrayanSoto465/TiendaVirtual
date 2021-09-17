@@ -20,6 +20,8 @@ export class IndexClienteComponent implements OnInit {
   public page = 1;
   public pageSize = 2;
   public token: any = '';
+
+  public load_data = true;
   
 
   constructor(private _clienteService: ClienteService, private _adminService: AdminService ) {
@@ -35,19 +37,22 @@ export class IndexClienteComponent implements OnInit {
     this._clienteService.listar(null,this.token).subscribe(
       response => {
         this.clientes = response.data;
+        this.load_data = false;
       },
       error => {
+        this.load_data = true;
         console.log(error);
       }
     );
   }
 
   filtro() {
+    this.load_data = true;
     if (this.filtro_Buscar) {
       this._clienteService.listar(this.filtro_Buscar,this.token).subscribe(
         response => {
+          this.load_data = false;
           this.clientes = response.data;
-          console.log(this.filtro_Buscar);
         },
         error => {
           console.log(error);
@@ -72,7 +77,7 @@ export class IndexClienteComponent implements OnInit {
         $('#delete-'+id).modal('hide');
         $('modal-backdrop').removeClass('show');
 
-        this.init_data;
+        this.init_data();
 
       },
       error=>{
