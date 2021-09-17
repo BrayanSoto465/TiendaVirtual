@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { AdminService } from 'src/app/services/admin.service';
 
-
 declare var iziToast: any;
 
 @Component({
