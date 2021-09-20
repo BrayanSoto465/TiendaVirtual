@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NgForm } from '@angular/forms'
+import { AdminService } from 'src/app/services/admin.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 declare var iziToast: any;
+declare var jQuery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-create-producto',
@@ -15,14 +19,37 @@ export class CreateProductoComponent implements OnInit {
     categoria : ''
   };
   public file: File | null = null;
+  public imgSelect : any | ArrayBuffer ='assets/img/error.png';
+  public config : any = {};
+  public token: any;
 
-  constructor() { }
+  constructor(
+    private _productoService : ProductoService,
+    private _adminService : AdminService
+    ) { 
+    
+    this.config = {
+      height:500
+    }
+    this.token = this._adminService.getToken();
+  }
 
   ngOnInit(): void {
   }
 
   registro(registroForm: NgForm){
     if(registroForm.valid){
+      console.log(this.producto);
+      console.log(this.file);
+
+      this._productoService.productoAdmin(this.producto,this.file,this.token).subscribe(
+        response=>{console.log(response);
+        },
+
+        error =>{
+          console.log(error);
+        }
+      );
 
     }else{
       iziToast.show({
@@ -32,10 +59,68 @@ export class CreateProductoComponent implements OnInit {
         position: 'topRight',
         message: 'Los datos del formulario no son validos'
       });
+        $('#input-portada').text('Seleccionar imagen');
+        this.imgSelect = 'assets/img/error.png';
+        this.file = null;
     }
   }
 
   fileChangeEvent(event:any):void{
+    var file: any;
+    if(event.target.files && event.target.files[0]){
+      file = <File>event.target.files[0];
+    
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        titleColor: '#FF0000',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'la imagen no existe'
+      });
+    }
 
+    if(file.size <= 4000000){
+      //asdf
+      if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg') {
+
+        const reader = new FileReader();
+        reader.onload = e => this.imgSelect = reader.result;
+        console.log(this.imgSelect)
+
+        reader.readAsDataURL(file);
+
+        $('#input-portada').text(file.name);
+
+        this.file = file;
+
+      }else{
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'El archivo debe ser una imagen'
+        });
+        $('#input-portada').text('Seleccionar imagen');
+        this.imgSelect = 'assets/img/error.png';
+        this.file = null;
+      }
+
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        titleColor: '#FF0000',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'la imagen no puede superar los 4mb'
+      });
+      $('#input-portada').text('Seleccionar imagen');
+      this.imgSelect = 'assets/img/error.png';
+      this.file = null;
+    }
+    
+    console.log(this.file);
   }
+  
 }

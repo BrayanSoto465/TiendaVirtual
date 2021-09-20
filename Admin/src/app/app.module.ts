@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxTinymceModule } from 'ngx-tinymce';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -38,7 +39,10 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
     //SidebarComponent,
     AppRoutingModule,
     routing,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgxTinymceModule.forRoot({
+      baseURL:'../../../assets/tinymce/'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
