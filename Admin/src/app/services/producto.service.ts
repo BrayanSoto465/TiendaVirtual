@@ -27,6 +27,6 @@ export class ProductoService {
     fd.append('categoria',data.categoria);
     fd.append('portada',file);
 
-    return this._http.post(this.url + 'producto/productoAdmin', fd, { headers: headers });
+    return this._http.post(this.url + 'producto/producto/administrador', fd, { headers: headers });
   }
 }

@@ -7,10 +7,10 @@ const productoController = require('../controllers/producto.controller');
 const auth = require('../middlewares/authenticate');
 
 const multiparty = require('connect-multiparty');
-const path = multiparty({uploadDir: './uploads/productos'});
+const path = multiparty({ uploadDir: './uploads/productos' });
 
 
-router.post('/productoAdmin', [auth.auth,path], productoController.productoAdmin);
+router.post('/producto/administrador', [auth.auth, path], productoController.productoAdmin);
 
 
 module.exports = router;
