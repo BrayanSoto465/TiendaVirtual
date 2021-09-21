@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const adminController = require('../controllers/admin.controller');
+const adminController = require('../controllers/Admin.controller');
 
 router.post('/registro', adminController.create);
 router.post('/login', adminController.login);

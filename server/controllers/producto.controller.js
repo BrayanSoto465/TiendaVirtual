@@ -1,6 +1,8 @@
 'use strict'
 
 const Producto = require('../models/producto');
+var fs = require('fs');
+var path = require('path');
 
 const productoController = {}
 
@@ -47,8 +49,18 @@ productoController.listarFiltro = async(req, res) => {
     }
 }
 
-productoController.getPortada = async(req, res) => {
-    var img = req.params['portada'];
+productoController.Portada = async(req, res) => {
+    var img = req.params['img'];
+
+    console.log(img);
+    fs.stat('uploads/productos/'+ img + ".png" , function(err){
+        if(!err){
+            let path_img = 'uploads/productos/'+ img + ".png";
+            res.status(200).sendFile(path.resolve(path_img));
+        }else{     
+            console.log(err);
+        }
+    }) 
 }
 
 module.exports = productoController;
