@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgForm } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 import { AdminService } from 'src/app/services/admin.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -18,16 +18,12 @@ export class CreateProductoComponent implements OnInit {
   public producto: any = {
     categoria : ''
   };
-  public file: File | null = null;
+  public file: any = null;
   public imgSelect : any | ArrayBuffer ='assets/img/error.png';
   public config : any = {};
   public token: any;
 
-  constructor(
-    private _productoService : ProductoService,
-    private _adminService : AdminService
-    ) { 
-    
+  constructor(private _productoService : ProductoService, private _adminService : AdminService) { 
     this.config = {
       height:500
     }
@@ -42,7 +38,7 @@ export class CreateProductoComponent implements OnInit {
       console.log(this.producto);
       console.log(this.file);
 
-      this._productoService.productoAdmin(this.producto,this.file,this.token).subscribe(
+      this._productoService.create_admin(this.producto,this.file,this.token).subscribe(
         response=>{console.log(response);
         },
 
@@ -65,8 +61,8 @@ export class CreateProductoComponent implements OnInit {
     }
   }
 
-  fileChangeEvent(event:any):void{
-    var file: any;
+  fileChangeEvent(event : any) : void{
+    var file : any;
     if(event.target.files && event.target.files[0]){
       file = <File>event.target.files[0];
     

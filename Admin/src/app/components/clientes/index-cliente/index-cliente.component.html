@@ -17,7 +17,7 @@
     <div class="card-header">
         <form class="form-inline pt-2">
             <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_Buscar" placeholder="Buscar">
+            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar">
         </form>
     </div>
     <div class="card-body">
@@ -68,8 +68,8 @@
                                         <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+cliente._id">Eliminar cliente</a>
                                     </div>
                                 </div>
-    
-    
+
+
                                 <div class="modal fade" id="delete-{{cliente._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">

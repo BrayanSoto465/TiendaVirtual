@@ -49,7 +49,6 @@ clienteController.login = async(req, res) => {
 }
 
 clienteController.listarFiltro = async(req, res) => {
-    console.log(req.user);
     if (req.user) {
         if (req.user.role == 'administrador') {
             let filtro = req.params['filtro'];

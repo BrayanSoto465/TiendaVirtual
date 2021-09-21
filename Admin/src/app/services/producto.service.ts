@@ -15,7 +15,7 @@ export class ProductoService {
     this.url = GLOBAL.url;
   }
 
-  productoAdmin(data : any,file: any,token: string ): Observable<any> {
+  create_admin(data: any, file: any, token: string ): Observable<any> {
     let headers = new HttpHeaders({'Authorization':token});
 
     const fd = new FormData();
@@ -28,5 +28,10 @@ export class ProductoService {
     fd.append('portada',file);
 
     return this._http.post(this.url + 'producto/producto/administrador', fd, { headers: headers });
+  }
+
+  listar(filtro:String  | null, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.get(this.url + 'producto/listar/' + filtro, { headers: headers });
   }
 }

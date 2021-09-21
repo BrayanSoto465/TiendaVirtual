@@ -15,7 +15,7 @@ declare var iziToast: any;
 export class IndexClienteComponent implements OnInit {
 
   public clientes: Array<any> = [];
-  public filtro_Buscar = '';
+  public filtro_buscar = '';
 
   public page = 1;
   public pageSize = 2;
@@ -48,8 +48,8 @@ export class IndexClienteComponent implements OnInit {
 
   filtro() {
     this.load_data = true;
-    if (this.filtro_Buscar) {
-      this._clienteService.listar(this.filtro_Buscar,this.token).subscribe(
+    if (this.filtro_buscar) {
+      this._clienteService.listar(this.filtro_buscar,this.token).subscribe(
         response => {
           this.load_data = false;
           this.clientes = response.data;

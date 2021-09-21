@@ -12,14 +12,14 @@
 
 <div class="card box-shadow-sm">
     <div class="card-header">
-        <h5 style="margin-bottom: 0px;">Filtro de clientes</h5>
+        <h5 style="margin-bottom: 0px;">Filtro de productos</h5>
     </div>
-    <!--div class="card-header">
+    <div class="card-header">
         <form class="form-inline pt-2">
             <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_Buscar" placeholder="Buscar">
+            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar">
         </form>
-    </div-->
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -52,6 +52,16 @@
                 </tbody>
 
                 <ng-container *ngIf="!load_data">
+                    <tbody *ngFor="let producto of productos">
+                        <tr>
+                            <td>#</td>
+                            <td>{{producto.titulo}}</td>
+                            <td>{{producto.stock}}</td>
+                            <td>{{producto.precio}}</td>
+                            <td>{{producto.categoria}}</td>
+                            <td>{{producto.nventas}}</td>
+                        </tr>
+                    </tbody>
                 </ng-container>
 
             </table>

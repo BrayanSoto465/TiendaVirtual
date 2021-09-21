@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-index-producto',
@@ -7,12 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexProductoComponent implements OnInit {
 
-  public load_data = true;
-  public productos: any = {};
+  public load_data = false;
+  public productos: Array<any> = [];
+  public filtro_buscar = '';
+  public token: any = '';
 
-  constructor() { }
+  constructor(private _productoService: ProductoService) { 
+    this.token = localStorage.getItem('token');
+  }
 
   ngOnInit(): void {
+    this._productoService.listar(null, this.token).subscribe(
+      response=>{
+        this.productos = response.data;
+      },
+      error=>{
+
+      }
+    );
+  }
+
+  filtro(){
+    
   }
 
 }
