@@ -42,7 +42,7 @@
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="this.clientes.length == 0">
+                <tbody *ngIf="this.clientes.length == 0 && !load_data">
                     <tr>
                         <td class="text-center" colspan="5">
                             No se han encontrado los datos

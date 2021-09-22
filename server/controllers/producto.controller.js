@@ -47,4 +47,8 @@ productoController.listarFiltro = async(req, res) => {
     }
 }
 
+productoController.getPortada = async(req, res) => {
+    var img = req.params['portada'];
+}
+
 module.exports = productoController;

@@ -35,17 +35,18 @@
                 </thead>
 
                 <tbody *ngIf="load_data">
+
                     <tr>
-                        <td class="text-center" colspan="5">
+                        <td class="text-center" colspan="6">
                             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                             </div>
                         </td>
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="this.productos.length == 0">
+                <tbody *ngIf="this.productos.length == 0 && !load_data">
                     <tr>
-                        <td class="text-center" colspan="5">
+                        <td class="text-center" colspan="6">
                             No se han encontrado los datos
                         </td>
                     </tr>
@@ -60,6 +61,16 @@
                             <td>{{producto.precio}}</td>
                             <td>{{producto.categoria}}</td>
                             <td>{{producto.nventas}}</td>
+                            <td>
+                                <div class="btn-group dropdown d-inline-block mb-3 mb-2">
+                                    <button type="button" class="btn  btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opciones
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" [routerLink]="['/panel/productos',producto._id]">Editar producto</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </ng-container>
