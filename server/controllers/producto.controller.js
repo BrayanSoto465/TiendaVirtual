@@ -12,7 +12,12 @@ productoController.productoAdmin = async(req, res) => {
             var img_path = req.files.portada.path;
 
             var name = img_path.split('\\');
+
+            console.log(name);
+
             var portada_name = name[2];
+
+            console.log(portada_name);
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             data.portada = portada_name;
@@ -47,8 +52,6 @@ productoController.listarFiltro = async(req, res) => {
     }
 }
 
-productoController.getPortada = async(req, res) => {
-    var img = req.params['portada'];
-}
+
 
 module.exports = productoController;
