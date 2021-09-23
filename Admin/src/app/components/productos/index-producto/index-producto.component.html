@@ -56,18 +56,20 @@
                     <tbody *ngFor="let producto of productos">
                         <tr>
                             <td>#</td>
-                            <td>{{producto.titulo}}</td>
+                            <td>
+                                <img [src]="producto.portada" /> {{producto.titulo}}
+                            </td>
                             <td>{{producto.stock}}</td>
                             <td>{{producto.precio}}</td>
                             <td>{{producto.categoria}}</td>
                             <td>{{producto.nventas}}</td>
                             <td>
-                                <div class="btn-group dropdown d-inline-block mb-3 mb-2">
-                                    <button type="button" class="btn  btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class=" btn-group dropdown d-inline-block mb-3 mb-2 ">
+                                    <button type="button " class="btn btn-outline-secondary dropdown-toggle " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
                                     Opciones
                                     </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" [routerLink]="['/panel/productos',producto._id]">Editar producto</a>
+                                    <div class="dropdown-menu ">
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos',producto._id] ">Editar producto</a>
                                     </div>
                                 </div>
                             </td>
@@ -78,8 +80,8 @@
             </table>
         </div>
     </div>
-    <div class="card-footer">
-        <!--ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="clientes.length">
+    <div class="card-footer ">
+        <!--ngb-pagination [(page)]="page " [pageSize]="pageSize " [collectionSize]="clientes.length ">
         </ngb-pagination-->
     </div>
 </div>
