@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
 import { AdminService } from 'src/app/services/admin.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -22,8 +23,10 @@ export class CreateProductoComponent implements OnInit {
   public imgSelect : any | ArrayBuffer ='assets/img/error.png';
   public config : any = {};
   public token: any;
+  public load_btn = false;
 
-  constructor(private _productoService : ProductoService, private _adminService : AdminService) { 
+  constructor(private _productoService : ProductoService, private _adminService : AdminService, 
+    private _router : Router) { 
     this.config = {
       height:500
     }
@@ -34,14 +37,24 @@ export class CreateProductoComponent implements OnInit {
   }
 
   registro(registroForm: NgForm){
+    this.load_btn = true;
     if(registroForm.valid){
       console.log(this.producto);
       console.log(this.file);
 
       this._productoService.create_admin(this.producto,this.file,this.token).subscribe(
         response=>{console.log(response);
-        },
+          iziToast.show({
+            title: 'SUCCESS',
+            titleColor: '#1DC74C',
+            class: 'text-success',
+            position: 'topRight',
+            message: 'Se registro correctamente el nuevo producto'
+          });
 
+          this.load_btn = false;
+          this._router.navigate(['panel/productos']);
+        },
         error =>{
           console.log(error);
         }

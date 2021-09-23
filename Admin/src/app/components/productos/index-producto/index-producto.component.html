@@ -57,7 +57,9 @@
                         <tr>
                             <td>#</td>
                             <td>
-                                <img [src]="producto.portada" /> {{producto.titulo}}
+                                <h6 style="padding-bottom: 0;margin-bottom: 0;">
+                                    <img width="80px" [src]="url + 'producto/portada/' + producto.portada" /> {{producto.titulo}}
+                                </h6>
                             </td>
                             <td>{{producto.stock}}</td>
                             <td>{{producto.precio}}</td>
