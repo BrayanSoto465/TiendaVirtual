@@ -53,9 +53,9 @@ productoController.Portada = async(req, res) => {
     var img = req.params['img'];
 
     console.log(img);
-    fs.stat('uploads/productos/'+ img + ".png" , function(err){
+    fs.stat('uploads/productos/'+ img  , function(err){
         if(!err){
-            let path_img = 'uploads/productos/'+ img + ".png";
+            let path_img = 'uploads/productos/'+ img ;
             res.status(200).sendFile(path.resolve(path_img));
         }else{     
             console.log(err);
