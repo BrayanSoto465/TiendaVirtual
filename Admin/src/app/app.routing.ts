@@ -9,6 +9,7 @@ import { CreateProductoComponent } from './components/productos/create-producto/
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 
 import { AdminGuard } from "./guards/admin.guard";
+import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 
 const appRoute : Routes = [
     
@@ -20,6 +21,7 @@ const appRoute : Routes = [
     
         {path: 'productos', component: IndexProductoComponent, canActivate: [AdminGuard]},
         {path: 'productos/registro', component: CreateProductoComponent, canActivate: [AdminGuard]},
+        {path: 'productos/:id', component: UpdateProductoComponent, canActivate: [AdminGuard]},
     ]},
     {path: 'login', component: LoginComponent}
 ];

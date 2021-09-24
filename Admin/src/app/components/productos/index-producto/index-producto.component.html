@@ -31,6 +31,7 @@
                         <th>Precio</th>
                         <th>Categoria</th>
                         <th>Ventas</th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -56,7 +57,11 @@
                     <tbody *ngFor="let producto of productos">
                         <tr>
                             <td>#</td>
-                            <td>{{producto.titulo}}</td>
+                            <td>
+                                <h6 style="padding-bottom: 0;margin-bottom: 0;">
+                                    <img width="80px" [src]="url + 'producto/portada/' + producto.portada" /> {{producto.titulo}}
+                                </h6>
+                            </td>
                             <td>{{producto.stock}}</td>
                             <td>{{producto.precio}}</td>
                             <td>{{producto.categoria}}</td>
@@ -67,7 +72,8 @@
                                     Opciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" [routerLink]="['/panel/productos',producto._id]">Editar producto</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos',producto._id] ">Editar producto</a>
+                                        
                                     </div>
                                 </div>
                             </td>
@@ -78,8 +84,9 @@
             </table>
         </div>
     </div>
-    <div class="card-footer">
-        <!--ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="clientes.length">
+    <div class="card-footer ">
+        <!--ngb-pagination [(page)]="page " [pageSize]="pageSize " [collectionSize]="clientes.length ">
         </ngb-pagination-->
     </div>
 </div>
+

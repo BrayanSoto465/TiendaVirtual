@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -13,9 +14,11 @@ export class IndexProductoComponent implements OnInit {
   public token: any = '';
   
   public load_data = true;
+  public url;
 
   constructor(private _productoService: ProductoService) { 
     this.token = localStorage.getItem('token');
+    this.url = GLOBAL.url;
   }
 
   ngOnInit(): void {
