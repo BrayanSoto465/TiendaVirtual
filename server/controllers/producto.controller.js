@@ -1,6 +1,7 @@
 'use strict'
 
 const Producto = require('../models/producto');
+const Inventario = require('../models/inventario');
 var fs = require('fs');
 var path = require('path');
 const { Console } = require('console');
@@ -21,7 +22,17 @@ productoController.productoAdmin = async(req, res) => {
             data.portada = portada_name;
             let reg = Producto.create(data);
 
-            res.status(200).send({ data: reg });
+
+            console.log(reg._id);
+            let inventario = await Inventario.create({
+             admin: req.user.sub,
+             cantidad: data.stock,
+             proveedor: 'Primer registro',
+             producto: reg._id
+
+            });
+
+            res.status(200).send({ data: reg, inventario : inventario });
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }
