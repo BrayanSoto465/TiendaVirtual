@@ -45,20 +45,25 @@ export class ProductoService {
     if(data.portada){
       let headers = new HttpHeaders({'Authorization':token});
 
-    const fd = new FormData();
-    fd.append('titulo',data.titulo);
-    fd.append('stock',data.stock);
-    fd.append('precio',data.precio);
-    fd.append('descripcion',data.descripcion);
-    fd.append('contenido',data.contenido);
-    fd.append('categoria',data.categoria);
-    fd.append('portada',data.portada);
+      const fd = new FormData();
+      fd.append('titulo',data.titulo);
+      fd.append('stock',data.stock);
+      fd.append('precio',data.precio);
+      fd.append('descripcion',data.descripcion);
+      fd.append('contenido',data.contenido);
+      fd.append('categoria',data.categoria);
+      fd.append('portada',data.portada);
 
-    return this._http.put(this.url + 'producto/actualizarAdmin/'+id, fd, { headers: headers });
-  }else{
+      return this._http.put(this.url + 'producto/actualizarAdmin/'+id, fd, { headers: headers });
+    }else{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
     return this._http.put(this.url + 'producto/actualizarAdmin/' + id,data, { headers: headers });
-  }
     }
+  }
+
+  eliminar_producto(id : string,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.delete(this.url + 'producto/eliminar_producto/' + id, { headers: headers });
+  }
     
 }

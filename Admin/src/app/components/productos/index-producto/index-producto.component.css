@@ -7,13 +7,13 @@
                 border-radius: 0px 5px 5px 0px;
             }
             
-            .btn-borrar:hover {
+            .active:hover {
                 border: 1px solid red;
                 border-left: 0px none;
                 color: red;
             }
             
-            #input-filtro {
+            #input-filtro-buscar {
                 border-right: 0px none;
                 border-top-right-radius: 0px none;
                 border-bottom-right-radius: 0px none;
