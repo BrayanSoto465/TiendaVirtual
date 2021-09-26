@@ -16,14 +16,18 @@
     </div>
     <div class="card-header">
         <form class="form-inline pt-2">
-            <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="input-filtro" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar" aria-describedby="button-addon2">
+
+                <button *ngIf="filtro_buscar == ''" class=" btn-borrar " type="button " d="button-addon2 "></button>
+                <button *ngIf="filtro_buscar != ''" class=" btn-borrar " type="button " (click)="resetear()" d="button-addon2 ">X</button>
+            </div>
         </form>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
+    <div class="card-body ">
+        <div class="table-responsive ">
+            <table class="table table-bordered ">
+                <thead class="thead-dark ">
                     <tr>
                         <th>#</th>
                         <th>Titulo</th>
@@ -34,31 +38,31 @@
                     </tr>
                 </thead>
 
-                <tbody *ngIf="load_data">
+                <tbody *ngIf="load_data ">
 
                     <tr>
-                        <td class="text-center" colspan="6">
-                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <td class="text-center " colspan="6 ">
+                            <div class="spinner-border " style="width: 3rem; height: 3rem; " role="status ">
                             </div>
                         </td>
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="this.productos.length == 0 && !load_data">
+                <tbody *ngIf="this.productos.length==0 && !load_data ">
                     <tr>
-                        <td class="text-center" colspan="6">
+                        <td class="text-center " colspan="6 ">
                             No se han encontrado los datos
                         </td>
                     </tr>
                 </tbody>
 
-                <ng-container *ngIf="!load_data">
-                    <tbody *ngFor="let producto of productos">
+                <ng-container *ngIf="!load_data ">
+                    <tbody *ngFor="let producto of productos ">
                         <tr>
                             <td>#</td>
                             <td>
-                                <h6 style="padding-bottom: 0;margin-bottom: 0;">
-                                    <img width="80px" [src]="url + 'producto/portada/' + producto.portada" /> {{producto.titulo}}
+                                <h6 style="padding-bottom: 0;margin-bottom: 0; ">
+                                    <img width="80px " [src]="url + 'producto/portada/' + producto.portada " /> {{producto.titulo}}
                                 </h6>
                             </td>
                             <td>{{producto.stock}}</td>

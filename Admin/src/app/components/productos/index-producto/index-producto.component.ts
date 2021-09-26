@@ -54,4 +54,9 @@ export class IndexProductoComponent implements OnInit {
     }
   }
 
+  resetear(){
+    this.filtro_buscar = '';
+    this.init_data();
+  }
+
 }

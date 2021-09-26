@@ -20,7 +20,7 @@ export class CreateProductoComponent implements OnInit {
     categoria : ''
   };
   public file: any = null;
-  public imgSelect : any | ArrayBuffer ='assets/img/error.png';
+  public imgSelect : any | ArrayBuffer ='assets/img/default.jpg';
   public config : any = {};
   public token: any;
   public load_btn = false;
@@ -90,7 +90,6 @@ export class CreateProductoComponent implements OnInit {
     }
 
     if(file.size <= 4000000){
-      //asdf
       if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg') {
 
         const reader = new FileReader();
