@@ -3,6 +3,7 @@
 const Producto = require('../models/producto');
 var fs = require('fs');
 var path = require('path');
+const { Console } = require('console');
 
 const productoController = {}
 
@@ -63,4 +64,88 @@ productoController.obtenerPortada = async(req, res) => {
     })
 }
 
+productoController.productooAdmin = async function(req, res) {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            var id = req.params['id'];
+
+            try {
+                var reg = await Producto.findById({ _id: id });
+                res.status(200).send({ data: reg });
+            } catch (error) {
+                res.status(200).send({ data: undefined });
+            }
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.actualizarAdmin = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            let id = req.params['id'];
+            let data = req.body;
+
+            console.log(req.files);
+
+            if(req.files){
+                // SI HAY IMAGEN
+                var img_path = req.files.portada.path;
+                var name = img_path.split('\\');
+                var portada_name = name[2];
+
+                let reg = await Producto.findByIdAndUpdate({_id:id},{
+                    titulo:data.titulo,
+                    stock:data.stock,
+                    precio:data.precio,
+                    categoria:data.categoria,
+                    descripcion:data.descripcion,
+                    contenido:data.contenido,
+                    portada:portada_name
+                });
+
+                    fs.stat('uploads/productos/' + reg.portada, function(err) {
+                       if(!err){
+                           fs.unlink('uploads/productos/' + reg.portada, (err)=>{
+                            if(err) throw err;
+                           });
+                       }
+                    })
+
+                res.status(200).send({ data: reg });
+
+               
+            }else{
+                //NO HAY IMAGEN
+               let reg = await Producto.findByIdAndUpdate({_id:id},{
+                   titulo:data.titulo,
+                   stock:data.stock,
+                   precio:data.precio,
+                   categoria:data.categoria,
+                   descripcion:data.descripcion,
+                   contenido:data.contenido,
+               });
+               res.status(200).send({ data: reg });
+            }
+
+           
+
+           
+
+         
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
 module.exports = productoController;
+
