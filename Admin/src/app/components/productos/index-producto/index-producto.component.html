@@ -63,7 +63,7 @@
                             <td>#</td>
                             <td>
                                 <h6 style="padding-bottom: 0;margin-bottom: 0; ">
-                                    <img width="80px " [src]="url + 'producto/portada/' + producto.portada " /> {{producto.titulo}}
+                                    <img width="80px " [src]="url + 'producto/obtener_portada/' + producto.portada " /> {{producto.titulo}}
                                 </h6>
                             </td>
                             <td>{{producto.stock}}</td>
@@ -78,6 +78,7 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item " [routerLink]="[ '/panel/productos',producto._id] ">Editar producto</a>
                                         <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+producto._id">Eliminar producto</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/inventario',producto._id] ">Inventario</a>
                                     </div>
                                 </div>
 

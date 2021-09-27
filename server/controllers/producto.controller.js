@@ -1,13 +1,14 @@
 'use strict'
 
 const Producto = require('../models/producto');
+const Inventario = require('../models/inventario');
 var fs = require('fs');
 var path = require('path');
 const { Console } = require('console');
 
 const productoController = {}
 
-productoController.productoAdmin = async(req, res) => {
+productoController.crear_producto = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -19,9 +20,16 @@ productoController.productoAdmin = async(req, res) => {
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             data.portada = portada_name;
-            let reg = Producto.create(data);
-            console.log();
-            res.status(200).send({ data: reg });
+            let reg = await Producto.create(data);
+
+            let inventario = await Inventario.create({
+                admin: req.user.sub,
+                cantidad: data.stock,
+                proveedor: 'Primer registro',
+                producto: reg._id
+            });
+
+            res.status(200).send({ data: reg, inventario: inventario });
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }
@@ -30,7 +38,7 @@ productoController.productoAdmin = async(req, res) => {
     }
 }
 
-productoController.listarFiltro = async(req, res) => {
+productoController.listar_producto_filtro = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
             let filtro = req.params['filtro'];
@@ -50,7 +58,7 @@ productoController.listarFiltro = async(req, res) => {
     }
 }
 
-productoController.obtenerPortada = async(req, res) => {
+productoController.obtener_portada = async(req, res) => {
     var img = req.params['img'];
 
     fs.stat('uploads/productos/' + img, function(err) {
@@ -64,7 +72,7 @@ productoController.obtenerPortada = async(req, res) => {
     })
 }
 
-productoController.productooAdmin = async function(req, res) {
+productoController.obtener_producto = async function(req, res) {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -85,7 +93,7 @@ productoController.productooAdmin = async function(req, res) {
     }
 }
 
-productoController.actualizarAdmin = async(req, res) => {
+productoController.actualizar_producto = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 

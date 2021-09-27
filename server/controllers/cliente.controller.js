@@ -123,8 +123,8 @@ clienteController.actualizarAdmin = async function(req, res) {
                 email: data.email,
                 password: data.password,
                 telefono: data.telefono,
-                empresa: data.empresa
-
+                empresa: data.empresa,
+                cedula: data.cedula
             })
             res.status(200).send({ data: reg });
 

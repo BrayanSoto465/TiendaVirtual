@@ -23,11 +23,8 @@ export class UpdateProductoComponent implements OnInit {
   public file: any = null;
   public url: any;
 
-  constructor(
-    private _route : ActivatedRoute,
-    private _productoService : ProductoService ,
-    private _router : Router
-  ) { 
+  constructor(private _route : ActivatedRoute, private _productoService : ProductoService, 
+    private _router : Router) { 
       this.config = {
       height:500
     }
@@ -47,7 +44,7 @@ export class UpdateProductoComponent implements OnInit {
               
             }else{
               this.producto = response.data;
-              this.imgSelect = this.url+'producto/portada/'+this.producto.portada;
+              this.imgSelect = this.url+'producto/obtener_portada/'+this.producto.portada;
             }
           },
           error=>{

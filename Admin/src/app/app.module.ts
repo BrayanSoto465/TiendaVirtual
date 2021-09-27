@@ -19,6 +19,7 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
+import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UpdateProductoComponent } from './components/productos/update-producto/
     CreateProductoComponent,
     IndexProductoComponent,
     UpdateProductoComponent,
+    InventarioProductoComponent,
   ],
   imports: [
     BrowserModule,
