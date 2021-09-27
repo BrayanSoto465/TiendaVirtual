@@ -20,7 +20,7 @@ productoController.productoAdmin = async(req, res) => {
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             data.portada = portada_name;
             let reg = Producto.create(data);
-
+            console.log();
             res.status(200).send({ data: reg });
         } else {
             res.status(500).send({ message: 'NoAcces' });
