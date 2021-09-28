@@ -3,7 +3,6 @@ import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { identity } from 'rxjs';
 
-declare var jQuery: any;
 declare var $: any;
 declare var iziToast: any;
 
@@ -22,7 +21,7 @@ export class IndexClienteComponent implements OnInit {
   public token: any = '';
 
   public load_data = true;
-  
+  public load_btn = false;
 
   constructor(private _clienteService: ClienteService, private _adminService: AdminService ) {
     this.token = this._adminService.getToken();
@@ -64,6 +63,7 @@ export class IndexClienteComponent implements OnInit {
   }
 
   eliminar(id : string){
+    this.load_btn = true;
     this._clienteService.eliminar_admin(id,this.token).subscribe(
       response=>{
         iziToast.show({
@@ -74,15 +74,23 @@ export class IndexClienteComponent implements OnInit {
           message: 'Se elimino correctamente el cliente'
         });
 
-        $('#delete-'+id).modal('hide');
+        $('#delete-' + id).modal('hide');
         $('modal-backdrop').removeClass('show');
-
+        
+        this.load_btn = false;
         this.init_data();
-
       },
       error=>{
-        console.log(error);
-        
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          class: 'text-success',
+          position: 'topRight',
+          message: 'Ocurrio un error en el servidor'
+        });
+
+        $('#delete-' + id).modal('hide');
+        $('modal-backdrop').removeClass('show');    
       }
       
     );

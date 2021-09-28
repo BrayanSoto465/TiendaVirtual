@@ -66,7 +66,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" [routerLink]="['/panel/clientes',cliente._id]">Editar cliente</a>
-                                        <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+cliente._id">Eliminar cliente</a>
+                                        <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+cliente._id">Eliminar producto</a>
                                     </div>
                                 </div>
 
@@ -85,8 +85,11 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" (click)="eliminar(cliente._id)">Si, eliminar</button>
-                                            </div>
+                                                <button *ngIf="!load_btn" type="button " class="btn btn-primary " (click)="eliminar(cliente._id)">Si, eliminar</button>
+                                                <button *ngIf="load_btn" type="button " class="btn btn-primary " (click)="eliminar(cliente._id)" disabled>
+                                                    <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                                                    Eliminando cliente...
+                                                </button> </div>
                                         </div>
                                     </div>
                                 </div>

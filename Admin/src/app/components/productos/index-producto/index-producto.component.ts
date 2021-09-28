@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
+declare var $: any;
+declare var iziToast: any;
+
 @Component({
   selector: 'app-index-producto',
   templateUrl: './index-producto.component.html',
@@ -13,8 +16,10 @@ export class IndexProductoComponent implements OnInit {
   public filtro_buscar = '';
   public token: any = '';
   
+  public load_btn = false;
   public load_data = true;
   public url;
+
 
   constructor(private _productoService: ProductoService) { 
     this.token = localStorage.getItem('token');
@@ -52,6 +57,45 @@ export class IndexProductoComponent implements OnInit {
     } else {
       this.init_data();
     }
+  }
+
+  resetear(){
+    this.filtro_buscar = '';
+    this.init_data();
+    $('#input-filtro-buscar').focus();
+  }
+
+  eliminar(id : string){
+    this.load_btn = true;
+    this._productoService.eliminar_producto(id,this.token).subscribe(
+      response=>{
+        iziToast.show({
+          title: 'SUCCESS',
+          titleColor: '#1DC74C',
+          class: 'text-success',
+          position: 'topRight',
+          message: 'Se elimino correctamente el producto'
+        });
+
+        $('#delete-' + id).modal('hide');
+        $('modal-backdrop').removeClass('show');
+
+        this.load_btn = false;
+        this.init_data();
+      },
+      error=>{
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          class: 'text-success',
+          position: 'topRight',
+          message: 'Ocurrio un error en el servidor'
+        });
+
+        $('#delete-' + id).modal('hide');
+        $('modal-backdrop').removeClass('show'); 
+      }
+    );
   }
 
 }

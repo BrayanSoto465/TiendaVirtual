@@ -20,7 +20,7 @@ export class CreateProductoComponent implements OnInit {
     categoria : ''
   };
   public file: any = null;
-  public imgSelect : any | ArrayBuffer ='assets/img/error.png';
+  public imgSelect : any | ArrayBuffer ='assets/img/default.jpg';
   public config : any = {};
   public token: any;
   public load_btn = false;
@@ -33,14 +33,11 @@ export class CreateProductoComponent implements OnInit {
     this.token = this._adminService.getToken();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   registro(registroForm: NgForm){
-   
     if(registroForm.valid){
       if(this.file == undefined){
-
         iziToast.show({
           title: 'ERROR',
           titleColor: '#FF0000',
@@ -48,32 +45,26 @@ export class CreateProductoComponent implements OnInit {
           position: 'topRight',
           message: 'Debe subir una portada para registrar'
         });
-
       }else{
-        console.log(this.producto);
-        console.log(this.file);
         this.load_btn = true;
-
-      this._productoService.create_admin(this.producto,this.file,this.token).subscribe(
-        response=>{console.log(response);
-          iziToast.show({
-            title: 'SUCCESS',
-            titleColor: '#1DC74C',
-            class: 'text-success',
-            position: 'topRight',
-            message: 'Se registro correctamente el nuevo producto'
-          });
-
-          this.load_btn = false;
-          this._router.navigate(['/panel/productos']);
-        },
-        error =>{
-          console.log(error);
-           this.load_btn = false;
-        }
-      );
+        this._productoService.create_admin(this.producto,this.file,this.token).subscribe(
+          response=>{
+            iziToast.show({
+              title: 'SUCCESS',
+              titleColor: '#1DC74C',
+              class: 'text-success',
+              position: 'topRight',
+              message: 'Se registro correctamente el nuevo producto'
+            });
+            this.load_btn = false;
+            this._router.navigate(['/panel/productos']);
+          },
+          error =>{
+            console.log(error);
+            this.load_btn = false;
+          }
+        );
       }
-
     }else{
       iziToast.show({
         title: 'ERROR',
@@ -104,7 +95,6 @@ export class CreateProductoComponent implements OnInit {
     }
 
     if(file.size <= 4000000){
-      //asdf
       if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg') {
 
         const reader = new FileReader();

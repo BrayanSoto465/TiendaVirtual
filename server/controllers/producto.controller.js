@@ -1,13 +1,14 @@
 'use strict'
 
 const Producto = require('../models/producto');
+const Inventario = require('../models/inventario');
 var fs = require('fs');
 var path = require('path');
 const { Console } = require('console');
 
 const productoController = {}
 
-productoController.productoAdmin = async(req, res) => {
+productoController.crear_producto = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -19,9 +20,16 @@ productoController.productoAdmin = async(req, res) => {
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             data.portada = portada_name;
-            let reg = Producto.create(data);
+            let reg = await Producto.create(data);
 
-            res.status(200).send({ data: reg });
+            let inventario = await Inventario.create({
+                admin: req.user.sub,
+                cantidad: data.stock,
+                proveedor: 'Primer registro',
+                producto: reg._id
+            });
+
+            res.status(200).send({ data: reg, inventario: inventario });
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }
@@ -30,7 +38,7 @@ productoController.productoAdmin = async(req, res) => {
     }
 }
 
-productoController.listarFiltro = async(req, res) => {
+productoController.listar_producto_filtro = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
             let filtro = req.params['filtro'];
@@ -50,7 +58,7 @@ productoController.listarFiltro = async(req, res) => {
     }
 }
 
-productoController.obtenerPortada = async(req, res) => {
+productoController.obtener_portada = async(req, res) => {
     var img = req.params['img'];
 
     fs.stat('uploads/productos/' + img, function(err) {
@@ -64,7 +72,7 @@ productoController.obtenerPortada = async(req, res) => {
     })
 }
 
-productoController.productooAdmin = async function(req, res) {
+productoController.obtener_producto = async function(req, res) {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -85,7 +93,7 @@ productoController.productooAdmin = async function(req, res) {
     }
 }
 
-productoController.actualizarAdmin = async(req, res) => {
+productoController.actualizar_producto = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -94,51 +102,57 @@ productoController.actualizarAdmin = async(req, res) => {
 
             console.log(req.files);
 
-            if(req.files){
-                // SI HAY IMAGEN
+            if (req.files) {
                 var img_path = req.files.portada.path;
                 var name = img_path.split('\\');
                 var portada_name = name[2];
 
-                let reg = await Producto.findByIdAndUpdate({_id:id},{
-                    titulo:data.titulo,
-                    stock:data.stock,
-                    precio:data.precio,
-                    categoria:data.categoria,
-                    descripcion:data.descripcion,
-                    contenido:data.contenido,
-                    portada:portada_name
+                let reg = await Producto.findByIdAndUpdate({ _id: id }, {
+                    titulo: data.titulo,
+                    stock: data.stock,
+                    precio: data.precio,
+                    categoria: data.categoria,
+                    descripcion: data.descripcion,
+                    contenido: data.contenido,
+                    portada: portada_name
                 });
 
-                    fs.stat('uploads/productos/' + reg.portada, function(err) {
-                       if(!err){
-                           fs.unlink('uploads/productos/' + reg.portada, (err)=>{
-                            if(err) throw err;
-                           });
-                       }
-                    })
+                fs.stat('uploads/productos/' + reg.portada, function(err) {
+                    if (!err) {
+                        fs.unlink('uploads/productos/' + reg.portada, (err) => {
+                            if (err) throw err;
+                        });
+                    }
+                })
 
                 res.status(200).send({ data: reg });
-
-               
-            }else{
-                //NO HAY IMAGEN
-               let reg = await Producto.findByIdAndUpdate({_id:id},{
-                   titulo:data.titulo,
-                   stock:data.stock,
-                   precio:data.precio,
-                   categoria:data.categoria,
-                   descripcion:data.descripcion,
-                   contenido:data.contenido,
-               });
-               res.status(200).send({ data: reg });
+            } else {
+                let reg = await Producto.findByIdAndUpdate({ _id: id }, {
+                    titulo: data.titulo,
+                    stock: data.stock,
+                    precio: data.precio,
+                    categoria: data.categoria,
+                    descripcion: data.descripcion,
+                    contenido: data.contenido,
+                });
+                res.status(200).send({ data: reg });
             }
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
 
-           
+productoController.eliminar_producto = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
 
-           
+            var id = req.params['id'];
+            let reg = await Producto.findByIdAndRemove({ _id: id });
+            res.status(200).send({ data: reg });
 
-         
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }
@@ -148,4 +162,3 @@ productoController.actualizarAdmin = async(req, res) => {
 }
 
 module.exports = productoController;
-

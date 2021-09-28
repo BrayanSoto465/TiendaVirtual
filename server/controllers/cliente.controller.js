@@ -76,7 +76,7 @@ clienteController.createAdmin = async(req, res) => {
             bcrypt.hash('123456789', null, null, async function(err, hash) {
                 if (hash) {
                     data.password = hash;
-                    var reg = await Cliente.create(data);
+                    let reg = await Cliente.create(data);
                     res.status(200).send({ data: reg });
                 } else {
                     res.status(200).send({ message: 'Hubo un error en el servidor', data: undefined });
@@ -123,8 +123,8 @@ clienteController.actualizarAdmin = async function(req, res) {
                 email: data.email,
                 password: data.password,
                 telefono: data.telefono,
-                empresa: data.empresa
-
+                empresa: data.empresa,
+                cedula: data.cedula
             })
             res.status(200).send({ data: reg });
 

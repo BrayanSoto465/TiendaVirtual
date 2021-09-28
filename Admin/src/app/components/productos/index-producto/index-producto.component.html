@@ -16,14 +16,18 @@
     </div>
     <div class="card-header">
         <form class="form-inline pt-2">
-            <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-            <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" (keyup)="filtro()" name="filtro_Buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="input-filtro-buscar" (keyup)="filtro()" name="filtro-buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar" aria-describedby="button-addon2">
+
+                <button *ngIf="filtro_buscar == ''" class=" btn-borrar " type="button " d="button-addon2 "></button>
+                <button *ngIf="filtro_buscar != ''" class=" btn-borrar active" type="button " (click)="resetear()" d="button-addon2 ">X</button>
+            </div>
         </form>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
+    <div class="card-body ">
+        <div class="table-responsive ">
+            <table class="table table-bordered ">
+                <thead class="thead-dark ">
                     <tr>
                         <th>#</th>
                         <th>Titulo</th>
@@ -35,31 +39,31 @@
                     </tr>
                 </thead>
 
-                <tbody *ngIf="load_data">
+                <tbody *ngIf="load_data ">
 
                     <tr>
-                        <td class="text-center" colspan="6">
-                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <td class="text-center " colspan="6 ">
+                            <div class="spinner-border " style="width: 3rem; height: 3rem; " role="status ">
                             </div>
                         </td>
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="this.productos.length == 0 && !load_data">
+                <tbody *ngIf="this.productos.length==0 && !load_data ">
                     <tr>
-                        <td class="text-center" colspan="6">
+                        <td class="text-center " colspan="6 ">
                             No se han encontrado los datos
                         </td>
                     </tr>
                 </tbody>
 
-                <ng-container *ngIf="!load_data">
-                    <tbody *ngFor="let producto of productos">
+                <ng-container *ngIf="!load_data ">
+                    <tbody *ngFor="let producto of productos ">
                         <tr>
                             <td>#</td>
                             <td>
-                                <h6 style="padding-bottom: 0;margin-bottom: 0;">
-                                    <img width="80px" [src]="url + 'producto/portada/' + producto.portada" /> {{producto.titulo}}
+                                <h6 style="padding-bottom: 0;margin-bottom: 0; ">
+                                    <img width="80px " [src]="url + 'producto/obtener_portada/' + producto.portada " /> {{producto.titulo}}
                                 </h6>
                             </td>
                             <td>{{producto.stock}}</td>
@@ -73,7 +77,32 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item " [routerLink]="[ '/panel/productos',producto._id] ">Editar producto</a>
-                                        
+                                        <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+producto._id">Eliminar producto</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/inventario',producto._id] ">Inventario</a>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="delete-{{producto._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar, {{producto.titulo}} </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>{{producto.titulo}}, desea eliminar este producto?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button *ngIf="!load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)">Si, eliminar</button>
+                                                <button *ngIf="load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)" disable>
+                                                    <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                                                    Eliminando producto...
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -89,4 +118,3 @@
         </ngb-pagination-->
     </div>
 </div>
-
