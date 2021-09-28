@@ -104,7 +104,7 @@ productoController.actualizar_producto = async(req, res) => {
 
             if (req.files) {
                 var img_path = req.files.portada.path;
-                var name = img_path.split('\\');
+                var name = img_path.split('/');
                 var portada_name = name[2];
 
                 let reg = await Producto.findByIdAndUpdate({ _id: id }, {
