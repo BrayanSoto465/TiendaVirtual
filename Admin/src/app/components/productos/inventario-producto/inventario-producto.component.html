@@ -1,5 +1,5 @@
-
-<app-sidebar></app-sidebar>
+<app-sidebar>
+</app-sidebar>
 
 <!-- Page title-->
 <div class="border-bottom pt-5 mt-2 mb-5">
@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
 
-                <ng-container *ngIf="inventarios.length ==0">
+                <ng-container *ngIf="inventarios.length == 0">
                     <tbody>
                         <tr>
                             <td colspan="4" class="text-center">
@@ -60,7 +60,7 @@
                     </tbody>
                 </ng-container>
 
-                <ng-container >
+                <ng-container>
                     <tbody *ngFor="let item of inventarios">
                         <tr>
                             <td> {{item.admin.nombres}} </td>
@@ -69,30 +69,30 @@
                             <td><button class="btn btn-danger btn-sm" data-toggle="modal" [attr.data-target]="'#delete-'+producto._id">
                                 <i class="cxi-delete"> Eliminar</i>
                             </button>
-                            <div class="modal fade" id="delete-{{producto._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar, {{producto.titulo}} </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <div class="modal fade" id="delete-{{producto._id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar, {{producto.titulo}} </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                           </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Desea eliminar este registro?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button *ngIf="!load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)">Si, eliminar</button>
-                                            <button *ngIf="load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)" disable>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Desea eliminar este registro?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button *ngIf="!load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)">Si, eliminar</button>
+                                                <button *ngIf="load_btn" type="button " class="btn btn-primary " (click)="eliminar(producto._id)" disable>
                                                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
                                                 Eliminando producto...
                                             </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
                         </tr>
                     </tbody>
                 </ng-container>

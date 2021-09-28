@@ -26,17 +26,14 @@ export class InventarioProductoComponent implements OnInit {
     this._route.params.subscribe(
       params=>{
         this.id = params['id'];
-        console.log(this.id);
         this._productoService.productooAdmin(this.id,this.token).subscribe(
           response=>{
             if(response.data == undefined){
               this.producto = undefined;
             }else{
-              this.producto = response.data;
-              
+              this.producto = response.data;       
               this._productoService.listar_producto(this.producto._id,this.token).subscribe(
                 response=>{
-                  
                   this.inventarios = response.data;
                   console.log(this.inventarios);
                 },
@@ -72,12 +69,11 @@ export class InventarioProductoComponent implements OnInit {
         this.load_btn = false;
         this._productoService.listar_producto(this.producto._id,this.token).subscribe(
           response=>{
-            
             this.inventarios = response.data;
-            console.log(this.inventarios);
+            console.log('Inventario ->' + this.inventarios);
           },
           error=>{
-            console.log(error);
+            console.log('Inventario ->' + error);
           }
         )
       },

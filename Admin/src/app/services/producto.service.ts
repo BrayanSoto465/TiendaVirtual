@@ -73,7 +73,7 @@ export class ProductoService {
 
   Eliminar_productoAdmin(id : any,token: string): Observable<any> {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
-    return this._http.delete(this.url + 'producto/Eliminar_productoAdmin/' + id, { headers: headers });
+    return this._http.delete(this.url + 'producto/eliminar_inventario/' + id, { headers: headers });
   }
     
 }
