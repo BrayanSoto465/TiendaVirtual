@@ -19,6 +19,6 @@ router.delete('/eliminar_producto/:id', [auth.auth, path], productoController.el
 
 //INVENTARIO
 router.get('/listar_producto/:id', auth.auth, productoController.listar_producto);
-router.delete('/eliminar_inventario/:id', auth.auth, productoController.eliminar_producto);
+router.delete('/eliminar_inventario/:id', auth.auth, productoController.eliminar_inventario);
 
 module.exports = router;

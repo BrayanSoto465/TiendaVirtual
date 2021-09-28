@@ -53,7 +53,7 @@ export class InventarioProductoComponent implements OnInit {
 
   eliminar(id : string){
     this.load_btn = true;
-    this._productoService.Eliminar_productoAdmin(id,this.token).subscribe(
+    this._productoService.eliminar_inventario(id,this.token).subscribe(
       response=>{
         iziToast.show({
           title: 'SUCCESS',
