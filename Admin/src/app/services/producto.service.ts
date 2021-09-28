@@ -66,4 +66,14 @@ export class ProductoService {
     return this._http.delete(this.url + 'producto/eliminar_producto/' + id, { headers: headers });
   }
     
+  listar_producto(id : any,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'producto/listar_producto/' + id, { headers: headers });
+  }
+
+  eliminar_inventario(id : any,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.delete(this.url + 'producto/eliminar_inventario/' + id, { headers: headers });
+  }
+    
 }

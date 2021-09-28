@@ -2,11 +2,13 @@
 
 const Producto = require('../models/producto');
 const Inventario = require('../models/inventario');
+const Administrador = require('../models/admin');
 var fs = require('fs');
 var path = require('path');
-const { Console } = require('console');
+
 
 const productoController = {}
+
 
 productoController.crear_producto = async(req, res) => {
     if (req.user) {
@@ -152,6 +154,51 @@ productoController.eliminar_producto = async(req, res) => {
             var id = req.params['id'];
             let reg = await Producto.findByIdAndRemove({ _id: id });
             res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.listar_producto = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            var id = req.params['id'];
+
+            var reg = await Inventario.find({ producto: id }).populate('admin');
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.eliminar_inventario = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            //OBTENER ID DEL INVENTARIO
+            var id = req.params['id'];
+            console.log(id);
+            //ELIMINAR EL INVENTARIO
+            let inventario = await Inventario.findByIdAndRemove({ _id: id });
+            console.log(inventario);
+            //OBTENER EL REGISTRO DEL PRODUCTO
+            let producto_inventario = await Producto.findById({ _id: inventario.producto });
+            console.log(producto_inventario);
+            //CALCULAR EL NUEVO STOCK
+            let nuevo_stock = parseInt(producto_inventario.stock) - parseInt(inventario.cantidad);
+            //ACTUALIZAR STOCK
+            let producto = await Producto.findByIdAndUpdate({ _id: inventario.producto }, {
+                stock: nuevo_stock
+            });
+            res.status(200).send({ data: producto });
 
         } else {
             res.status(500).send({ message: 'NoAcces' });
