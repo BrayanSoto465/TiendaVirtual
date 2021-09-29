@@ -75,5 +75,10 @@ export class ProductoService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.delete(this.url + 'producto/eliminar_inventario/' + id, { headers: headers });
   }
+
+  crear_inventario(data : any,token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.post(this.url + 'producto/crear_inventario', data, { headers: headers });
+  }
     
 }

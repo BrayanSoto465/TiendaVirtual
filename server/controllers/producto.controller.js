@@ -183,22 +183,33 @@ productoController.listar_producto = async(req, res) => {
 productoController.eliminar_inventario = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
-            //OBTENER ID DEL INVENTARIO
             var id = req.params['id'];
-            console.log(id);
-            //ELIMINAR EL INVENTARIO
+    
             let inventario = await Inventario.findByIdAndRemove({ _id: id });
-            console.log(inventario);
-            //OBTENER EL REGISTRO DEL PRODUCTO
             let producto_inventario = await Producto.findById({ _id: inventario.producto });
-            console.log(producto_inventario);
-            //CALCULAR EL NUEVO STOCK
+            
             let nuevo_stock = parseInt(producto_inventario.stock) - parseInt(inventario.cantidad);
-            //ACTUALIZAR STOCK
-            let producto = await Producto.findByIdAndUpdate({ _id: inventario.producto }, {
-                stock: nuevo_stock
-            });
+            let producto = await Producto.findByIdAndUpdate({ _id: inventario.producto }, { stock: nuevo_stock });
             res.status(200).send({ data: producto });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.crear_inventario = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            let data = req.body;
+            let reg = await Inventario.create(data);
+            let producto_inventario = await Producto.findById({ _id: reg.producto });
+            
+            let nuevo_stock = parseInt(producto_inventario.stock) + parseInt(reg.cantidad);
+            let producto = await Producto.findByIdAndUpdate({ _id: reg.producto }, { stock: nuevo_stock });
+            res.status(200).send({ data: reg });
 
         } else {
             res.status(500).send({ message: 'NoAcces' });
