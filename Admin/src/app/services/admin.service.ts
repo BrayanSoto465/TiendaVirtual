@@ -31,19 +31,15 @@ export class AdminService {
     if (!token) {
       return false;
     }
-
     try {
       const helper = new JwtHelperService();
       var decodedToken = helper.decodeToken(token);
-
       console.log(decodedToken);
-
       if (!decodedToken) {
         console.log('NO ACCCESO');
         localStorage.removeItem('token');
         return false;
       }
-
     } catch (error) {
       localStorage.removeItem('token');
       return false;
@@ -51,4 +47,13 @@ export class AdminService {
     return allowRoles.includes(decodedToken['role']);
   }
 
+  obtener_config( token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.get(this.url + 'config/obtener_config/' , { headers: headers });
+  }
+
+  actualizar_config( id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.get(this.url + 'config/actualizar_config/' + id , { headers: headers });
+  }
 }
