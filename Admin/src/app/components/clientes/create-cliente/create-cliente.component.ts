@@ -17,32 +17,31 @@ export class CreateClienteComponent implements OnInit {
   public token: any = '';
   public load_btn = false;
 
-  constructor(private _clienteService: ClienteService, private _adminService: AdminService, private _router: Router) { 
+  constructor(private _clienteService: ClienteService, private _adminService: AdminService, private _router: Router) {
     this.token = this._adminService.getToken();
   }
 
   ngOnInit(): void {
   }
 
-  registro(registroForm: NgForm){
-    if(registroForm.valid){
-      console.log(this.cliente);
+  registro(registroForm: NgForm) {
+    if (registroForm.valid) {
       this.load_btn = true;
-      this._clienteService.create_admin(this.cliente,this.token).subscribe(
-        response=>{
+      this._clienteService.create_admin(this.cliente, this.token).subscribe(
+        response => {
           iziToast.show({
-            title: 'SUCCESS',
-            titleColor: '#1DC74C',
+            backgroundColor: '#52BE80 ',
             class: 'text-success',
             position: 'topRight',
-            message: 'Se registro correctamente el nuevo cliente'
+            message: 'Se ha registrado un nuevo cliente',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
           });
 
           this.cliente = {
             genero: '',
             nombres: '',
             email: '',
-            f_nacimiento: '',
             telefono: '',
             dni: ''
           };
@@ -50,25 +49,29 @@ export class CreateClienteComponent implements OnInit {
           this.load_btn = false;
           this._router.navigate(['panel/clientes']);
         },
-        error=>{
+        error => {
           console.log(error);
           iziToast.show({
-            title: 'ERROR',
-            titleColor: '#FF0000',
+            backgroundColor: '#dc3424',
             class: 'text-danger',
             position: 'topRight',
-            message: 'Los datos del formulario no son validos'
+            message: 'Ocurrio un error en el servidor',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
           });
+          this.load_btn = false;
         }
       );
-    }else{
+    } else {
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Los datos del formulario no son validos'
+        message: 'Los datos del formulario no son validos',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
+      this.load_btn = false;
     }
   }
 }

@@ -11,8 +11,7 @@ var clienteSchema = Schema({
     telefono: { type: String, required: false },
     cedula: { type: String, required: true },
     empresa: { type: String, required: false },
-    created: { type: Date, default: Date.now, require: true },
-    f_nacimiento: { type: String, required: true }
+    created: { type: Date, default: Date.now, require: true }
 });
 
 module.exports = mongoose.model('cliente', clienteSchema);

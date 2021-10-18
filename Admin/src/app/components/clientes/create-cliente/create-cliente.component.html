@@ -7,8 +7,8 @@
         <p class="text-muted">Este módulo lista todos los clientes de la tienda.</p>
     </div>
 </div>
-
-<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+<!-- class="needs-validation" -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)" novalidate>
     <div class="card box-shadow-sm">
         <div class="card-header">
             <h5 style="margin-bottom: 0px;">Registro de cliente</h5>
@@ -17,41 +17,53 @@
 
             <div class="row">
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Nombres</label>
-                    <input class="form-control" type="text" placeholder="Nombre" name="nombres" [(ngModel)]="cliente.nombres" required>
+                    <label class="form-label">Nombres</label>
+                    <input class="form-control" type="text" placeholder="Nombres" name="nombres" ngControl="nombre" minlength="7" [(ngModel)]="cliente.nombres" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                        <div *ngIf="name.errors?.required">
+                            Name is required.
+                        </div>
+                        <div *ngIf="name.errors?.minlength">
+                            Name must be at least 4 characters long.
+                        </div>
+                        <div *ngIf="name.errors?.forbiddenName">
+                            Name cannot be Bob.
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Correo electrónico</label>
+                    <label class="form-label">Correo electrónico</label>
                     <input class="form-control" type="email" placeholder="Correo Electronico" name="email" [(ngModel)]="cliente.email" required>
+                    <div class="invalid-tooltip">Proporcione un correo electronico valido</div>
                 </div>
 
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Telefono</label>
-                    <input class="form-control" type="number" placeholder="Telefono" name="telefono" [(ngModel)]="cliente.telefono" required>
+                    <label class="form-label">Telefono</label>
+                    <input class="form-control" type="number" placeholder="Telefono" name="telefono" [(ngModel)]="cliente.telefono" minlength="10000000" required>
+                    <div class="invalid-tooltip">Proporcione un telefono valido</div>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Fecha nacimiento</label>
-                    <input class="form-control" type="date" placeholder="Fecha Nacimiento" name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento" required>
+                    <label class="form-label">Cedula</label>
+                    <input class="form-control" type="number" placeholder="Documento" name="cedula" [(ngModel)]="cliente.cedula" required>
+                    <div class="invalid-tooltip">Proporcione un documento valido</div>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Cedula</label>
-                    <input class="form-control" type="number" placeholder="Documento" name="dni" [(ngModel)]="cliente.cedula" required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Empresa</label>
-                    <input class="form-control" type="text" placeholder="Documento" name="empresa" [(ngModel)]="cliente.empresa" required>
+                    <label class="form-label">Empresa</label>
+                    <input class="form-control" type="text" placeholder="Emppresa" name="empresa" [(ngModel)]="cliente.empresa" required>
+                    <div class="invalid-tooltip">Proporcione una empresa valida</div>
                 </div>
             </div>
 
         </div>
         <div class="card-footer">
             <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Crear cliente</button>
-            
+
             <button *ngIf="load_btn" class="btn btn-primary mr-3" type="submit">
                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
                 Creando cliente ...
             </button>
-
             <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
         </div>
     </div>

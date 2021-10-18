@@ -67,11 +67,12 @@ export class IndexClienteComponent implements OnInit {
     this._clienteService.eliminar_admin(id,this.token).subscribe(
       response=>{
         iziToast.show({
-          title: 'SUCCESS',
-          titleColor: '#1DC74C',
-          class: 'text-success',
-          position: 'topRight',
-          message: 'Se elimino correctamente el cliente'
+          backgroundColor: '#52BE80 ',
+            class: 'text-success',
+            position: 'topRight',
+            message: 'Se ha eliminado un cliente',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
         });
 
         $('#delete-' + id).modal('hide');
@@ -82,11 +83,12 @@ export class IndexClienteComponent implements OnInit {
       },
       error=>{
         iziToast.show({
-          title: 'ERROR',
-          titleColor: '#FF0000',
-          class: 'text-success',
-          position: 'topRight',
-          message: 'Ocurrio un error en el servidor'
+          backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'Ocurrio un error en el servidor',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
         });
 
         $('#delete-' + id).modal('hide');
