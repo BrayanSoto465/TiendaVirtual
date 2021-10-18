@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { NgForm } from '@angular/forms';
 import  {v4 as uuidv4}  from 'uuid';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 
 declare var iziToast : any;
+declare var $: any;
 
 @Component({
   selector: 'app-config',
@@ -19,18 +21,21 @@ export class ConfigComponent implements OnInit {
   public icono_cat ='';
 
   public file:any = null;
+  public imgSelect:any = null;
+  public url;
 
   constructor(private _adminService: AdminService) { 
       this.token = localStorage.getItem('token');
       this._adminService.obtener_config(this.token).subscribe(
         response=>{
           this.config = response.data;
-          console.log(this.config);
+          this.imgSelect = this.url + 'config/obtener_logo/' + this.config.logo;
         }, 
         error=>{
           console.log(error);
         }
       );
+      this.url = GLOBAL.url;
     }
 
   ngOnInit(): void {
@@ -69,7 +74,23 @@ export class ConfigComponent implements OnInit {
         correlativo : confForm.value.correlativo,
         categorias : this.config.categorias,
         logo : this.file,
-      }
+      };
+
+      this._adminService.actualizar_config(data, "id", this.token).subscribe(
+        response=>{
+          iziToast.show({
+            title: 'SUCCESS',
+            titleColor: '#1DC74C',
+            class: 'text-success',
+            position: 'topRight',
+            message: 'Se actualizo correctamente la configuracion'
+          });
+        },
+        error=>{
+
+        }
+
+      );
     }else{
       iziToast.show({
         backgroundColor: '#dc3424',
@@ -80,6 +101,65 @@ export class ConfigComponent implements OnInit {
         progressBarColor: '#FFFFFF'
       });
     }
+  }
+
+
+  fileChangeEvent(event : any) : void{
+    var file : any;
+    if(event.target.files && event.target.files[0]){
+      file = <File>event.target.files[0];
+    
+    }else{
+      iziToast.show({
+        backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'La imagen no existe',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+      });
+    }
+
+    if(file.size <= 4000000){
+      if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg' || file.type == 'image/svg') {
+
+        const reader = new FileReader();
+        reader.onload = e => this.imgSelect = reader.result;
+        reader.readAsDataURL(file);
+
+        $('#input-portada').text(file.name);
+
+        this.file = file;
+
+      }else{
+        iziToast.show({
+          backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'El archivo debe ser una imagen',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+        });
+        $('#input-portada').text('Seleccionar imagen');
+        this.imgSelect = 'assets/img/error.png';
+        this.file = null;
+      }
+
+    }else{
+      iziToast.show({
+        backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'La imagen es muy grande',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+      });
+      $('#input-portada').text('Seleccionar imagen');
+      this.imgSelect = 'assets/img/error.png';
+      this.file = null;
+    }
+    
+    console.log(this.file);
   }
 
 }

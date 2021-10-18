@@ -85,18 +85,22 @@
                 <div class="form-group row align-items-center">
                     <label class="col-md-3 col-form-label font-weight-medium" for="file-input">Logo</label>
                     <div class="col-md-9">
-                        <div class="custom-file">
-                            <input class="custom-file-input" type="file" id="file-input">
-                            <label class="custom-file-label" for="file-input">Buscar</label>
+                        <div class="cs-file-drop-area">
+
+                            <div class="cs-file-drop-preview img-thunbnail rounded">
+                                <img [src]="imgSelect">
+                            </div>
+
+                            <span class="cs-file-drop-message">Arrastre la imagen</span>
+                            <input type="file" class="cs-file-drop-input" (change)="fileChangeEvent($event)" accept="image/*">
+                            <button type="button" class="cs-file-drop-btn btn btn-outline-primary btn-sm">Subir imagen</button>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary mr-3">Guardar cambios</button>
+        <div class=" card-footer ">
+            <button class="btn btn-primary mr-3 ">Guardar cambios</button>
         </div>
     </div>
 </form>

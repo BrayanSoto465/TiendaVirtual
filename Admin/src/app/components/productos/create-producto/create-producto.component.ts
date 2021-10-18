@@ -6,7 +6,6 @@ import { AdminService } from 'src/app/services/admin.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 declare var iziToast: any;
-declare var jQuery: any;
 declare var $: any;
 
 @Component({

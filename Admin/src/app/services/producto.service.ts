@@ -41,7 +41,7 @@ export class ProductoService {
     return this._http.get(this.url + 'producto/obtener_producto/' + id, { headers: headers });
   }
 
-  actualizarAdmin(data: any, id: any, token: string ): Observable<any> {
+  actualizarAdmin( data: any, id: any, token: string ): Observable<any> {
     if(data.portada){
       let headers = new HttpHeaders({'Authorization':token});
 
