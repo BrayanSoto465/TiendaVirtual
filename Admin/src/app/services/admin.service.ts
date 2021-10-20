@@ -68,5 +68,11 @@ export class AdminService {
       let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
       return this._http.put(this.url + 'config/actualizar_config/' + id, data, { headers: headers });
     }
+
+    
+  }
+   obtener_publico(): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.get(this.url + 'config/obtener_publico', { headers: headers });
   }
 }

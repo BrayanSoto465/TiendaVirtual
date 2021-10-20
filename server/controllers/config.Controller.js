@@ -78,4 +78,11 @@ configController.obtener_logo = async(req, res) => {
     })
 }
 
+configController.obtener_publico = async(req, res) => {
+
+    let reg = await Config.findById({ _id: "6151a7a74037f9b72147ca87" });
+    res.status(200).send({ data: reg });
+}
+
+
 module.exports = configController;

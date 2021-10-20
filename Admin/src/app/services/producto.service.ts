@@ -80,5 +80,8 @@ export class ProductoService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.post(this.url + 'producto/crear_inventario', data, { headers: headers });
   }
-    
+  actualizar_variedades( data: any, id: any, token: string ): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.put(this.url + 'producto/actualizar_variedades/' + id, data, { headers: headers });
+  }
 }

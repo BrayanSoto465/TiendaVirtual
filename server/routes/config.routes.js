@@ -12,5 +12,5 @@ const path = multiparty({ uploadDir: './uploads/configuraciones' });
 router.put('/actualizar_config/:id', [auth.auth, path], configController.actualizar_config);
 router.get('/obtener_config/', auth.auth, configController.obtener_config);
 router.get('/obtener_logo/:img', configController.obtener_logo);
-
+router.get('/obtener_publico',configController.obtener_publico);
 module.exports = router;

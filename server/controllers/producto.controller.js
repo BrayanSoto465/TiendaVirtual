@@ -17,7 +17,8 @@ productoController.crear_producto = async(req, res) => {
             let data = req.body;
             var img_path = req.files.portada.path;
 
-            var name = img_path.split('/');
+           
+            var name = img_path.split('\\');
             var portada_name = name[2];
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -211,6 +212,28 @@ productoController.crear_inventario = async(req, res) => {
             let producto = await Producto.findByIdAndUpdate({ _id: reg.producto }, { stock: nuevo_stock });
             res.status(200).send({ data: reg });
 
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.actualizar_variedades = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            let id = req.params['id'];
+            let data = req.body;
+
+            let reg = await Producto.findByIdAndUpdate({ _id: id }, {
+                titulo_variedad : data.titulo_variedad,
+                variedades: data.variedades
+            });
+            res.status(200).send({ data: reg });
+
+           
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }

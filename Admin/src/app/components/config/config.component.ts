@@ -162,4 +162,8 @@ export class ConfigComponent implements OnInit {
     console.log(this.file);
   }
 
+  eliminar_categoria(idx:any){
+    this.config.categorias.splice(idx,1);
+  }
+
 }
