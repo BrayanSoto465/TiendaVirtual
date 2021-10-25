@@ -31,17 +31,17 @@ export class ProductoService {
     return this._http.post(this.url + 'producto/crear_producto', fd, { headers: headers });
   }
 
-  listar(filtro:String  | null, token: string): Observable<any> {
+  listar(filtro:string | null, token: string): Observable<any> {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
     return this._http.get(this.url + 'producto/listar_producto_filtro/' + filtro, { headers: headers });
   }
 
-  productooAdmin(id:String  | null, token: string): Observable<any> {
+  productooAdmin(id:string, token: string): Observable<any> {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
     return this._http.get(this.url + 'producto/obtener_producto/' + id, { headers: headers });
   }
 
-  actualizarAdmin( data: any, id: any, token: string ): Observable<any> {
+  actualizarAdmin( id: any, data: any, token: string ): Observable<any> {
     if(data.portada){
       let headers = new HttpHeaders({'Authorization':token});
 
@@ -81,4 +81,9 @@ export class ProductoService {
     return this._http.post(this.url + 'producto/crear_inventario', data, { headers: headers });
   }
     
+  actualizar_variedades( id: any, data: any,  token: string ): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.put(this.url + 'producto/actualizar_producto_variedades/' + id, data, { headers: headers });
+  }
+
 }

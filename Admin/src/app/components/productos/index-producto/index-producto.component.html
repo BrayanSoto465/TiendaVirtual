@@ -76,9 +76,10 @@
                                     Opciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos',producto._id] ">Editar producto</a>
+                                        <a class="dropdown-item " [routerLink]="['/panel/productos',producto._id]">Editar producto</a>
                                         <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+producto._id">Eliminar producto</a>
-                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/inventario',producto._id] ">Inventario</a>
+                                        <a class="dropdown-item " [routerLink]="['/panel/productos/inventario',producto._id]">Inventario</a>
+                                        <a class="dropdown-item " [routerLink]="['/panel/productos/variedades',producto._id]">Variedades</a>
                                     </div>
                                 </div>
 

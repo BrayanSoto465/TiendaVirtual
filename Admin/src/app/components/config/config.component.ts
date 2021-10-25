@@ -30,6 +30,13 @@ export class ConfigComponent implements OnInit {
         response=>{
           this.config = response.data;
           this.imgSelect = this.url + 'config/obtener_logo/' + this.config.logo;
+          
+          alert(this.imgSelect);
+          if(this.imgSelect != null){
+            $('.cs-file-drop-icon').addClass("cs-file-drop-preview img-thunbnail rounded");
+            $('.cs-file-drop-icon').removeClass("cs-file-drop-icon cxi-upload");
+            this.ngDoCheck();
+          }
         }, 
         error=>{
           console.log(error);
@@ -79,15 +86,23 @@ export class ConfigComponent implements OnInit {
       this._adminService.actualizar_config(data, "id", this.token).subscribe(
         response=>{
           iziToast.show({
-            title: 'SUCCESS',
-            titleColor: '#1DC74C',
+            backgroundColor: '#52BE80 ',
             class: 'text-success',
             position: 'topRight',
-            message: 'Se actualizo correctamente la configuracion'
+            message: 'Se ha actualizado la configuracion de la tienda',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
           });
         },
         error=>{
-
+          iziToast.show({
+            backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'Ocurrio un error en el servidor',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+          });
         }
 
       );
@@ -127,7 +142,8 @@ export class ConfigComponent implements OnInit {
         reader.onload = e => this.imgSelect = reader.result;
         reader.readAsDataURL(file);
 
-        $('#input-portada').text(file.name);
+        $('.cs-file-drop-icon').addClass("cs-file-drop-preview img-thunbnail rounded");
+        $('.cs-file-drop-icon').removeClass("cs-file-drop-icon cxi-upload");
 
         this.file = file;
 
@@ -158,8 +174,9 @@ export class ConfigComponent implements OnInit {
       this.imgSelect = 'assets/img/error.png';
       this.file = null;
     }
-    
-    console.log(this.file);
   }
 
+  ngDoCheck(): void{
+    $('.cs-file-drop-preview').html("<img src=" + this.imgSelect + ">");
+  }
 }

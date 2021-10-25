@@ -9,7 +9,7 @@ configController.obtener_config = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
-            let reg = await Config.findById({ _id: "6151a7a74037f9b72147ca87" });
+            let reg = await Config.findById({ _id: "61732b5cf972c54241fd5f1d" });
             res.status(200).send({ data: reg });
 
         } else {
@@ -31,7 +31,7 @@ configController.actualizar_config = async(req, res) => {
                 var name = img_path.split('/');
                 var portada_name = name[2];
 
-                let reg = await Config.findByIdAndUpdate({ _id: "6151a7a74037f9b72147ca87" }, {
+                let reg = await Config.findByIdAndUpdate({ _id: "61732b5cf972c54241fd5f1d" }, {
                     categorias: JSON.parse(data.categorias),
                     titulo: data.titulo,
                     serie: data.serie,
@@ -48,7 +48,7 @@ configController.actualizar_config = async(req, res) => {
                 })
                 res.status(200).send({ data: reg });
             } else {
-                let reg = await Config.findByIdAndUpdate({ _id: "6151a7a74037f9b72147ca87" }, {
+                let reg = await Config.findByIdAndUpdate({ _id: "61732b5cf972c54241fd5f1d" }, {
                     categorias: data.categorias,
                     titulo: data.titulo,
                     serie: data.serie,

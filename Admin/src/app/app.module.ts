@@ -21,6 +21,7 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 import { ConfigComponent } from './components/config/config.component';
+import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ConfigComponent } from './components/config/config.component';
     UpdateProductoComponent,
     InventarioProductoComponent,
     ConfigComponent,
+    VariedadProductoComponent,
   ],
   imports: [
     BrowserModule,

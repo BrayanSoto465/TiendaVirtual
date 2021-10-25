@@ -77,7 +77,7 @@ export class UpdateProductoComponent implements OnInit {
 
       this.load_btn = true;
 
-      this._productoService.actualizarAdmin(data,this.id,this.token).subscribe(
+      this._productoService.actualizarAdmin(this.id,data,this.token).subscribe(
         response =>{
           console.log(response);
           iziToast.show({
@@ -92,7 +92,14 @@ export class UpdateProductoComponent implements OnInit {
           this._router.navigate(['/panel/productos']);
         },
         error=>{
-          console.log(error);
+          iziToast.show({
+            backgroundColor: '#dc3424',
+                class: 'text-danger',
+                position: 'topRight',
+                message: 'Ocurrio un problema en el servidor',
+                messageColor: '#FFFFFF',
+                progressBarColor: '#FFFFFF'
+          });
           this.load_btn = false;
         }
       )
@@ -162,8 +169,6 @@ export class UpdateProductoComponent implements OnInit {
       this.imgSelect = 'assets/img/error.png';
       this.file = null;
     }
-    
-    console.log(this.file);
   }
 
 }

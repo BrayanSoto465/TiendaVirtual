@@ -14,6 +14,8 @@ var ProductoSchema = Schema({
     nventas: { type: Number, default: 0, required: false },
     npuntos: { type: Number, default: 0, required: false },
     categoria: { type: String, required: true },
+    variedades: [{ type: Object, required: false}],
+    titulo_variedad: { type: String, required: false },
     estado: { type: String, default: 'Edicion', required: false },
     created: { type: Date, default: Date.now, require: false }
 });
