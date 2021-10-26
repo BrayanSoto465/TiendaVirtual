@@ -49,10 +49,10 @@ export class AdminService {
 
   obtener_config( token: string): Observable<any> {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
-    return this._http.get(this.url + 'config/obtener_config/' , { headers: headers });
+    return this._http.get(this.url + 'config/obtener_config', { headers: headers });
   }
 
-  actualizar_config( data: any, id: string, token: string): Observable<any> {
+  actualizar_config( data: any, token: string): Observable<any> {
     if(data.logo){
       let headers = new HttpHeaders({'Authorization':token});
 
@@ -63,10 +63,10 @@ export class AdminService {
       fd.append('categorias',JSON.stringify(data.categorias));
       fd.append('logo',data.logo);
 
-      return this._http.put(this.url + 'config/actualizar_config/' + id, fd, { headers: headers });
+      return this._http.put(this.url + 'config/actualizar_config', fd, { headers: headers });
     }else{
       let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
-      return this._http.put(this.url + 'config/actualizar_config/' + id, data, { headers: headers });
+      return this._http.put(this.url + 'config/actualizar_config', data, { headers: headers });
     }
 
     

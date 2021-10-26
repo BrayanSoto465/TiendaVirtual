@@ -29,6 +29,7 @@ export class ConfigComponent implements OnInit {
       this._adminService.obtener_config(this.token).subscribe(
         response=>{
           this.config = response.data;
+          console.log(this.config);
           this.imgSelect = this.url + 'config/obtener_logo/' + this.config.logo;
           
           alert(this.imgSelect);
@@ -83,7 +84,7 @@ export class ConfigComponent implements OnInit {
         logo : this.file,
       };
 
-      this._adminService.actualizar_config(data, "id", this.token).subscribe(
+      this._adminService.actualizar_config(data, this.token).subscribe(
         response=>{
           iziToast.show({
             backgroundColor: '#52BE80 ',

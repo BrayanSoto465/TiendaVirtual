@@ -19,7 +19,7 @@ export class CreateProductoComponent implements OnInit {
     categoria : ''
   };
   public file: any = null;
-  public imgSelect : any | ArrayBuffer ='assets/img/default.jpg';
+  public imgSelect: any | ArrayBuffer ='assets/img/default.jpg';
   public config : any = {};
   public token: any;
   public load_btn = false;
@@ -90,7 +90,6 @@ export class CreateProductoComponent implements OnInit {
     var file : any;
     if(event.target.files && event.target.files[0]){
       file = <File>event.target.files[0];
-    
     }else{
       iziToast.show({
         backgroundColor: '#dc3424',
@@ -101,7 +100,6 @@ export class CreateProductoComponent implements OnInit {
             progressBarColor: '#FFFFFF'
       });
     }
-
     if(file.size <= 4000000){
       if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg' || file.type == 'image/svg') {
 
@@ -109,7 +107,6 @@ export class CreateProductoComponent implements OnInit {
         reader.onload = e => this.imgSelect = reader.result;
         reader.readAsDataURL(file);
         $('#input-portada').text(file.name);
-
         this.file = file;
 
       }else{
@@ -125,7 +122,6 @@ export class CreateProductoComponent implements OnInit {
         this.imgSelect = 'assets/img/error.png';
         this.file = null;
       }
-
     }else{
       iziToast.show({
         backgroundColor: '#dc3424',
@@ -139,8 +135,6 @@ export class CreateProductoComponent implements OnInit {
       this.imgSelect = 'assets/img/error.png';
       this.file = null;
     }
-    
-    console.log(this.file);
   }
   
 }
