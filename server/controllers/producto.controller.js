@@ -16,7 +16,6 @@ productoController.crear_producto = async(req, res) => {
             let data = req.body;
             var img_path = req.files.portada.path;
 
-            console.log(img_path);
             var name = img_path.split('\\');
             var portada_name = name[2];
 
@@ -221,7 +220,7 @@ productoController.crear_inventario = async(req, res) => {
     }
 }
 
-productoController.actualizar_producto_vaiedades = async(req, res) => {
+productoController.actualizar_variedades = async(req, res) => {
     if (req.user) {
         if (req.user.role == 'administrador') {
 
@@ -229,10 +228,10 @@ productoController.actualizar_producto_vaiedades = async(req, res) => {
             let data = req.body;
 
             let reg = await Producto.findByIdAndUpdate({ _id: id }, {
-                titulo_variedad: data.titulo_variedad,
-                variedades: data.variedades,
+                titulo_variedad : data.titulo_variedad,
+                variedades: data.variedades
             });
-            
+            res.status(200).send({ data: reg });
         } else {
             res.status(500).send({ message: 'NoAcces' });
         }

@@ -1,7 +1,10 @@
+
+import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductoService } from 'src/app/services/producto.service';
+import { ActivatedRoute } from '@angular/router';
 import { GLOBAL } from 'src/app/services/GLOBAL';
+import { ProductoService } from 'src/app/services/producto.service';
+
 
 declare var iziToast : any;
 
@@ -36,19 +39,32 @@ export class VariedadProductoComponent implements OnInit {
               this.producto = undefined;
             }else{
               this.producto = response.data;
-
               this._productoService.listar_producto(this.producto._id,this.token).subscribe(
                 response=>{
                   this.inventarios = response.data;
                 },
                 error=>{
-                  console.log(error);
+                  iziToast.show({
+                    backgroundColor: '#dc3424',
+                        class: 'text-danger',
+                        position: 'topRight',
+                        message: 'Ocurrio un problema en el servidor',
+                        messageColor: '#FFFFFF',
+                        progressBarColor: '#FFFFFF'
+                  });
                 }
               );
             }
           },
           error=>{
-            console.log(error);
+            iziToast.show({
+              backgroundColor: '#dc3424',
+                  class: 'text-danger',
+                  position: 'topRight',
+                  message: 'Ocurrio un problema en el servidor',
+                  messageColor: '#FFFFFF',
+                  progressBarColor: '#FFFFFF'
+            });
           }
         );
       }
@@ -64,56 +80,52 @@ export class VariedadProductoComponent implements OnInit {
         backgroundColor: '#dc3424',
             class: 'text-danger',
             position: 'topRight',
-            message: 'EL campo de la variedad debe ser completada',
+            message: 'El campo de variedad ',
             messageColor: '#FFFFFF',
             progressBarColor: '#FFFFFF'
       });
     }
   }
 
-  eliminar_variedad(id: any):void{
+  eliminar_variedad(id : any){
     this.producto.variedades.splice(id, 1);
   }
 
-  actualizar():void{
+  actualizar(){
     if(this.producto.titulo_variedad){
-      this.load_btn = true;
-      this._productoService.actualizar_variedades(this.id, 
-        {
-          titulo_variedad: this.producto.variedad_titulo,
-          variedades : this.producto.variedades
-        } ,this.token).subscribe(
-          response=>{
-            iziToast.show({
-              title: 'SUCCESS',
-              titleColor: '#1DC74C',
-              class: 'text-success',
-              position: 'topRight',
-              message: 'Se actualizo correctamente las variedades'
-            });
-          },
-          error=>{
-            iziToast.show({
-              backgroundColor: '#dc3424',
-                  class: 'text-danger',
-                  position: 'topRight',
-                  message: 'Ocurrio un problema en el servidor',
-                  messageColor: '#FFFFFF',
-                  progressBarColor: '#FFFFFF'
-            });
-          }
-        );
+      if(this.producto.variedades.length >=1){
 
-    }else{
-      iziToast.show({
-        backgroundColor: '#dc3424',
-            class: 'text-danger',
-            position: 'topRight',
-            message: 'EL campo de la variedad debe ser completada',
-            messageColor: '#FFFFFF',
-            progressBarColor: '#FFFFFF'
-      });
+        this.load_btn = true;
+        this._productoService.actualizar_variedades( this.id,
+          {
+            titulo_variedad: this.producto.titulo_variedad,
+            variedades: this.producto.variedades
+          }, this.token).subscribe(
+            response=>{
+              iziToast.show({
+                backgroundColor: '#52BE80 ',
+                class: 'text-success',
+                position: 'topRight',
+                message: 'Se ha registrado las variedades',
+                messageColor: '#FFFFFF',
+                progressBarColor: '#FFFFFF'
+              });
+            },
+            error=>{
+              iziToast.show({
+                backgroundColor: '#dc3424',
+                class: 'text-danger',
+                position: 'topRight',
+                message: 'Ocurrio un problema en el servidor',
+                messageColor: '#FFFFFF',
+                progressBarColor: '#FFFFFF'
+              });
+            }
+        );
+        this.load_btn = false;
+      }
     }
-    this.load_btn = false;
   }
+            
+
 }

@@ -13,6 +13,7 @@ var ProductoSchema = Schema({
     stock: { type: Number, required: true },
     nventas: { type: Number, default: 0, required: false },
     npuntos: { type: Number, default: 0, required: false },
+    variedades: [{ type: Object, required: false }],
     categoria: { type: String, required: true },
     variedades: [{ type: Object, required: false}],
     titulo_variedad: { type: String, required: false },

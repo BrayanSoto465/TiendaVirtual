@@ -16,8 +16,7 @@ router.get('/obtener_portada/:img', productoController.obtener_portada);
 router.get('/obtener_producto/:id', auth.auth, productoController.obtener_producto);
 router.put('/actualizar_producto/:id', [auth.auth, path], productoController.actualizar_producto);
 router.delete('/eliminar_producto/:id', [auth.auth, path], productoController.eliminar_producto);
-router.put('/actualizar_producto_variedades/:id', auth.auth, productoController.actualizar_producto_vaiedades);
-
+router.put('/actualizar_variedades/:id',auth.auth,productoController.actualizar_variedades);
 //Inventario
 router.get('/listar_producto/:id', auth.auth, productoController.listar_producto);
 router.delete('/eliminar_inventario/:id', auth.auth, productoController.eliminar_inventario);

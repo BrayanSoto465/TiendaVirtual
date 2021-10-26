@@ -23,6 +23,7 @@ export class CreateProductoComponent implements OnInit {
   public config : any = {};
   public token: any;
   public load_btn = false;
+  public config_global : any = {};
 
   constructor(private _productoService : ProductoService, private _adminService : AdminService, 
     private _router : Router) { 
@@ -30,6 +31,11 @@ export class CreateProductoComponent implements OnInit {
       height:500
     }
     this.token = this._adminService.getToken();
+    this._adminService.obtener_publico().subscribe(
+      response=>{
+        this.config_global = response.data;
+      }
+    )
   }
 
   ngOnInit(): void { }
@@ -101,10 +107,7 @@ export class CreateProductoComponent implements OnInit {
 
         const reader = new FileReader();
         reader.onload = e => this.imgSelect = reader.result;
-        console.log(this.imgSelect)
-
         reader.readAsDataURL(file);
-
         $('#input-portada').text(file.name);
 
         this.file = file;

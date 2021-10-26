@@ -70,11 +70,12 @@ export class IndexProductoComponent implements OnInit {
     this._productoService.eliminar_producto(id,this.token).subscribe(
       response=>{
         iziToast.show({
-          title: 'SUCCESS',
-          titleColor: '#1DC74C',
+          backgroundColor: '#52BE80 ',
           class: 'text-success',
           position: 'topRight',
-          message: 'Se elimino correctamente el producto'
+          message: 'Se ha registrado un nuevo cliente',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
         });
 
         $('#delete-' + id).modal('hide');
@@ -85,11 +86,12 @@ export class IndexProductoComponent implements OnInit {
       },
       error=>{
         iziToast.show({
-          title: 'ERROR',
-          titleColor: '#FF0000',
-          class: 'text-success',
+          backgroundColor: '#dc3424',
+          class: 'text-danger',
           position: 'topRight',
-          message: 'Ocurrio un error en el servidor'
+          message: 'Ocurrio un problema en el servidor',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
         });
 
         $('#delete-' + id).modal('hide');

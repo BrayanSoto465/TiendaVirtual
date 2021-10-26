@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 declare var iziToast:any;
@@ -22,33 +23,44 @@ export class UpdateProductoComponent implements OnInit {
   public token : any;
   public file: any = null;
   public url: any;
+  public config_global : any = {};
 
-  constructor(private _route : ActivatedRoute, private _productoService : ProductoService, 
+  constructor(private _route : ActivatedRoute, private _productoService : ProductoService, private _adminService :AdminService ,
     private _router : Router) { 
-      this.config = {
+    this.config = {
       height:500
     }
     this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
+    this._adminService.obtener_publico().subscribe(
+      response=>{
+        this.config_global = response.data;
+      }
+    )
   }
 
   ngOnInit(): void {
     this._route.params.subscribe(
       params=>{
         this.id = params['id'];
-        console.log(this.id);
         this._productoService.productooAdmin(this.id,this.token).subscribe(
           response=>{
             if(response.data == undefined){
               this.producto = undefined;
-              
             }else{
               this.producto = response.data;
-              this.imgSelect = this.url+'producto/obtener_portada/'+this.producto.portada;
+              this.imgSelect = this.url + 'producto/obtener_portada/' + this.producto.portada;
             }
           },
           error=>{
-            console.log(error);
+            iziToast.show({
+              backgroundColor: '#dc3424',
+              class: 'text-danger',
+              position: 'topRight',
+              message: 'Ocurrio un problema en el servidor',
+              messageColor: '#FFFFFF',
+              progressBarColor: '#FFFFFF'
+            });
           }
         );
       }
@@ -57,10 +69,7 @@ export class UpdateProductoComponent implements OnInit {
 
   actualizar(actualizarForm : NgForm){
     if(actualizarForm.valid){
-      
-
       var data : any = {};
-      
       
       if(this.file != undefined){
         data.portada = this.file;
@@ -79,13 +88,13 @@ export class UpdateProductoComponent implements OnInit {
 
       this._productoService.actualizarAdmin(this.id,data,this.token).subscribe(
         response =>{
-          console.log(response);
           iziToast.show({
-            title: 'SUCCESS',
-            titleColor: '#1DC74C',
+            backgroundColor: '#52BE80 ',
             class: 'text-success',
             position: 'topRight',
-            message: 'Se actualizo correctamente el nuevo producto'
+            message: 'Se ha registrado un nuevo cliente',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
           });
           this.load_btn = false;
 
@@ -94,22 +103,23 @@ export class UpdateProductoComponent implements OnInit {
         error=>{
           iziToast.show({
             backgroundColor: '#dc3424',
-                class: 'text-danger',
-                position: 'topRight',
-                message: 'Ocurrio un problema en el servidor',
-                messageColor: '#FFFFFF',
-                progressBarColor: '#FFFFFF'
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'Ocurrio un problema en el servidor',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
           });
           this.load_btn = false;
         }
       )
     }else{
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Debe subir una portada para registrar'
+        message: 'Debe subir una portada',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
       this.load_btn = false;
     }
@@ -122,11 +132,12 @@ export class UpdateProductoComponent implements OnInit {
     
     }else{
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'la imagen no existe'
+        message: 'La imagen no existe',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
     }
 
@@ -146,11 +157,12 @@ export class UpdateProductoComponent implements OnInit {
 
       }else{
         iziToast.show({
-          title: 'ERROR',
-          titleColor: '#FF0000',
+          backgroundColor: '#dc3424',
           class: 'text-danger',
           position: 'topRight',
-          message: 'El archivo debe ser una imagen'
+          message: 'El archivo debe ser una imagen',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
         });
         $('#input-portada').text('Seleccionar imagen');
         this.imgSelect = 'assets/img/error.png';
@@ -159,11 +171,12 @@ export class UpdateProductoComponent implements OnInit {
 
     }else{
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'la imagen no puede superar los 4mb'
+        message: 'La imagen es muy grande',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
       $('#input-portada').text('Seleccionar imagen');
       this.imgSelect = 'assets/img/error.png';
