@@ -92,7 +92,7 @@ export class UpdateProductoComponent implements OnInit {
             backgroundColor: '#52BE80 ',
             class: 'text-success',
             position: 'topRight',
-            message: 'Se ha registrado un nuevo cliente',
+            message: 'Se ha actualizado el producto',
             messageColor: '#FFFFFF',
             progressBarColor: '#FFFFFF'
           });

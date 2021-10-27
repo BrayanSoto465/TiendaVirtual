@@ -14,12 +14,10 @@ productoController.crear_producto = async(req, res) => {
         if (req.user.role == 'administrador') {
 
             let data = req.body;
-            var img_path = req.files.portada.path;
 
+            var img_path = req.files.portada.path;
             var name = img_path.split('\\');
             var portada_name = name[2];
-
-            console.log(window.navigator);
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             data.portada = portada_name;
@@ -231,6 +229,47 @@ productoController.actualizar_variedades = async(req, res) => {
                 titulo_variedad : data.titulo_variedad,
                 variedades: data.variedades
             });
+            res.status(200).send({ data: reg });
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.agregar_imagen_galeria = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            let id = req.params['id'];
+            let data = req.body;
+
+            var img_path = req.files.imagen.path;
+            var name = img_path.split('\\');
+            var imagen_name = name[2];
+
+            let reg = await Producto.findByIdAndUpdate({_id: id}, { $push: { galeria: {
+                imagen : imagen_name,
+                _id : data._id
+            }}});
+            
+            res.status(200).send({ data: reg });
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+productoController.eliminar_imagen_galeria = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            let id = req.params['id'];
+            let data = req.body;
+
+            let reg = await Producto.findByIdAndUpdate({_id: id}, { $pull: { galeria: {_id : data._id}}});
+            
             res.status(200).send({ data: reg });
         } else {
             res.status(500).send({ message: 'NoAcces' });

@@ -85,4 +85,17 @@ export class ProductoService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
     return this._http.put(this.url + 'producto/actualizar_variedades/' + id, data, { headers: headers });
   }
+
+  agregar_imagen_galeria(id : string, data: any, token: string ): Observable<any> {
+    let headers = new HttpHeaders({'Authorization':token});
+    const fd = new FormData();
+    fd.append('_id',data._id);
+    fd.append('imagen',data.imagen);
+    return this._http.put(this.url + 'producto/agregar_imagen_galeria/' + id, fd, { headers: headers });
+  }
+
+  eliminar_imagen_galeria( id: any, data: any, token: string ): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.put(this.url + 'producto/eliminar_imagen_galeria/' + id, data, { headers: headers });
+  }
 }

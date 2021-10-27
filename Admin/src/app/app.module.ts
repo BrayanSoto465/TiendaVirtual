@@ -22,6 +22,7 @@ import { UpdateProductoComponent } from './components/productos/update-producto/
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 import { ConfigComponent } from './components/config/config.component';
 import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
+import { GaleriaProductoComponent } from './components/productos/galeria-producto/galeria-producto.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { VariedadProductoComponent } from './components/productos/variedad-produ
     InventarioProductoComponent,
     ConfigComponent,
     VariedadProductoComponent,
+    GaleriaProductoComponent,
   ],
   imports: [
     BrowserModule,

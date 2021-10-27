@@ -71,8 +71,10 @@ export class AdminService {
 
     
   }
-   obtener_publico(): Observable<any> {
+  
+  obtener_publico(): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(this.url + 'config/obtener_publico', { headers: headers });
   }
+
 }

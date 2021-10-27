@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
-
 declare var iziToast : any;
 
 @Component({

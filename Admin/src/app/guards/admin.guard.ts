@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
+
 export class AdminGuard implements CanActivate {
 
   constructor(private _adminService:AdminService, private _router:Router){ }
