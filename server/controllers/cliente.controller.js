@@ -38,7 +38,7 @@ clienteController.login = async(req, res) => {
         bcrypt.compare(data.password, user.password, async function(error, check) {
             if (check) {
                 res.status(200).send({
-                    message: user,
+                    data: user,
                     token: jwt.createToken(user)
                 });
             } else {
@@ -151,5 +151,60 @@ clienteController.eliminarAdmin = async function(req, res) {
         res.status(500).send({ message: 'NoAcces' });
     }
 }
+
+clienteController.cliente_guest = async function(req, res) {
+    if (req.user) {
+       
+            var id = req.params['id'];
+
+            try {
+                var reg = await Cliente.findById({ _id: id });
+                res.status(200).send({ data: reg });
+            } catch (error) {
+                res.status(200).send({ data: undefined });
+            }        
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.cliente_actualizar_guest = async function(req, res) {
+    if (req.user) {
+       
+            var id = req.params['id'];
+            var data = req.body;
+
+            console.log(data.password);
+
+            if(data.password){
+                console.log('Con contraseña');
+                bcrypt.hash(data.password,null,null, async function(err,hash){
+                    var reg = await Cliente.findByIdAndUpdate({_id:id},{
+                        nombres: data.nombres,
+                        empresa: data.empresa,
+                        telefono: data.telefono,
+                        cedula: data.cedula,
+                        pais: data.pais,
+                        password: hash,
+                    });
+                    res.status(200).send({data:reg});
+                });
+                
+            }else{
+                console.log('sin contraseña');
+                var reg = await Cliente.findByIdAndUpdate({_id:id},{
+                    nombres: data.nombres,
+                    empresa: data.empresa,
+                    telefono: data.telefono,
+                    cedula: data.cedula,
+                    pais: data.pais,
+                });
+                res.status(200).send({data:reg});
+            }
+                  
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+} 
 
 module.exports = clienteController;
