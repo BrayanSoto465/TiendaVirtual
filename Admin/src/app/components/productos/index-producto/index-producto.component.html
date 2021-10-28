@@ -15,14 +15,21 @@
         <h5 style="margin-bottom: 0px;">Filtro de productos</h5>
     </div>
     <div class="card-header">
-        <form class="form-inline pt-2">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" id="input-filtro-buscar" (keyup)="filtro()" name="filtro-buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar" aria-describedby="button-addon2">
+        <div class="row">
+            <div class="col-6"> 
+                <div class="input-group">
+                    <input type="text" class="form-control" id="input-filtro-buscar" (keyup)="filtro()" name="filtro-buscar" [(ngModel)]="filtro_buscar" placeholder="Buscar" aria-describedby="button-addon2">
 
-                <button *ngIf="filtro_buscar == ''" class=" btn-borrar " type="button " d="button-addon2 "></button>
-                <button *ngIf="filtro_buscar != ''" class=" btn-borrar active" type="button " (click)="resetear()" d="button-addon2 ">X</button>
+                    <div class="input-group-append">
+                        <button *ngIf="filtro_buscar == ''" class=" btn-borrar " type="button " d="button-addon2 "></button>
+                        <button *ngIf="filtro_buscar != ''" class=" btn-borrar active" type="button " (click)="resetear()" d="button-addon2 ">X</button>
+                    </div>
+                </div>
             </div>
-        </form>
+            <div class="col-12 mt-3">
+                <button class="btn btn-success" (click)="donwload_excel()">Exportar a excel</button>
+            </div>
+        </div>
     </div>
     <div class="card-body ">
         <div class="table-responsive ">
@@ -76,10 +83,11 @@
                                     Opciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item " [routerLink]="['/panel/productos',producto._id]">Editar producto</a>
+                                        <a class="dropdown-item " [routerLink]="['/panel/productos/',producto._id]">Editar producto</a>
                                         <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+producto._id">Eliminar producto</a>
-                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/inventario',producto._id] ">Inventario</a>
-                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/variedades',producto._id] ">Variedades</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/inventario/',producto._id] ">Inventario</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/variedades/',producto._id] ">Variedades</a>
+                                        <a class="dropdown-item " [routerLink]="[ '/panel/productos/galeria/',producto._id] ">Galeria</a>
                                     </div>
                                 </div>
 

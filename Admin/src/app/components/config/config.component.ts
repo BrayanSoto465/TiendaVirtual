@@ -29,10 +29,8 @@ export class ConfigComponent implements OnInit {
       this._adminService.obtener_config(this.token).subscribe(
         response=>{
           this.config = response.data;
-          console.log(this.config);
           this.imgSelect = this.url + 'config/obtener_logo/' + this.config.logo;
-          
-          alert(this.imgSelect);
+    
           if(this.imgSelect != null){
             $('.cs-file-drop-icon').addClass("cs-file-drop-preview img-thunbnail rounded");
             $('.cs-file-drop-icon').removeClass("cs-file-drop-icon cxi-upload");
@@ -40,7 +38,14 @@ export class ConfigComponent implements OnInit {
           }
         }, 
         error=>{
-          console.log(error);
+          iziToast.show({
+            backgroundColor: '#dc3424',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'Ocurrio un error en el servidor',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+          });
         }
       );
       this.url = GLOBAL.url;

@@ -16,7 +16,11 @@ router.get('/obtener_portada/:img', productoController.obtener_portada);
 router.get('/obtener_producto/:id', auth.auth, productoController.obtener_producto);
 router.put('/actualizar_producto/:id', [auth.auth, path], productoController.actualizar_producto);
 router.delete('/eliminar_producto/:id', [auth.auth, path], productoController.eliminar_producto);
-router.put('/actualizar_variedades/:id',auth.auth,productoController.actualizar_variedades);
+router.put('/actualizar_variedades/:id', auth.auth, productoController.actualizar_variedades);
+router.put('/agregar_imagen_galeria/:id', [auth.auth, path], productoController.agregar_imagen_galeria);
+router.put('/eliminar_imagen_galeria/:id', auth.auth, productoController.eliminar_imagen_galeria);
+
+
 //Inventario
 router.get('/listar_producto/:id', auth.auth, productoController.listar_producto);
 router.delete('/eliminar_inventario/:id', auth.auth, productoController.eliminar_inventario);

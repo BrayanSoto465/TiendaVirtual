@@ -38,6 +38,8 @@
                     <input class="form-control mb-3 mr-ms-4" type="text" placeholder="proveedor" name="proveedor" [(ngModel)]="inventario.Proveedor" required>
 
                     <button class="btn btn-primary mb-3" type="ngSubmit">Ingresar</button>
+
+                    <button class="btn btn-success mb-3" type="button" (click)="donwload_excel()">Exportar a excel</button>
                 </form>
             </div>
         </div>

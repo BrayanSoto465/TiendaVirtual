@@ -42,7 +42,7 @@
 
                 <div class="col-md-4 form-group ">
                     <label class="form-label ">Telefono</label>
-                    <input class="form-control " type="number " placeholder="Telefono " name="telefono " [(ngModel)]="cliente.telefono " minlength="10000000 " required>
+                    <input class="form-control " type="number " placeholder="Telefono " name="telefono " [(ngModel)]="cliente.telefono " minlength="1" required>
                     <div class="invalid-tooltip ">Proporcione un telefono valido</div>
                 </div>
                 <div class="col-md-4 form-group ">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-4 form-group ">
                     <label class="form-label ">Empresa</label>
-                    <input class="form-control " type="text " placeholder="Emppresa " name="empresa " [(ngModel)]="cliente.empresa " required>
+                    <input class="form-control " type="text " placeholder="Emppresa " name="empresa " [(ngModel)]="cliente.empresa" required>
                     <div class="invalid-tooltip ">Proporcione una empresa valida</div>
                 </div>
             </div>
