@@ -279,5 +279,19 @@ productoController.eliminar_imagen_galeria = async(req, res) => {
     }
 }
 
+//------------------------METODOS PUBLICOS -----------------------------
+
+productoController.listar_producto_publico = async(req, res) => {
+    let filtro = req.params['filtro'];
+    if (filtro == 'null' || filtro == null) {
+        let reg = await Producto.find({});
+        res.status(200).send({ data: reg });
+    } else {
+        let regExp = new RegExp(filtro, 'i');
+        let reg = await Producto.find({ $or: [{ titulo: regExp }, { descripcion: regExp }, { categoria: regExp }] });
+        res.status(200).send({ data: reg });
+    }
+}
+
 module.exports = productoController;
 

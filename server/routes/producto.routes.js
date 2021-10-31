@@ -26,4 +26,7 @@ router.get('/listar_producto/:id', auth.auth, productoController.listar_producto
 router.delete('/eliminar_inventario/:id', auth.auth, productoController.eliminar_inventario);
 router.post('/crear_inventario', auth.auth, productoController.crear_inventario);
 
+//PUBLICOS
+router.get('/listar_producto_publico/:filtro?',productoController.listar_producto_publico);
+
 module.exports = router;
