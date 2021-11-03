@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
+import { ShowProductoComponent  } from './components/productos/show-producto/show-producto.component';
 
 import { AuthGuard } from "./guards/auth.guard";
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
@@ -14,7 +15,8 @@ const appRoute : Routes = [
 
   {path: 'cuenta/perfil',component: PerfilComponent, canActivate: [AuthGuard]},
   {path: 'productos',component: IndexProductoComponent},
-  {path: 'productos/categoria/:categoria',component: IndexProductoComponent}
+  {path: 'productos/categoria/:categoria',component: IndexProductoComponent},
+  {path: 'productos/:slug', component: ShowProductoComponent}
 ];
 
 export const appRoutingProviders : any[] = [];

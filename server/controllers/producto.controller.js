@@ -284,13 +284,32 @@ productoController.eliminar_imagen_galeria = async(req, res) => {
 productoController.listar_producto_publico = async(req, res) => {
     let filtro = req.params['filtro'];
     if (filtro == 'null' || filtro == null) {
-        let reg = await Producto.find({});
+        let reg = await Producto.find({}).sort({created: -1});
         res.status(200).send({ data: reg });
     } else {
         let regExp = new RegExp(filtro, 'i');
-        let reg = await Producto.find({ $or: [{ titulo: regExp }, { descripcion: regExp }, { categoria: regExp }] });
+        let reg = await Producto.find({ $or: [{ titulo: regExp }, { descripcion: regExp }, { categoria: regExp }] }).sort({created: -1});
         res.status(200).send({ data: reg });
     }
+}
+
+productoController.obtener_producto_slug = async(req, res) => {
+    let slug = req.params['slug'];
+    let reg = await Producto.findOne({ slug: slug});
+    res.status(200).send({ data: reg });
+}
+
+productoController.listar_productos_recomentados = async(req, res) => {
+    let categoria = req.params['categoria'];
+    if (categoria == 'null' || categoria == null) {
+        let reg = await Producto.find({}).sort({created: -1}).limit(8);
+        res.status(200).send({ data: reg });
+    } else {
+        let regExp = new RegExp(categoria, 'i');
+        let reg = await Producto.find({categoria: regExp}).sort({created: -1}).limit(8);
+        res.status(200).send({ data: reg });
+    }
+    res.status(200).send({ data: reg });
 }
 
 module.exports = productoController;

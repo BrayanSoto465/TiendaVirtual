@@ -28,5 +28,7 @@ router.post('/crear_inventario', auth.auth, productoController.crear_inventario)
 
 //PUBLICOS
 router.get('/listar_producto_publico/:filtro?',productoController.listar_producto_publico);
+router.get('/obtener_producto_slug/:slug', productoController.obtener_producto_slug);
+router.get('/listar_productos_recomendados/:categoria', productoController.listar_productos_recomentados);
 
 module.exports = router;

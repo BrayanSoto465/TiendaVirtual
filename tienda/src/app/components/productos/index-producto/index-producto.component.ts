@@ -30,7 +30,6 @@ export class IndexProductoComponent implements OnInit {
   
   public sort_by = 'Defecto';
   
-
   constructor(
     private _clienteService: ClienteService,
     private _route: ActivatedRoute
@@ -101,45 +100,35 @@ export class IndexProductoComponent implements OnInit {
 
   }
   buscar_categorias( ){
-    
-    
     if(this.filter_categoria){
       var search = new RegExp(this.filter_categoria, 'i');
       this.config_global.categorias = this.config_global.categorias.filter(
         (item : any) => search.test(item.titulo)
       );
-  }else{
+    }else{
+      this._clienteService.obtener_publico().subscribe(
+        response=>{
+          this.config_global = response.data;
+        }
+      )
 
-    this._clienteService.obtener_publico().subscribe(
-      response=>{
-        this.config_global = response.data;
-      }
-    )
-
+    }
   }
-}
   buscar_producto(){
     this._clienteService.listar_producto_publico(this.filter_producto).subscribe(
       response=>{
-       
         this.productos = response.data;
         this.load_data = false;
       },
       error => {
-        console.log(error);
-      
-    
-    
-
-      
-      iziToast.show({
-        backgroundColor: '#dc3424',
+        iziToast.show({
+          backgroundColor: '#dc3424',
           class: 'text-danger',
           position: 'topRight',
           message: 'Ocurrio un error en el servidor',
           messageColor: '#FFFFFF',
           progressBarColor: '#FFFFFF'
-      });
+        });
     });
     
   }
