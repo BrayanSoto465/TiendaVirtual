@@ -309,7 +309,6 @@ productoController.listar_productos_recomentados = async(req, res) => {
         let reg = await Producto.find({categoria: regExp}).sort({created: -1}).limit(8);
         res.status(200).send({ data: reg });
     }
-    res.status(200).send({ data: reg });
 }
 
 module.exports = productoController;
