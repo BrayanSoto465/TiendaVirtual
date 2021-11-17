@@ -68,5 +68,19 @@ export class ClienteService {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(this.url + 'producto/listar_producto_publico/'+filtro, { headers: headers });
   }
+
+  agregar_carrito_cliente(data : Object, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.post(this.url + 'carrito/agregar_carrito_cliente' ,data,{ headers: headers });
+  }
+
+  obtener_carrito_cliente(id : String, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'carrito/obtener_carrito_cliente/' + id ,{ headers: headers });
+  }
   
+  eliminar_carrito_cliente(id : String, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.delete(this.url + 'carrito/eliminar_carrito_cliente/' + id ,{ headers: headers });
+  }
 }
