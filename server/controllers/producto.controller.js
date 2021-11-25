@@ -48,7 +48,7 @@ productoController.listar_producto_filtro = async(req, res) => {
                 res.status(200).send({ data: reg });
             } else {
                 let regExp = new RegExp(filtro, 'i');
-                let reg = await Producto.find({ $or: [{ titulo: regExp }, { descripcion: regExp }, { contenido: regExp }, { categoria: regExp }] });
+                let reg = await Producto.find({ $or: [{ titulo: regExp }, { categoria: regExp }] });
                 res.status(200).send({ data: reg });
             }
         } else {
