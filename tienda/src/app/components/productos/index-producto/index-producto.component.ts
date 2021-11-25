@@ -40,10 +40,7 @@ export class IndexProductoComponent implements OnInit {
 
   public btn_cart = false;
   public socket = io('http://localhost:4201');
-  constructor(
-    private _clienteService: ClienteService,
-    private _route: ActivatedRoute
-  ) { 
+  constructor(private _clienteService: ClienteService, private _route: ActivatedRoute) { 
     this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
     this._clienteService.obtener_publico().subscribe(
@@ -78,9 +75,7 @@ export class IndexProductoComponent implements OnInit {
         }
 
       }
-    );
-
-    
+    ); 
   }
 
   ngOnInit(): void {
@@ -110,6 +105,7 @@ export class IndexProductoComponent implements OnInit {
     $('.noUi-tooltip').css('font-size','11px');
 
   }
+
   buscar_categorias( ){
     if(this.filter_categoria){
       var search = new RegExp(this.filter_categoria, 'i');
@@ -125,6 +121,7 @@ export class IndexProductoComponent implements OnInit {
 
     }
   }
+
   buscar_producto(){
     this._clienteService.listar_producto_publico(this.filter_producto).subscribe(
       response=>{

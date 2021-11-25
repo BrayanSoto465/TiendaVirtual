@@ -23,6 +23,8 @@ export class IndexProductoComponent implements OnInit {
   public load_data = true;
   public url;
 
+  public page = 1;
+  public pageSize = 5;
 
   constructor(private _productoService: ProductoService) { 
     this.token = localStorage.getItem('token');

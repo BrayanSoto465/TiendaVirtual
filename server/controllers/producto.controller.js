@@ -16,7 +16,7 @@ productoController.crear_producto = async(req, res) => {
             let data = req.body;
 
             var img_path = req.files.portada.path;
-            var name = img_path.split('\\');
+            var name = img_path.split('/');
             var portada_name = name[2];
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -245,7 +245,7 @@ productoController.agregar_imagen_galeria = async(req, res) => {
             let data = req.body;
 
             var img_path = req.files.imagen.path;
-            var name = img_path.split('\\');
+            var name = img_path.split('/');
             var imagen_name = name[2];
 
             let reg = await Producto.findByIdAndUpdate({_id: id}, { $push: { galeria: {
@@ -309,11 +309,6 @@ productoController.listar_productos_recomentados = async(req, res) => {
         let reg = await Producto.find({categoria: regExp}).sort({created: -1}).limit(8);
         res.status(200).send({ data: reg });
     }
-<<<<<<< HEAD
-   
-=======
->>>>>>> d51eea8e74948b351d62f7d08403e1760d3eb8a5
 }
 
 module.exports = productoController;
-

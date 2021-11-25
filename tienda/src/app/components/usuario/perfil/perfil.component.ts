@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 declare var $: any;
@@ -54,11 +54,12 @@ export class PerfilComponent implements OnInit {
 
     }else{
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Los datos del formulario no son validos'
+        message: 'Los datos del formulario no son validos',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
     }
   }

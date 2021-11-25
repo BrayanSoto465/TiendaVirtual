@@ -3,6 +3,7 @@
 const Cliente = require('../models/cliente');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
+const Direccion = require('../models/direccion');
 
 const clienteController = {}
 
@@ -154,9 +155,7 @@ clienteController.eliminarAdmin = async function(req, res) {
 
 clienteController.cliente_guest = async function(req, res) {
     if (req.user) {
-       
             var id = req.params['id'];
-
             try {
                 var reg = await Cliente.findById({ _id: id });
                 res.status(200).send({ data: reg });
@@ -206,5 +205,51 @@ clienteController.cliente_actualizar_guest = async function(req, res) {
         res.status(500).send({ message: 'NoAcces' });
     }
 } 
+
+//Direccion
+clienteController.registro_direccion = async function(req, res) {
+    if(req.user){
+            var data = req.body;
+            
+            if(data.principal){
+                let direcciones = await Direccion.find({cliente: data.cliente});
+
+                for(let direccion of direcciones) {
+                    await Direccion.findByIdAndUpdate({_id: direccion._id}, {principal:false});
+                }
+            }
+
+            let reg = await Direccion.create(data);
+            res.status(200).send({ data: reg });
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.obtener_direcciones = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];
+        let reg = await Direccion.find({cliente: id});
+        res.status(200).send({ data: reg });
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.cambiar_direccion_principal = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];
+        var cliente = req.params['cliente'];       
+    
+        let direcciones = await Direccion.find({cliente: cliente});
+        for(let direccion of direcciones) {
+            await Direccion.findByIdAndUpdate({_id: direccion._id}, {principal:false});
+        }
+        let reg = await Direccion.findByIdAndUpdate({_id: id}, {principal:true});
+        res.status(200).send({ data: reg });
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
 
 module.exports = clienteController;
