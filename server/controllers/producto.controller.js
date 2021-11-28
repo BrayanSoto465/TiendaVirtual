@@ -16,7 +16,7 @@ productoController.crear_producto = async(req, res) => {
             let data = req.body;
 
             var img_path = req.files.portada.path;
-            var name = img_path.split('\\');
+            var name = img_path.split('/');
             var portada_name = name[2];
 
             data.slug = data.titulo.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -48,7 +48,7 @@ productoController.listar_producto_filtro = async(req, res) => {
                 res.status(200).send({ data: reg });
             } else {
                 let regExp = new RegExp(filtro, 'i');
-                let reg = await Producto.find({ $or: [{ titulo: regExp }, { descripcion: regExp }, { contenido: regExp }, { categoria: regExp }] });
+                let reg = await Producto.find({ $or: [{ titulo: regExp }, { categoria: regExp }] });
                 res.status(200).send({ data: reg });
             }
         } else {
@@ -245,7 +245,7 @@ productoController.agregar_imagen_galeria = async(req, res) => {
             let data = req.body;
 
             var img_path = req.files.imagen.path;
-            var name = img_path.split('\\');
+            var name = img_path.split('/');
             var imagen_name = name[2];
 
             let reg = await Producto.findByIdAndUpdate({_id: id}, { $push: { galeria: {
@@ -309,6 +309,7 @@ productoController.listar_productos_recomentados = async(req, res) => {
         let reg = await Producto.find({categoria: regExp}).sort({created: -1}).limit(8);
         res.status(200).send({ data: reg });
     }
+<<<<<<< HEAD
 
 }
 
@@ -325,3 +326,8 @@ productoController.listar_producto_masvendido_publico = async(req, res) => {
 
 module.exports = productoController;
 
+=======
+}
+
+module.exports = productoController;
+>>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9

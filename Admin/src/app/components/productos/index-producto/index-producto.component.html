@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-3">
+            <div class="col-6">
                 <button class="btn btn-success" (click)="donwload_excel()">Exportar a excel</button>
             </div>
         </div>
@@ -65,9 +65,9 @@
                 </tbody>
 
                 <ng-container *ngIf="!load_data ">
-                    <tbody *ngFor="let producto of productos ">
+                    <tbody *ngFor="let producto of productos| slice: (page-1)*pageSize : (page-1)*pageSize+pageSize ; let indice = index">
                         <tr>
-                            <td>#</td>
+                            <td>{{indice+1}}</td>
                             <td>
                                 <h6 style="padding-bottom: 0;margin-bottom: 0; ">
                                     <img width="80px " [src]="url + 'producto/obtener_portada/' + producto.portada " /> {{producto.titulo}}
@@ -123,7 +123,7 @@
         </div>
     </div>
     <div class="card-footer ">
-        <!--ngb-pagination [(page)]="page " [pageSize]="pageSize " [collectionSize]="clientes.length ">
-        </ngb-pagination-->
+        <ngb-pagination [(page)]="page " [pageSize]="pageSize " [collectionSize]="productos.length ">
+        </ngb-pagination>
     </div>
 </div>

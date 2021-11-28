@@ -23,6 +23,8 @@ export class IndexProductoComponent implements OnInit {
   public load_data = true;
   public url;
 
+  public page = 1;
+  public pageSize = 5;
 
   constructor(private _productoService: ProductoService) { 
     this.token = localStorage.getItem('token');
@@ -65,15 +67,13 @@ export class IndexProductoComponent implements OnInit {
   filtro(){
     this.load_data = true;
     if (this.filtro_buscar) {
-      this._productoService.listar(this.filtro_buscar,this.token).subscribe(
+      this._productoService.listar(this.filtro_buscar, this.token).subscribe(
         response => {
           this.load_data = false;
           this.productos = response.data;
-        },
-        error => {
-          console.log(error);
         }
       );
+      this.load_data = false;
     } else {
       this.init_data();
     }

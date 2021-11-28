@@ -41,11 +41,12 @@ export class LoginComponent implements OnInit {
         response => {
           if (response.data == undefined) {
             iziToast.show({
-              title: 'ERROR',
-              titleColor: '#FF0000',
+              backgroundColor: '#dc3424',
               class: 'text-danger',
               position: 'topRight',
-              message: response.message
+              message: response.message,
+              messageColor: '#FFFFFF',
+              progressBarColor: '#FFFFFF'
             });
           }else{
             this.usuario = response.message;
@@ -63,11 +64,12 @@ export class LoginComponent implements OnInit {
       );
     }else {
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Los datos del formulario no son validos'
+        message: 'Los datos del formulario no son validos',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
     }
   }
