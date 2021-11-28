@@ -16,4 +16,8 @@ router.delete('/Eliminar/administrador/:id', auth.auth, clienteController.elimin
 router.get('/cliente_guest/:id',auth.auth,clienteController.cliente_guest);
 router.put('/cliente_actualizar_guest/:id',auth.auth,clienteController.cliente_actualizar_guest);
 
+//CONTACTO
+
+router.post('/enviar_mensaje_contacto', clienteController.enviar_mensaje_contacto);
+
 module.exports = router;

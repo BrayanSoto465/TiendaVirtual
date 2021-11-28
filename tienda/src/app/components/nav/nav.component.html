@@ -106,59 +106,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown mega-dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Megamenu</a>
-                        <div class="dropdown-menu">
-                            <div class="container pt-lg-1 pb-lg-3">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-3 py-2">
-                                        <ul class="list-unstyled">
-                                            <li><a href="#" class="dropdown-item">Nuevos productos</a></li>
-                                            <li><a href="#" class="dropdown-item">Lo más vendidos</a></li>
-                                            <li><a href="#" class="dropdown-item text-danger">Promociones %</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 py-2">
-                                        <h4 class="font-size-sm text-uppercase pt-1 mb-2">Otras opciones</h4>
-                                        <ul class="list-unstyled">
-                                            <li><a href="#" class="dropdown-item">Opcion 1</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 2</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 3</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 py-2">
-                                        <h4 class="font-size-sm text-uppercase pt-1 mb-2">Metales</h4>
-                                        <ul class="list-unstyled">
-                                            <li><a href="#" class="dropdown-item">Opcion 1</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 2</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 3</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 py-2">
-                                        <h4 class="font-size-sm text-uppercase pt-1 mb-2">Pinturas</h4>
-                                        <ul class="list-unstyled">
-                                            <li><a href="#" class="dropdown-item">Opcion 1</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 2</a></li>
-                                            <li><a href="#" class="dropdown-item">Opcion 3</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-1 d-none d-lg-block py-2">
-                                        <span class="divider-vertical h-100 mx-auto"></span>
-                                    </div>
-                                    <div class="col-lg-3 d-none d-lg-block py-2">
-                                        <a href="#" class="d-block text-decoration-none pt-1">
-                                            <img src="../../assets/img/ecommerce/Acero.jpeg" class="d-block rounded mb-3" alt="Promo banner">
-                                            <h5 class="font-size-sm mb-3">Producto en descuento</h5>
-                                            <div class="btn btn-outline-primary btn-sm">
-                                                Mirar ofertas
-                                                <i class="cxi-arrow-right ml-1"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <li class="nav-item">
+                      <a [routerLink]="['/contacto']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Contacto</a>
+                  </li>
 
                 </ul>
             </nav>

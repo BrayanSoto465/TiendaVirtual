@@ -1,6 +1,7 @@
 'use strict'
 
 const Cliente = require('../models/cliente');
+const Contacto = require('../models/contacto');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
 
@@ -207,4 +208,14 @@ clienteController.cliente_actualizar_guest = async function(req, res) {
     }
 } 
 
+////CONTACTO////
+
+
+clienteController.enviar_mensaje_contacto = async(req, res) => {
+    let data = req.body;
+
+    data.estado = 'Abierto';
+    let reg = await Contacto.create(data);
+    res.status(200).send({data:reg});
+}
 module.exports = clienteController;

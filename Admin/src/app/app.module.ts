@@ -23,6 +23,7 @@ import { InventarioProductoComponent } from './components/productos/inventario-p
 import { ConfigComponent } from './components/config/config.component';
 import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
 import { GaleriaProductoComponent } from './components/productos/galeria-producto/galeria-producto.component';
+import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GaleriaProductoComponent } from './components/productos/galeria-product
     ConfigComponent,
     VariedadProductoComponent,
     GaleriaProductoComponent,
+    IndexContactoComponent,
   ],
   imports: [
     BrowserModule,

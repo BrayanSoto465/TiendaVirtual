@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import  { GuestService } from 'src/app/services/guest.service';
+import { GLOBAL } from 'src/app/services/GLOBAL';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { Element } from '@angular/compiler';
 declare var tns : any ;
+
 
 @Component({
   selector: 'app-inicio',
@@ -7,10 +12,82 @@ declare var tns : any ;
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+  public new_productos : Array<any> = [];
+  public mas_vendidos : Array<any> = [];
+  public config_global : any = {};
+  public url : any;
+  public categorias : Array<any> = [];
+ 
 
-  constructor() { }
+  constructor(
+    private _guestService:GuestService,
+    private _clienteService : ClienteService
+  ) {
+    this.url = GLOBAL.url;
+    this._clienteService.obtener_publico().subscribe(
+      response=>{
+        
+        response.data.categorias.forEach((element : any)  =>{
+          element.titulo = element.titulo.replace(/\s+/g, "");
+          if(element.titulo == 'Smartphones'){
+            this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Headphones'){
+            this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Oficina'){
+            this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Moda'){
+             this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Moda'){
+              this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Alimentos'){
+            this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }else if(element.titulo == 'Hogar'){
+            this.categorias.push({
+              titulo:element.titulo,
+              portada: ''
+            });
+          }
+        });
+
+        console.log(this.categorias);
+        
+      }
+    );
+  }
 
   ngOnInit(): void {
+
+
+    this._guestService.listar_producto_nuevo_publico().subscribe(
+      response=>{
+        this.new_productos = response.data;
+      }
+    );
+
+    this._guestService.listar_producto_masvendido_publico().subscribe(
+      response=>{
+        this.mas_vendidos = response.data;
+      }
+    );
+
     setTimeout(()=>{
       tns({
         container: '.cs-carousel-inner',

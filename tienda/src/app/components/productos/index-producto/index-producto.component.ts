@@ -63,7 +63,7 @@ export class IndexProductoComponent implements OnInit {
           this._clienteService.listar_producto_publico('').subscribe(
             response=>{
               this.productos = response.data;
-              this.productos = this.productos.filter(item=> item.categoria.toLowerCase() == this.route_categoria);
+              this.productos = this.productos.filter(item=> item.categoria.toLowerCase().replace(/\s+/g, "") == this.route_categoria.replace(/\s+/g, ""));
               this.load_data = false;
             }
           );
