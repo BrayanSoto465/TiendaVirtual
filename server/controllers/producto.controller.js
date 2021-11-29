@@ -309,7 +309,6 @@ productoController.listar_productos_recomentados = async(req, res) => {
         let reg = await Producto.find({categoria: regExp}).sort({created: -1}).limit(8);
         res.status(200).send({ data: reg });
     }
-<<<<<<< HEAD
 
 }
 
@@ -323,11 +322,4 @@ productoController.listar_producto_masvendido_publico = async(req, res) => {
     res.status(200).send({ data: reg });  
 }
 
-
 module.exports = productoController;
-
-=======
-}
-
-module.exports = productoController;
->>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9

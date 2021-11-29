@@ -18,11 +18,8 @@ import { SidebarComponent } from './components/usuario/sidebar/sidebar.component
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
-<<<<<<< HEAD
 import { ContactoComponent } from './components/contacto/contacto.component';
-=======
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
->>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9
 
 @NgModule({
   declarations: [
@@ -36,11 +33,8 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
     IndexProductoComponent,
     ShowProductoComponent,
     CarritoComponent,
-<<<<<<< HEAD
-    ContactoComponent
-=======
+    ContactoComponent,
     DireccionesComponent
->>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9
   ],
   imports: [
     BrowserModule,
