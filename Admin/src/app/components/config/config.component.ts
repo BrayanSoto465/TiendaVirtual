@@ -59,7 +59,7 @@ export class ConfigComponent implements OnInit {
       console.log(uuidv4());
 
       this.config.categorias.push({
-        titulo: this.titulo_cat,
+        titulo: this.titulo_cat.replace(/\s+/g, ""),
         icono: this.icono_cat,
         _id:uuidv4()
       });

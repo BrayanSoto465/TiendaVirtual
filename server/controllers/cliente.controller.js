@@ -1,6 +1,7 @@
 'use strict'
 
 const Cliente = require('../models/cliente');
+const Contacto = require('../models/contacto');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
 const Direccion = require('../models/direccion');
@@ -206,6 +207,18 @@ clienteController.cliente_actualizar_guest = async function(req, res) {
     }
 } 
 
+<<<<<<< HEAD
+////CONTACTO////
+
+
+clienteController.enviar_mensaje_contacto = async(req, res) => {
+    let data = req.body;
+
+    data.estado = 'Abierto';
+    let reg = await Contacto.create(data);
+    res.status(200).send({data:reg});
+}
+=======
 //Direccion
 clienteController.registro_direccion = async function(req, res) {
     if(req.user){
@@ -252,4 +265,5 @@ clienteController.cambiar_direccion_principal = async function(req, res) {
     }
 }
 
+>>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9
 module.exports = clienteController;

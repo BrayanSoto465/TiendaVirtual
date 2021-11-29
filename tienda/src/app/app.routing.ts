@@ -8,7 +8,11 @@ import { ShowProductoComponent  } from './components/productos/show-producto/sho
 import { AuthGuard } from "./guards/auth.guard";
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+<<<<<<< HEAD
+import { ContactoComponent } from './components/contacto/contacto.component';
+=======
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
+>>>>>>> 393aade481b0b9a4316fdffdb3e2e98b855bcdd9
 
 
 const appRoute : Routes = [
@@ -21,7 +25,9 @@ const appRoute : Routes = [
 
   {path: 'productos',component: IndexProductoComponent},
   {path: 'productos/categoria/:categoria',component: IndexProductoComponent},
-  {path: 'productos/:slug', component: ShowProductoComponent}
+  {path: 'productos/:slug', component: ShowProductoComponent},
+
+  {path: 'contacto',component: ContactoComponent},
 ];
 
 export const appRoutingProviders : any[] = [];

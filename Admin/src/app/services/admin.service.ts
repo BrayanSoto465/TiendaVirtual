@@ -86,4 +86,14 @@ export class AdminService {
     return this._http.get(this.url + 'config/obtener_publico', { headers: headers });
   }
 
+  obtener_mensajes_admin( token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.get(this.url + 'administrador/obtener_mensajes_admin', { headers: headers });
+  }
+
+  cerrar_mensaje_admin(id:any,data: Object, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.put(this.url + 'administrador/cerrar_mensaje_admin/'+id,data, { headers: headers });
+  }
+
 }

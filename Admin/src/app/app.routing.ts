@@ -15,6 +15,8 @@ import { InventarioProductoComponent } from './components/productos/inventario-p
 import { ConfigComponent } from './components/config/config.component';
 import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
 
+import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
+
 const appRoute : Routes = [
     
     {path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
@@ -31,6 +33,7 @@ const appRoute : Routes = [
         {path: 'productos/galeria/:id', component: GaleriaProductoComponent, canActivate: [AdminGuard]},
 
         {path: 'configuraciones', component: ConfigComponent, canActivate: [AdminGuard]},
+        {path: 'contactos', component: IndexContactoComponent, canActivate: [AdminGuard]},
     ]},
     {path: 'login', component: LoginComponent}
 ];

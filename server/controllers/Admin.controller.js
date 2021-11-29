@@ -1,6 +1,7 @@
 'use strict'
 
 const Admin = require('../models/admin');
+const Contacto = require('../models/contacto');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
 
@@ -46,6 +47,38 @@ adminController.login = async(req, res) => {
                 res.status(200).send({ message: 'Contraseña no coincide', data: undefined });
             }
         });
+    }
+}
+
+adminController.obtener_mensajes_admin = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            let reg = await Contacto.find().sort({createAt : -1});
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+adminController.cerrar_mensaje_admin = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            let id = req.params['id'];
+
+            let reg = await Contacto.findByIdAndUpdate({_id:id},{estado: 'Cerrado'});
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
     }
 }
 
