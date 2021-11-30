@@ -22,5 +22,6 @@ router.post('/enviar_mensaje_contacto', clienteController.enviar_mensaje_contact
 router.post('/registro_direccion', auth.auth, clienteController.registro_direccion);
 router.get('/obtener_direcciones/:id', auth.auth, clienteController.obtener_direcciones);
 router.put('/cambiar_direccion_principal/:id/:cliente', auth.auth, clienteController.cambiar_direccion_principal);
+router.get('/obtener_direccion_principal/:id', auth.auth, clienteController.obtener_direccion_principal);
 
 module.exports = router;

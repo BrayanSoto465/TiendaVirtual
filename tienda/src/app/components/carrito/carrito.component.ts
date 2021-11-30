@@ -21,6 +21,7 @@ export class CarritoComponent implements OnInit {
     public subtotal =0;
     public total_pagar =0;
     public socket = io('http://localhost:4201');
+    public direccion : any;
     
   constructor(private _clienteService : ClienteService) { 
     this.url = GLOBAL.url;
@@ -52,6 +53,21 @@ export class CarritoComponent implements OnInit {
       var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
 
     });
+
+    this.obtener_direccion();
+  }
+
+  obtener_direccion(){
+    this._clienteService.obtener_direccion_principal(this.idcliente, this.token).subscribe(
+      response=>{
+        if(response.data != undefined){
+          this.direccion = response.data;
+        }else{
+          this.direccion = undefined;
+        }
+        
+      }
+    );
   }
 
   calcular_carrito(){

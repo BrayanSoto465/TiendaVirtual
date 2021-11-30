@@ -263,4 +263,20 @@ clienteController.cambiar_direccion_principal = async function(req, res) {
     }
 }
 
+clienteController.obtener_direccion_principal = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];      
+        
+        let reg = await Direccion.find({cliente:id, principal:true});
+        if(red == undefined){
+            res.status(200).send({ data: undefined });
+        }else{
+            res.status(200).send({ data: reg });
+        }
+    
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
 module.exports = clienteController;
