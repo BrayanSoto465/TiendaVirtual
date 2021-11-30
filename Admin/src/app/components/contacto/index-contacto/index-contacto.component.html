@@ -17,7 +17,7 @@
 
     <div class="card-body" *ngIf="!load_data">
 <!-- Product review -->
-<div class="mb-4 pb-4 border-bottom" *ngFor="let item of mensajes | slice: (page-1)*pageSize : (page-1) * pageSize + pageSize;">
+<div class="mb-4 pb-4 border-bottom" *ngFor="let item of mensajes | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index" >
     <div class="row">
       <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
         <h3 class="mb-2 fs-lg">{{item.cliente}}</h3>

@@ -3,8 +3,6 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { io } from "socket.io-client";
 declare var iziToast : any;
-declare var Cleave : any;
-declare var StickySidebar : any; 
 
 @Component({
   selector: 'app-carrito',
@@ -21,53 +19,26 @@ export class CarritoComponent implements OnInit {
     public subtotal =0;
     public total_pagar =0;
     public socket = io('http://localhost:4201');
-    public direccion : any;
     
-  constructor(private _clienteService : ClienteService) { 
+  constructor(
+    private _clienteService : ClienteService,
+  ) { 
     this.url = GLOBAL.url;
     this.token = localStorage.getItem('token');
     this.idcliente = localStorage.getItem('_id');
     this._clienteService.obtener_carrito_cliente(this.idcliente,this.token).subscribe(
+              
       response=>{
+       
         this.carrito_arr = response.data;
         this.calcular_carrito();
       }
-    );
+    
+  );
+
   }
 
   ngOnInit(): void {
-    setTimeout(()=>{
-
-      new Cleave('#cc-number', {
-        creditCard: true,
-        /* onCreditCardTypeChanged: function (type) {
-             update UI ...
-        } */
-      });
-
-      new Cleave('#cc-exp-date', {
-        date: true,
-        datePattern: ['m', 'y']
-      });
-
-      var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
-
-    });
-
-    this.obtener_direccion();
-  }
-
-  obtener_direccion(){
-    this._clienteService.obtener_direccion_principal(this.idcliente, this.token).subscribe(
-      response=>{
-        if(response.data != undefined){
-          this.direccion = response.data;
-        }else{
-          this.direccion = undefined;
-        }
-        
-      }
-    );
   }
 
   calcular_carrito(){

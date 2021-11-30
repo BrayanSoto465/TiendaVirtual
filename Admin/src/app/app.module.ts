@@ -24,6 +24,8 @@ import { ConfigComponent } from './components/config/config.component';
 import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
 import { GaleriaProductoComponent } from './components/productos/galeria-producto/galeria-producto.component';
 import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
+import { IndexVentasComponent } from './components/ventas/index-ventas/index-ventas.component';
+import { DetalleVentasComponent } from './components/ventas/detalle-ventas/detalle-ventas.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { IndexContactoComponent } from './components/contacto/index-contacto/ind
     VariedadProductoComponent,
     GaleriaProductoComponent,
     IndexContactoComponent,
+    IndexVentasComponent,
+    DetalleVentasComponent,
   ],
   imports: [
     BrowserModule,
