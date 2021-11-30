@@ -40,9 +40,6 @@ export class CarritoComponent implements OnInit {
 
       new Cleave('#cc-number', {
         creditCard: true,
-        /* onCreditCardTypeChanged: function (type) {
-             update UI ...
-        } */
       });
 
       new Cleave('#cc-exp-date', {
