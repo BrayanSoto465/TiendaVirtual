@@ -23,6 +23,9 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
 import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
 import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
 
+import { NgRatingBarModule } from 'ng-rating-bar';
+import { IndexReviewComponent } from './components/usuario/review/index-review/index-review.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,8 @@ import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orde
     ContactoComponent,
     DireccionesComponent,
     IndexOrdenesComponent,
-    DetalleOrdenComponent
+    DetalleOrdenComponent,
+    IndexReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orde
     HttpClientModule,
     routing,
     NgbPaginationModule,
+    NgRatingBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

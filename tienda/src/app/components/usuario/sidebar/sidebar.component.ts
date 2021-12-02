@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ export class SidebarComponent implements OnInit {
   public user : any = undefined;
   public user_lc : any = undefined;
 
-  constructor( private _clienteService : ClienteService) { 
+  constructor( private _clienteService : ClienteService, private _router : Router) { 
     this.token = localStorage.getItem('token');
     this.id = localStorage.getItem('_id');
 
@@ -43,4 +44,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(): void{
+    window.location.reload();
+    localStorage.clear();
+    this._router.navigate(['/']);
+  }
 }

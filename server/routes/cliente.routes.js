@@ -32,5 +32,7 @@ router.get('/obtener_orden/:id', auth.auth, clienteController.obtener_orden);
 //Review
 router.post('/emitir_review', auth.auth, clienteController.emitir_review);
 router.get('/obtener_review_producto/:id/:cliente', clienteController.obtener_review);
+router.get('/obtener_reviews/:id', auth.auth, clienteController.obtener_reviews);
+
 
 module.exports = router;

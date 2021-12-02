@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
-import { StarRatingComponent } from 'ng-starrating';
 
 declare var iziToast : any;
 declare var $ : any;
@@ -22,7 +21,7 @@ export class DetalleOrdenComponent implements OnInit {
 
   public detalles : Array<any> = [];
 
-  public totalstart : number = 5;
+  public value : number = 0;
   public review: any = {};
 
   constructor(private _clienteService: ClienteService, private _route: ActivatedRoute) {
@@ -48,11 +47,11 @@ export class DetalleOrdenComponent implements OnInit {
           this.orden = response.data;
           this.detalles = response.detalles;
           
-          this.orden.detalles.forEach((element : any) => {
+          this.detalles.forEach((element : any) => {
             this._clienteService.obtener_review(element.producto._id, element.cliente).subscribe(
               response => {
                 let emitido = false;
-                if(response.data.length != 0){
+                if(response.data.length > 0){
                   emitido = true;
                 }
                 element.estado = emitido;
@@ -88,7 +87,7 @@ export class DetalleOrdenComponent implements OnInit {
 
   emitir(id: any): void {
     if(this.review.review){
-      this.review.estrellas = this.totalstart;
+      this.review.estrellas = this.value;
       this._clienteService.emitir_review(this.review, this.token).subscribe(
         reponse => {
           iziToast.show({
@@ -125,9 +124,11 @@ export class DetalleOrdenComponent implements OnInit {
         progressBarColor: '#FFFFFF'
       });
     }
+    this.init_data();
   }
 
-  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}): void {
+  onValueChange($event: number) {
+    this.value = $event
   }
 
 }

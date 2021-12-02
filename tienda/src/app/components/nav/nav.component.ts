@@ -29,8 +29,6 @@ export class NavComponent implements OnInit {
   constructor(
     private _clienteService : ClienteService,
     private _router : Router
-    
-
   ) { 
     this.url = GLOBAL.url;
 

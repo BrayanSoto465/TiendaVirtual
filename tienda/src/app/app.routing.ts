@@ -12,6 +12,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
 import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
+import { IndexReviewComponent } from './components/usuario/review/index-review/index-review.component';
 
 const appRoute : Routes = [
   {path: '',component: InicioComponent},
@@ -21,7 +22,9 @@ const appRoute : Routes = [
   {path: 'cuenta/direcciones',component: DireccionesComponent, canActivate: [AuthGuard]},
   {path: 'cuenta/ordenes',component: IndexOrdenesComponent, canActivate: [AuthGuard]},
   {path: 'cuenta/ordenes/:id',component: DetalleOrdenComponent, canActivate: [AuthGuard]},
-  {path: 'carrito',component: CarritoComponent, canActivate: [AuthGuard]},
+  {path: 'cuenta/reviews',component: IndexReviewComponent, canActivate: [AuthGuard]},
+/*   {path: 'cuenta/reviews/:id',component: , canActivate: [AuthGuard]},
+ */  {path: 'carrito',component: CarritoComponent, canActivate: [AuthGuard]},
 
   {path: 'productos',component: IndexProductoComponent},
   {path: 'productos/categoria/:categoria',component: IndexProductoComponent},
