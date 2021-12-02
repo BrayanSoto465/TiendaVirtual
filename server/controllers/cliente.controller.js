@@ -267,10 +267,11 @@ clienteController.obtener_direccion_principal = async function(req, res) {
     if(req.user){
         var id = req.params['id'];      
         
-        let reg = await Direccion.find({cliente:id, principal:true});
-        if(red == undefined){
+        let reg = await Direccion.findOne({cliente:id, principal:true});
+        if(reg == undefined){
             res.status(200).send({ data: undefined });
         }else{
+            console.log("Direccion:" +reg);
             res.status(200).send({ data: reg });
         }
     

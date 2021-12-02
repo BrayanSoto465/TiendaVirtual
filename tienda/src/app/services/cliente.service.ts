@@ -98,4 +98,14 @@ export class ClienteService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.put(this.url + 'cliente/cambiar_direccion_principal/' + id + '/' + cliente, {data:true}, { headers: headers });
   }
+
+  obtener_direccion_principal(id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/obtener_direccion_principal/' + id, { headers: headers });
+  }
+
+  registro_compra_cliente(data : Object, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.post(this.url + 'venta/registro_compra_cliente', data,  { headers: headers });
+  }
 }

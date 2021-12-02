@@ -52,4 +52,5 @@ app.use('/api/administrador', require('./routes/admin.routes'));
 app.use('/api/producto', require('./routes/producto.routes'));
 app.use('/api/config', require('./routes/config.routes')); 
 app.use('/api/carrito',require('./routes/carrito.routes'));
+app.use('/api/venta',require('./routes/venta.routes'));
 module.exports = app;
