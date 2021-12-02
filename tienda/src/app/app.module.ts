@@ -4,7 +4,6 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { RatingModule } from 'ng-starrating';
 
 import { routing } from"./app.routing";
 
@@ -48,7 +47,6 @@ import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orde
     HttpClientModule,
     routing,
     NgbPaginationModule,
-    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
