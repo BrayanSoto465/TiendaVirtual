@@ -301,8 +301,8 @@ clienteController.obtener_orden = async function(req, res) {
         try{
             let venta = await Venta.findById({ _id: id }).populate('direccion');
             let detalles = await Dventa.find({ venta: id }).populate('producto');
-            venta.detalles = detalles;
-            res.status(200).send({ data: venta });
+            
+            res.status(200).send({ data: venta, detalles: detalles });
         }catch(error){
             res.status(200).send({ data: undefined });
         }
@@ -326,7 +326,6 @@ clienteController.emitir_review = async function(req, res) {
 clienteController.obtener_review = async function(req, res) {
     var id = req.params['id'];
     var cliente = req.params['cliente']; 
-
     let reg = await Review.find({producto: id}, {cliente: cliente}).sort({createdAt: -1});
     res.status(200).send({ data: reg });
 } 
