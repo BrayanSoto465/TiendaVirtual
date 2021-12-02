@@ -110,8 +110,8 @@
                                   <a [routerLink]="['/productos/', detalle.producto.slug]" class="nav-link font-weight-bold">{{detalle.producto.titulo}}</a>
                                 </h3>
                               </div>
-                              <a style="cursor: pointer" data-toggle="modal" [attr.data-target]="'#review-' + detalle._id" href="" class="text-primary">[Emitir reseña]</a>
-                            
+                              <a *ngIf="!detalle.estado" (click)="openModal(detalle)" style="cursor: pointer" data-toggle="modal" [attr.data-target]="'#review-' + detalle._id" href="" class="text-primary">[Emitir reseña]</a>
+                              <span *ngIf="detalle.estado" class="badge badge-warning">Comentario emitido</span>
 
                               <div class="modal fade" id="review-{{detalle._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -133,7 +133,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cerrar</button>
-                                            <button class="btn btn-primary btn-shadow btn-sm">Enviar</button>
+                                            <button class="btn btn-primary btn-shadow btn-sm" (click)="emitir(detalle._id)">Enviar</button>
                                         </div>
                                     </div>
                                 </div>

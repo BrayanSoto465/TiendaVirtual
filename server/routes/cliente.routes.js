@@ -29,4 +29,8 @@ router.get('/obtener_direccion_principal/:id', auth.auth, clienteController.obte
 router.get('/obtener_ordenes/:id', auth.auth, clienteController.obtener_ordenes);
 router.get('/obtener_orden/:id', auth.auth, clienteController.obtener_orden);
 
+//Review
+router.post('/emitir_review', auth.auth, clienteController.emitir_review);
+router.get('/obtener_review_producto/:id/:cliente', clienteController.obtener_review);
+
 module.exports = router;

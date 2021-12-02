@@ -317,11 +317,19 @@ clienteController.obtener_orden = async function(req, res) {
 clienteController.emitir_review = async function(req, res) {
     if(req.user){
         let data = req.body;
-
-        
+        let reg = await Review.create(data);
+        res.status(200).send({ data: reg });
     } else {
         res.status(500).send({ message: 'NoAcces' });
     }
+} 
+
+clienteController.obtener_review = async function(req, res) {
+    var id = req.params['id'];
+    var cliente = req.params['cliente']; 
+
+    let reg = await Review.find({producto: id}, {cliente: cliente}).sort({createdAt: -1});
+    res.status(200).send({ data: reg });
 } 
 
 module.exports = clienteController;
