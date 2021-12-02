@@ -28,12 +28,12 @@ export class ContactoComponent implements OnInit {
           console.log(response);
 
           iziToast.show({
-            title: 'SUCCESS',
-            titleColor: '#1DC74C',
-            color: '#FFF',
-            class: 'text-seccess',
-            position: 'topRight',
-            message: 'Se envio correctamente el mensaje' 
+            backgroundColor: '#52BE80 ',
+          class: 'text-success',
+          position: 'topRight',
+          message: 'Se ha enviado un mensaje',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
           });
           this.contacto ={};
           this.load_btn = false;
@@ -41,11 +41,12 @@ export class ContactoComponent implements OnInit {
       );
     }else{
       iziToast.show({
-        title: 'ERROR',
-        titleColor: '#FF0000',
+        backgroundColor: '#dc3424',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Los datos del formulario no son validos'
+        message: 'Los datos del formulario no son validos',
+        messageColor: '#FFFFFF',
+        progressBarColor: '#FFFFFF'
       });
     }
   }

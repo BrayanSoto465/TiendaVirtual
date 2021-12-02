@@ -33,10 +33,7 @@ export class CarritoComponent implements OnInit {
     public venta : any = {};
     public dventa : Array<any> = [];
 
-  constructor(
-    private _clienteService : ClienteService,
-    private _guestService : GuestService) { 
-
+  constructor(private _clienteService : ClienteService, private _guestService : GuestService) { 
     this.url = GLOBAL.url;
     this.token = localStorage.getItem('token');
     this.idcliente = localStorage.getItem('_id');
@@ -140,12 +137,21 @@ export class CarritoComponent implements OnInit {
   obtener_direccion(){
     this._clienteService.obtener_direccion_principal(this.idcliente, this.token).subscribe(
       response=>{
-        if(response.data != undefined){
-          this.direccion = response.data;
-        }else{
+        console.log("Direccion " + response.data);
+        if(response.data == undefined){
           this.direccion = undefined;
+        }else{
+          this.direccion = response.data;
         }
-        
+      },error=>{
+        iziToast.show({
+          backgroundColor: '#dc3424',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'Ocurrio un problema con el servidor',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
+        });
       }
     );
   }
@@ -166,13 +172,13 @@ export class CarritoComponent implements OnInit {
     this._clienteService.eliminar_carrito_cliente(id,this.token).subscribe(
       response=>{
         iziToast.show({
-          title: 'SUCCESS',
-          titleColor: '#1DC74C',
-          color: '#FFF',
-          class: 'text-seccess',
-          position: 'topRight',
-          message: 'Se elimino el producto correctamente' 
-        });
+              backgroundColor: '#52BE80 ',
+            class: 'text-success',
+            position: 'topRight',
+            message: 'Se elimino el producto correctamente',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+            });
         this.socket.emit('delete-carrito',{data:response.data});
         this.init_Data();
       }
