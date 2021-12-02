@@ -21,7 +21,7 @@ export class CarritoComponent implements OnInit {
     public subtotal =0;
     public total_pagar =0;
     public socket = io('http://localhost:4201');
-    public direccion : any;
+    public direccion : any = {};
     
   constructor(private _clienteService : ClienteService) { 
     this.url = GLOBAL.url;
@@ -37,7 +37,6 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(()=>{
-
       new Cleave('#cc-number', {
         creditCard: true,
       });
@@ -48,7 +47,6 @@ export class CarritoComponent implements OnInit {
       });
 
       var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
-
     });
 
     this.obtener_direccion();
@@ -57,12 +55,21 @@ export class CarritoComponent implements OnInit {
   obtener_direccion(){
     this._clienteService.obtener_direccion_principal(this.idcliente, this.token).subscribe(
       response=>{
-        if(response.data != undefined){
-          this.direccion = response.data;
-        }else{
+        console.log("Direccion " + response.data);
+        if(response.data == undefined){
           this.direccion = undefined;
+        }else{
+          this.direccion = response.data;
         }
-        
+      },error=>{
+        iziToast.show({
+          backgroundColor: '#dc3424',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'Ocurrio un problema con el servidor',
+          messageColor: '#FFFFFF',
+          progressBarColor: '#FFFFFF'
+        });
       }
     );
   }
@@ -80,13 +87,13 @@ export class CarritoComponent implements OnInit {
     this._clienteService.eliminar_carrito_cliente(id,this.token).subscribe(
       response=>{
         iziToast.show({
-          title: 'SUCCESS',
-          titleColor: '#1DC74C',
-          color: '#FFF',
-          class: 'text-seccess',
-          position: 'topRight',
-          message: 'Se elimino el producto correctamente' 
-        });
+              backgroundColor: '#52BE80 ',
+            class: 'text-success',
+            position: 'topRight',
+            message: 'Se elimino el producto correctamente',
+            messageColor: '#FFFFFF',
+            progressBarColor: '#FFFFFF'
+            });
         this.socket.emit('delete-carrito',{data:response.data});
         this._clienteService.obtener_carrito_cliente(this.idcliente,this.token).subscribe(
               

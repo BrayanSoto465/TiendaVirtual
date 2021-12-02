@@ -4,6 +4,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RatingModule } from 'ng-starrating';
 
 import { routing } from"./app.routing";
 
@@ -20,6 +21,8 @@ import { ShowProductoComponent } from './components/productos/show-producto/show
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
+import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
+import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
     ShowProductoComponent,
     CarritoComponent,
     ContactoComponent,
-    DireccionesComponent
+    DireccionesComponent,
+    IndexOrdenesComponent,
+    DetalleOrdenComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,8 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
     FormsModule,
     HttpClientModule,
     routing,
-    NgbPaginationModule
+    NgbPaginationModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

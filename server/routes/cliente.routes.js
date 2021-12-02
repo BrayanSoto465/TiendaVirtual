@@ -18,10 +18,15 @@ router.put('/cliente_actualizar_guest/:id',auth.auth,clienteController.cliente_a
 
 //Contacto
 router.post('/enviar_mensaje_contacto', clienteController.enviar_mensaje_contacto);
+
 //Direccion
 router.post('/registro_direccion', auth.auth, clienteController.registro_direccion);
 router.get('/obtener_direcciones/:id', auth.auth, clienteController.obtener_direcciones);
 router.put('/cambiar_direccion_principal/:id/:cliente', auth.auth, clienteController.cambiar_direccion_principal);
 router.get('/obtener_direccion_principal/:id', auth.auth, clienteController.obtener_direccion_principal);
+
+//Orden
+router.get('/obtener_ordenes/:id', auth.auth, clienteController.obtener_ordenes);
+router.get('/obtener_orden/:id', auth.auth, clienteController.obtener_orden);
 
 module.exports = router;

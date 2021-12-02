@@ -5,6 +5,9 @@ const Contacto = require('../models/contacto');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
 const Direccion = require('../models/direccion');
+const Venta = require('../models/venta');
+const Dventa = require('../models/dventa');
+const Review = require('../models/review');
 
 const clienteController = {}
 
@@ -267,10 +270,11 @@ clienteController.obtener_direccion_principal = async function(req, res) {
     if(req.user){
         var id = req.params['id'];      
         
-        let reg = await Direccion.find({cliente:id, principal:true});
-        if(red == undefined){
+        let reg = await Direccion.findOne({cliente:id, principal:true});
+        if(reg == undefined){
             res.status(200).send({ data: undefined });
         }else{
+            console.log("Direccion: " + reg);
             res.status(200).send({ data: reg });
         }
     
@@ -278,5 +282,46 @@ clienteController.obtener_direccion_principal = async function(req, res) {
         res.status(500).send({ message: 'NoAcces' });
     }
 }
+
+//Ordenes
+clienteController.obtener_ordenes = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];      
+        
+        let reg = await Venta.find({Cliente:id}).sort({createdAt: -1});
+        res.status(200).send({ data: reg });
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+clienteController.obtener_orden = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];      
+        
+        try{
+            let venta = await Venta.findById({ _id: id }).populate('direccion');
+            let detalles = await Dventa.find({ venta: id }).populate('producto');
+            venta.detalles = detalles;
+            res.status(200).send({ data: venta });
+        }catch(error){
+            res.status(200).send({ data: undefined });
+        }
+        
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
+
+//Review
+clienteController.emitir_review = async function(req, res) {
+    if(req.user){
+        let data = req.body;
+
+        
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+} 
 
 module.exports = clienteController;

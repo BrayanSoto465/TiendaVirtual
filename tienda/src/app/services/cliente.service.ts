@@ -103,4 +103,14 @@ export class ClienteService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.get(this.url + 'cliente/obtener_direccion_principal/' + id, { headers: headers });
   }
+
+  obtener_ordenes(id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/obtener_ordenes/' + id, { headers: headers });
+  }
+
+  obtener_orden(id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/obtener_orden/' + id, { headers: headers });
+  }
 }
