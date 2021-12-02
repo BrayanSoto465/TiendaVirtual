@@ -11,9 +11,6 @@ ventaController.registro_compra_cliente = async function(req, res) {
 
         var data = req.body;
         var detalles = data.detalles;
-        
-
-        
 
         var venta_last = await Venta.find().sort({created: -1});
         var serie;
@@ -45,14 +42,15 @@ ventaController.registro_compra_cliente = async function(req, res) {
         data.nventa = n_venta;
         data.estado = 'Procesando';
 
-        console.log(data);
+        console.log(data); 
 
         
          let venta = await Venta.create(data);
 
             detalles.forEach(async element => {
-            element.venta = venta._id;
-            await Dventa.create(element);
+                element.venta = venta._id;
+                
+                await Dventa.create(element);
 
                 let element_producto = await Producto.findById({_id:element.producto});
                 let new_stock = element_producto.stock - element.cantidad;
@@ -60,11 +58,11 @@ ventaController.registro_compra_cliente = async function(req, res) {
                 await Producto.findByIdAndUpdate({_id: element.producto},{
                     stock: new_stock
                 });
-
-                //limpiar carrito
-                await Carrito.remove({cliente:data.cliente});
     
-        });
+            });
+
+            //limpiar carrito
+            await Carrito.remove({cliente:data.cliente});
 
         res.status(200).send({venta:venta});  
         

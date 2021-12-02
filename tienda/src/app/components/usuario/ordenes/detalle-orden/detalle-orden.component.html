@@ -41,7 +41,7 @@
                           </tr>
                           <tr>
                             <th class="border-0 py-2 pl-0">Fecha:</th>
-                            <td class="border-0 py-2 px-0 text-muted">{{orden.createdAt | date}}</td>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden.created | date}}</td>
                           </tr>
                          
                         </tbody>
@@ -99,7 +99,7 @@
                   <div class="table-responsive">
                     <table class="table mb-0">
                       <tbody>
-                        <tr *ngForm="let detalle of orden.datalles">
+                        <tr *ngFor="let detalle of detalles">
                           <td class="border-top-0">
                             <div class="media pl-2 py-2">
                               <a [routerLink]="['/productos/', detalle.producto.slug]" style="min-width: 80px;">
@@ -109,10 +109,10 @@
                                 <h3 class="font-size-sm mb-3">
                                   <a [routerLink]="['/productos/', detalle.producto.slug]" class="nav-link font-weight-bold">{{detalle.producto.titulo}}</a>
                                 </h3>
+                                <a *ngIf="!detalle.estado" (click)="openModal(detalle)" style="cursor: pointer" data-toggle="modal" [attr.data-target]="'#review-' + detalle._id" href="" class="text-primary">[Emitir reseña]</a>
+                                <span *ngIf="detalle.estado" class="badge badge-warning">Comentario emitido</span>
                               </div>
-                              <a *ngIf="!detalle.estado" (click)="openModal(detalle)" style="cursor: pointer" data-toggle="modal" [attr.data-target]="'#review-' + detalle._id" href="" class="text-primary">[Emitir reseña]</a>
-                              <span *ngIf="detalle.estado" class="badge badge-warning">Comentario emitido</span>
-
+                              
                               <div class="modal fade" id="review-{{detalle._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">

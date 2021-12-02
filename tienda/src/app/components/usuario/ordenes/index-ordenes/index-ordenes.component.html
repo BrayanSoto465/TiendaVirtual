@@ -44,18 +44,18 @@
                   <!-- Order -->
                   <div class="card border-bottom" *ngFor="let orden of ordenes  | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize">
                     <div class="card-header accordion-heading py-1">
-                      <a [routerLink]="['/cuenta/oredenes/', orden._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="false">
+                      <a [routerLink]="['/cuenta/oredenes/', orden._id]" class="d-flex flex-wrap justify-content-between py-3" >
                         <span class="pr-2"># {{orden._id.toUpperCase()}}</span>
                         <span class="font-size-sm text-muted text-nowrap px-2">
                           <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
-                          {{orden.createdAt | date}}
+                          {{orden.created | date}}
                         </span>
                         <span class="badge badge-info">{{orden.estado}}</span>
                         <span class="text-dark pl-1">${{orden.subtotal}}</span>
                       </a>
                     </div>
                   </div>
-                </ng-container>
+                </ng-container> 
 
                 <ng-container *ngIf="ordenes.length == 0">
                   <div class="card border-bottom">

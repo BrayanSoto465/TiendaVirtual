@@ -20,7 +20,9 @@ export class DetalleOrdenComponent implements OnInit {
   public load_data = true;
   public id : any;
 
-  public totalstart = 5;
+  public detalles : Array<any> = [];
+
+  public totalstart : number = 5;
   public review: any = {};
 
   constructor(private _clienteService: ClienteService, private _route: ActivatedRoute) {
@@ -44,7 +46,8 @@ export class DetalleOrdenComponent implements OnInit {
       response => {
         if(response.data != undefined){
           this.orden = response.data;
-
+          this.detalles = response.detalles;
+          
           this.orden.detalles.forEach((element : any) => {
             this._clienteService.obtener_review(element.producto._id, element.cliente).subscribe(
               response => {
