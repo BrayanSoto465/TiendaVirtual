@@ -17,11 +17,8 @@ import { VariedadProductoComponent } from './components/productos/variedad-produ
 
 import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
 import { IndexVentasComponent } from './components/ventas/index-ventas/index-ventas.component';
-<<<<<<< HEAD
-import { DetalleVentasComponent } from './components/ventas/detalle-ventas/detalle-ventas.component';
-=======
 import { ReviewsProductoComponent } from './components/productos/reviews-producto/reviews-producto.component';
->>>>>>> c0d336766478fa296e717a2307916325d5902107
+import { DetalleVentasComponent } from './components/ventas/detalle-ventas/detalle-ventas.component';
 
 const appRoute : Routes = [
     
