@@ -98,4 +98,9 @@ export class ProductoService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
     return this._http.put(this.url + 'producto/eliminar_imagen_galeria/' + id, data, { headers: headers });
   }
+
+  obtener_reviews_producto(id : any): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this._http.get(this.url + 'producto/obtener_reviews_producto/' + id, { headers: headers });
+  }
 }

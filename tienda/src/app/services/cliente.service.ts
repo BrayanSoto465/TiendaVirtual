@@ -126,6 +126,12 @@ export class ClienteService {
 
   obtener_review(id: string, cliente: String): Observable<any> {
     let headers = new HttpHeaders({'Content-Type':'application/json'});
-    return this._http.get(this.url + 'cliente/obtener_review/' + id + '/' + cliente, { headers: headers });
+    return this._http.get(this.url + 'cliente/obtener_review_producto/' + id + '/' + cliente, { headers: headers });
   }
+
+  obtener_reviews(id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/obtener_reviews/' + id, { headers: headers });
+  }
+
 }

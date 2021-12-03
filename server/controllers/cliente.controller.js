@@ -328,6 +328,16 @@ clienteController.obtener_review = async function(req, res) {
     var cliente = req.params['cliente']; 
     let reg = await Review.find({producto: id}, {cliente: cliente}).sort({createdAt: -1});
     res.status(200).send({ data: reg });
+}
+
+clienteController.obtener_reviews = async function(req, res) {
+    if(req.user){
+        var id = req.params['id'];
+        let reg = await Review.find({cliente: id}).sort({createdAt: -1});
+        res.status(200).send({ data: reg });
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
 } 
 
 module.exports = clienteController;

@@ -67,7 +67,12 @@ ventaController.registro_compra_cliente = async function(req, res) {
     
             });
 
+<<<<<<< HEAD
            
+=======
+            //limpiar carrito
+            await Carrito.deleteOne({cliente:data.cliente});
+>>>>>>> c0d336766478fa296e717a2307916325d5902107
 
         res.status(200).send({venta:venta});  
         

@@ -127,6 +127,7 @@
                                             <div class="col-sm-12 form-group">
                                               <label for="ac-fn">Reseña</label>
                                               <textarea type="text" required class="form-control form-control-lg" name="review" [(ngModel)]="review.review" placeholder="Que te parecio el producto"></textarea>
+                                              <ng-rating-bar [value]="value" [ratingCount]="5" (valueChange)="onValueChange($event)"></ng-rating-bar>
                                             </div>
                                           </div>
                                         </div>
