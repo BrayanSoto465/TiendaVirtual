@@ -30,7 +30,10 @@ export class GuestService {
     return this._http.get(this.url + 'producto/listar_producto_nuevo_publico/', { headers: headers });
   }
 
-  
+  obtener_reviews_producto(id : any): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this._http.get(this.url + 'producto/obtener_reviews_producto/' + id, { headers: headers });
+  }
 
   listar_producto_masvendido_publico(): Observable<any> { 
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

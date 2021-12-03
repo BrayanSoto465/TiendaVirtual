@@ -3,6 +3,7 @@
 const Producto = require('../models/producto');
 const Inventario = require('../models/inventario');
 const Administrador = require('../models/admin');
+const Review = require('../models/review');
 var fs = require('fs');
 var path = require('path');
 
@@ -313,12 +314,18 @@ productoController.listar_productos_recomentados = async(req, res) => {
 }
 
 productoController.listar_producto_nuevo_publico = async(req, res) => {      
-        let reg = await Producto.find().sort({created: -1}).limit(8);
-        res.status(200).send({ data: reg });  
+    let reg = await Producto.find().sort({created: -1}).limit(8);
+    res.status(200).send({ data: reg });  
 }
 
 productoController.listar_producto_masvendido_publico = async(req, res) => {      
     let reg = await Producto.find().sort({nventas: -1}).limit(8);
+    res.status(200).send({ data: reg });  
+}
+
+productoController.obtener_review_producto = async(req, res) => {      
+    let id = req.params['id'];
+    let reg = await Review.find({producto: id}).sort({created: -1});
     res.status(200).send({ data: reg });  
 }
 
