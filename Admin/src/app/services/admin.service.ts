@@ -96,4 +96,14 @@ export class AdminService {
     return this._http.put(this.url + 'administrador/cerrar_mensaje_admin/'+id,data, { headers: headers });
   }
 
+  obtener_ventas_admin(desde:any,hasta:any, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': token});
+    return this._http.get(this.url + 'administrador/obtener_ventas_admin/'+desde+'/'+hasta, { headers: headers });
+  }
+
+  obtener_orden(id: string, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url + 'cliente/obtener_orden/' + id, { headers: headers });
+  }
+
 }

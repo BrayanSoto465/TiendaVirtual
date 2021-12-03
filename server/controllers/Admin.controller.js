@@ -5,6 +5,9 @@ const Contacto = require('../models/contacto');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../helpers/jwt');
 
+const Venta = require('../models/venta');
+const Dventa = require('../models/dventa');
+
 const adminController = {}
 
 
@@ -82,4 +85,43 @@ adminController.cerrar_mensaje_admin = async(req, res) => {
     }
 }
 
+///VENTAS
+
+adminController.obtener_ventas_admin = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+
+            let ventas = [];
+            let desde = req.params['desde'];
+            let hasta = req.params['hasta'];
+
+            if(desde == 'undefined' && hasta == 'undefined'){
+
+                ventas = await Venta.find().populate('cliente').populate('direccion').sort({created:-1});
+                 res.status(200).send({data:ventas});
+
+            } else{
+                    let tt_desde = Date.parse(new Date(desde+'T00:00:00'))/1000;
+                    let tt_hasta = Date.parse(new Date(hasta+'T00:00:00'))/1000;
+
+                    let tem_ventas = await Venta.find().populate('cliente').populate('direccion').sort({created:-1});
+
+                    for(var item of tem_ventas){
+                        var tt_created = Date.parse(new Date(item.created))/1000;
+                        if(tt_created >= tt_desde && tt_created <= tt_hasta){
+                            ventas.push(item);
+                        }
+                    }
+                    res.status(200).send({data:ventas});
+            }
+
+            
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });
+    }
+}
 module.exports = adminController;

@@ -57,12 +57,17 @@ ventaController.registro_compra_cliente = async function(req, res) {
 
                 await Producto.findByIdAndUpdate({_id: element.producto},{
                     stock: new_stock
+
+                     
+
                 });
+
+                //limpiar carrito
+                await Carrito.remove({cliente:data.cliente});
     
             });
 
-            //limpiar carrito
-            await Carrito.remove({cliente:data.cliente});
+           
 
         res.status(200).send({venta:venta});  
         
