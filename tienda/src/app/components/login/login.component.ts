@@ -15,13 +15,11 @@ export class LoginComponent implements OnInit {
   public usuario : any = {};
   public token;
 
-  constructor(
-    private _clienteService: ClienteService,
-    private _router : Router
-  ) { this.token = localStorage.getItem('token');
-      if(this.token){
-        this._router.navigate(['/']);
-      }
+  constructor(private _clienteService: ClienteService, private _router : Router) {
+    this.token = localStorage.getItem('token');
+    if(this.token){
+      this._router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {
