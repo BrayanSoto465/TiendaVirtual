@@ -23,8 +23,7 @@ const appRoute : Routes = [
   {path: 'cuenta/ordenes',component: IndexOrdenesComponent, canActivate: [AuthGuard]},
   {path: 'cuenta/ordenes/:id',component: DetalleOrdenComponent, canActivate: [AuthGuard]},
   {path: 'cuenta/reviews',component: IndexReviewComponent, canActivate: [AuthGuard]},
-/*   {path: 'cuenta/reviews/:id',component: , canActivate: [AuthGuard]},
- */  {path: 'carrito',component: CarritoComponent, canActivate: [AuthGuard]},
+  {path: 'carrito',component: CarritoComponent, canActivate: [AuthGuard]},
 
   {path: 'productos',component: IndexProductoComponent},
   {path: 'productos/categoria/:categoria',component: IndexProductoComponent},
