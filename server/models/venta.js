@@ -9,7 +9,9 @@ var VentaSchema = Schema({
     subtotal: { type: Number, required: true },
     transaccion: { type: String, required: true },
     estado: { type: String, required: true },
-    direccion: { type: Schema.ObjectId,ref:'direccion', required: true },
+    metodoPago: { type: String, required: true },
+    estadoPago: { type: String, default: "Esperando Pago", required: false },
+    direccion: { type: Schema.ObjectId, ref:'direccion', required: true },
     nota: { type: String, required: false },
     created: { type: Date, default: Date.now, require: true },
 });

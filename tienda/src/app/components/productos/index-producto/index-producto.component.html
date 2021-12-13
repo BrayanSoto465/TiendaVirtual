@@ -125,7 +125,7 @@
                             <input type="radio" name="group1" class="custom-control-input" id="blazers-todos" (change)="buscar_por_categoria()" value="todos" [(ngModel)]="filter_cat_productos">
                             <label for="blazers-todos" class="custom-control-label">
                               <span class="cs-filter-item-text">Todos</span>
-                              <span class="pl-1 text-muted">(235)</span>
+                              <span class="pl-1 text-muted">({{productos.length}})</span>
                             </label>
                           </div>
                         </li>
@@ -134,7 +134,7 @@
                             <input type="radio" name="group1" class="custom-control-input" (change)="buscar_por_categoria()" id="blazers-{{indice}}" value="{{item.titulo}}" [(ngModel)]="filter_cat_productos">
                             <label for="blazers-{{indice}}" class="custom-control-label">
                               <span class="cs-filter-item-text">{{item.titulo}} </span>
-                              <span class="pl-1 text-muted">(235)</span>
+                              <span class="pl-1 text-muted">( {{categorias_length(item.titulo)}} )</span>
                             </label>
                           </div>
                         </li>
@@ -220,11 +220,11 @@
                       </a>
                       <div class="card-product-widgets-top">
                         <div class="star-rating ml-auto">
-                          <i class="sr-star cxi-star-filled active"></i>
-                          <i class="sr-star cxi-star-filled active"></i>
-                          <i class="sr-star cxi-star-filled active"></i>
-                          <i class="sr-star cxi-star-filled active"></i>
-                          <i class="sr-star cxi-star-filled active"></i>
+                          <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.npuntos >= 1}"></i>
+                          <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.npuntos >= 2}"></i>
+                          <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.npuntos >= 3}"></i>
+                          <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.npuntos >= 4}"></i>
+                          <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.npuntos >= 5}"></i>
                         </div>
                       </div>
                       <div class="card-product-widgets-bottom">

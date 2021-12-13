@@ -13,5 +13,6 @@ router.get('/obtener_mensajes_admin', auth.auth,adminController.obtener_mensajes
 router.put('/cerrar_mensaje_admin/:id', auth.auth,adminController.cerrar_mensaje_admin);
 
 router.get('/obtener_ventas_admin/:desde?/:hasta?',auth.auth,adminController.obtener_ventas_admin);
+router.put('/cambiar_estado_venta/:id', auth.auth,adminController.cambiar_estado_venta);
 
 module.exports = router;

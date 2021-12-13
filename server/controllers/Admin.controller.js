@@ -124,4 +124,25 @@ adminController.obtener_ventas_admin = async(req, res) => {
         res.status(500).send({ message: 'NoAcces' });
     }
 }
+
+adminController.cambiar_estado_venta = async(req, res) => {
+    if (req.user) {
+        if (req.user.role == 'administrador') {
+            
+            let id = req.params['id'];
+            let estado = req.body.estado;
+            let estadoPago = req.body.estadoPago;
+            console.log(req.body);
+            let reg = await Venta.findByIdAndUpdate({_id: id}, {estadoPago: estadoPago, estado:estado});
+            console.log(reg);
+            res.status(200).send({ data: reg });
+
+        } else {
+            res.status(500).send({ message: 'NoAcces' });
+        }
+    } else {
+        res.status(500).send({ message: 'NoAcces' });   
+    }
+}
+
 module.exports = adminController;

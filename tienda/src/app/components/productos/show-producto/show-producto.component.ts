@@ -86,8 +86,11 @@ export class ShowProductoComponent implements OnInit {
 
                 this.estrellas = ((this.count_five_star * 5) + (this.count_four_star * 4) + (this.count_three_star * 3) +
                 (this.count_two_star * 2) + (this.count_one_star * 1)) / this.reviews.length;
+
               }
             );
+
+            this._clienteService.actualizar_estrellas(this.producto._id, this.estrellas);
 
             this._guestService.listar_productos_recomendados(this.producto.categoria).subscribe(
               response => {

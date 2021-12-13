@@ -330,4 +330,11 @@ productoController.obtener_review_producto = async(req, res) => {
     res.status(200).send({ data: reg });  
 }
 
+productoController.actualizar_estrellas = async(req, res) => {      
+    let id = req.params['id'];
+    let data = req.body;
+    let reg = await Producto.findByIdAndUpdate({ _id: id }, {npuntos: data.estrellas});  
+    res.status(200).send({ data: reg });  
+} 
+
 module.exports = productoController;

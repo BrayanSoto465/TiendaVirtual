@@ -73,7 +73,12 @@
                                     <img width="80px " [src]="url + 'producto/obtener_portada/' + producto.portada " /> {{producto.titulo}}
                                 </h6>
                             </td>
-                            <td>{{producto.stock}}</td>
+                            <td>
+                                <p class="badge badge-dark" *ngIf="producto.stock == 0 ">{{producto.stock}}</p>
+                                <p class="badge badge-danger" *ngIf="producto.stock > 0 && producto.stock <= 15">{{producto.stock}}</p>
+                                <p class="badge badge-warning" *ngIf="producto.stock > 15 && producto.stock <= 40">{{producto.stock}}</p>
+                                <p class="badge badge-success" *ngIf="producto.stock > 40">{{producto.stock}}</p>
+                            </td>
                             <td>{{producto.precio}}</td>
                             <td>{{producto.categoria}}</td>
                             <td>{{producto.nventas}}</td>

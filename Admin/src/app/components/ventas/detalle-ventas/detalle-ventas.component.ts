@@ -24,6 +24,9 @@ export class DetalleVentasComponent implements OnInit {
   public totalstart : number = 5;
   public review: any = {};
 
+  public estadoPago: any;
+  public estado: any;
+
   constructor( private _route: ActivatedRoute, private _adminService:AdminService) { 
     this.url = GLOBAL.url;
     this.token = localStorage.getItem('token');
@@ -32,10 +35,11 @@ export class DetalleVentasComponent implements OnInit {
         this.id = params['id'];
       }
     );
+    this.estadoPago = this.orden.estadoPago;
+    this.estado = this.orden.estado;
   }
 
   ngOnInit(): void {
-
     this.init_data();
   }
 
@@ -44,14 +48,24 @@ export class DetalleVentasComponent implements OnInit {
       response => {
         if(response.data != undefined){
           this.orden = response.data;
-          this.detalles = response.detalles;
-        
-
+          this.detalles = response.detalles;     
         }else{
           this.orden = undefined;
         }
-        console.log(this.detalles);
-       
+      }
+    );
+  }
+
+  cambiar_estado(): void{
+    let data = {
+      estadoPago: this.estadoPago,
+      estado: this.estado
+    }
+    this._adminService.cambiar_estado_venta(this.id, data, this.token).subscribe(
+      response => {
+        this.init_data();
+      },error => {
+        alert("error");
       }
     );
   }

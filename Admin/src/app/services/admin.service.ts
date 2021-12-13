@@ -106,4 +106,9 @@ export class AdminService {
     return this._http.get(this.url + 'cliente/obtener_orden/' + id, { headers: headers });
   }
 
+  cambiar_estado_venta(id: string, data: Object, token: string): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.put(this.url + 'administrador/cambiar_estado_venta/' + id, data, { headers: headers });
+  }
+
 }

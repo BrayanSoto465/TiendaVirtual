@@ -134,4 +134,9 @@ export class ClienteService {
     return this._http.get(this.url + 'cliente/obtener_reviews/' + id, { headers: headers });
   }
 
+  actualizar_estrellas(id: string, estrellas: number): Observable<any> {
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this._http.put(this.url + 'producto/actualizar_estrellas/' + id, {estrellas: estrellas}, { headers: headers });
+  }
+
 }
