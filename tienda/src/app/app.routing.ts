@@ -13,10 +13,12 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
 import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
 import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
 import { IndexReviewComponent } from './components/usuario/review/index-review/index-review.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 const appRoute : Routes = [
   {path: '',component: InicioComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'registro', component: RegistroComponent},
 
   {path: 'cuenta/perfil',component: PerfilComponent, canActivate: [AuthGuard]},
   {path: 'cuenta/direcciones',component: DireccionesComponent, canActivate: [AuthGuard]},

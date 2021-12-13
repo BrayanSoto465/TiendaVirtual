@@ -25,6 +25,7 @@ import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orde
 
 import { NgRatingBarModule } from 'ng-rating-bar';
 import { IndexReviewComponent } from './components/usuario/review/index-review/index-review.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { IndexReviewComponent } from './components/usuario/review/index-review/i
     DireccionesComponent,
     IndexOrdenesComponent,
     DetalleOrdenComponent,
-    IndexReviewComponent
+    IndexReviewComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
