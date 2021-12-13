@@ -30,9 +30,20 @@
                           <th class="border-0 py-2 pl-0">Fecha:</th>
                           <td class="border-0 py-2 px-0 text-muted">{{orden.created | date}}</td>
                         </tr>
-                       
+                        <tr>
+                          <th class="border-0 py-2 pl-0">Metodo Pago:</th>
+                          <td class="border-0 py-2 px-0 text-muted">{{orden.metodoPago}}</td>
+                        </tr>
+                        <tr>
+                          <th class="border-0 py-2 pl-0">Estado Pago:</th>
+                          <td class="border-0 py-2 px-0 text-muted">
+                            <p class="badge badge-warning" *ngIf="orden.estadoPago == 'Esperando Pago'">{{orden.estadoPago}}</p>
+                            <p class="badge badge-success" *ngIf="orden.estadoPago == 'Pagado'">{{orden.estadoPago}}</p>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
+
                   </div>
                   <div class="col-lg-6">
                     <table class="table mb-0">
@@ -52,14 +63,50 @@
                           <td class="border-0 py-2 px-0 text-muted">{{orden.transaccion}}</td>
                         </tr>
                         <tr>
-                          <th class="border-0 py-2 pl-0">Estado:</th>
-                          <td class="border-0 py-2 px-0 text-muted">{{orden.estado}}</td>
+                          <th class="border-0 py-2 pl-0">Estado Pedido:</th>
+                          <td class="border-0 py-2 px-0 text-muted">
+                            <p class="badge badge-warning" *ngIf="orden.estado == 'Procesando'">{{orden.estado}}</p>
+                            <p class="badge badge-success" *ngIf="orden.estado == 'Enviado'">{{orden.estado}}</p>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
                 
+              </div>
+            </div>
+
+            <div class="col-12 mb-4" *ngIf="orden.estado != 'Enviado' || orden.estadoPago != 'Pagado'">
+              <div class="card card-body py-3 box-shadow ">
+                <div class="card-header">
+                  <strong>Cambiar estado</strong>
+                </div>
+
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-4" *ngIf="orden.estadoPago == 'Esperando Pago'">
+                      
+                      <select class="form-control custom-select" id="select-input" name="estadoPago" [(ngModel)]="estadoPago">
+                        <option value="Esperando Pago" disabled selected >Esperando Pago</option>
+                        <option value="Pagado">Pagado</option>  
+                      </select>
+
+                    </div>
+                    <div class="col-lg-4" *ngIf="orden.estado == 'Procesando'">
+                      
+                      <select class="form-control custom-select" id="select-input" name="estado" [(ngModel)]="estado">
+                        <option value="Procesando" disabled selected >Procesando</option>
+                        <option value="Enviado">Enviado</option>  
+                      </select>
+
+                    </div>  
+                    <div class="col-lg-4">
+                      <button (click)="cambiar_estado()" class="btn btn-primary mr-3">Cambiar estado</button>
+                    </div>
+                  </div>  
+                </div>
+
               </div>
             </div>
 
@@ -133,7 +180,7 @@
                     </div>
                   </div>
                   
-                </div>
+              </div>
             </div>
           </div>
         

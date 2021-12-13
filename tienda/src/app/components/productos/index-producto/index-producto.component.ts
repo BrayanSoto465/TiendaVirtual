@@ -19,6 +19,7 @@ export class IndexProductoComponent implements OnInit {
   public config_global : any = {};
   public filter_categoria ='';
   public productos : Array<any> =[];
+  public productos_todos : Array<any> =[];
   public filter_producto ='';
   public filter_cat_productos = 'todos';
   public url : any;
@@ -27,7 +28,7 @@ export class IndexProductoComponent implements OnInit {
 
   public route_categoria : any;
   public page = 1;
-  public pageSize = 3;
+  public pageSize = 15;
   public token : any;
   
   public sort_by = 'Defecto';
@@ -36,24 +37,21 @@ export class IndexProductoComponent implements OnInit {
     cantidad : 1
   };
 
-  
-
   public btn_cart = false;
   public socket = io('http://localhost:4201');
+  
   constructor(private _clienteService: ClienteService, private _route: ActivatedRoute) { 
     this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
     this._clienteService.obtener_publico().subscribe(
       response=>{
         this.config_global = response.data;
-    
       }
-    )
+    );
 
     this._route.params.subscribe(
       params=>{
         this.route_categoria = params['categoria'];
-        console.log(this.route_categoria);
 
 
         if(this.route_categoria){
@@ -66,9 +64,9 @@ export class IndexProductoComponent implements OnInit {
           );
         }else {
           this._clienteService.listar_producto_publico('').subscribe(
-            response=>{
-             
+            response=>{     
               this.productos = response.data;
+              this.productos_todos = response.data;
               this.load_data = false;
             }
           );
@@ -167,8 +165,7 @@ export class IndexProductoComponent implements OnInit {
   buscar_por_categoria(){
     if(this.filter_cat_productos == 'todos'){
       this._clienteService.listar_producto_publico(this.filter_producto).subscribe(
-        response=>{
-         
+        response=>{ 
           this.productos = response.data;
           this.load_data = false;
         }
@@ -200,7 +197,6 @@ export class IndexProductoComponent implements OnInit {
     if(this.sort_by == 'Defecto'){
       this._clienteService.listar_producto_publico('').subscribe(
         response=>{
-         
           this.productos = response.data;
           this.load_data = false;
         }
@@ -308,6 +304,16 @@ export class IndexProductoComponent implements OnInit {
         
       }
     );
+  }
+
+  categorias_length(categoria: any): number {
+    let count = 0;
+      this.productos_todos.forEach((product : any) => {
+        if(product.categoria.toLowerCase().replace(/\s+/g, "") == categoria.toLowerCase().replace(/\s+/g, "")){
+          count++;
+        }
+      });
+    return count;
   }
 }
 

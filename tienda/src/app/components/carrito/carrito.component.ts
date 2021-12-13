@@ -3,6 +3,8 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { io } from "socket.io-client";
 import { GuestService } from 'src/app/services/guest.service';
+import { Router } from '@angular/router';
+
 declare var iziToast : any;
 declare var Cleave : any;
 declare var StickySidebar : any; 
@@ -32,8 +34,9 @@ export class CarritoComponent implements OnInit {
     public direccion : any;
     public venta : any = {};
     public dventa : Array<any> = [];
+    
 
-  constructor(private _clienteService : ClienteService, private _guestService : GuestService) { 
+  constructor(private _clienteService : ClienteService, private _guestService : GuestService, private _router : Router) { 
     this.url = GLOBAL.url;
     this.token = localStorage.getItem('token');
     this.idcliente = localStorage.getItem('_id');
@@ -84,17 +87,15 @@ export class CarritoComponent implements OnInit {
           this.venta.transaccion = order.purchase_units[0].payments.captures[0].id;
           this.venta.detalles = this.dventa;
           this.venta.direccion = this.direccion._id;
+          this.venta.estadoPago = 'Pago Efectuado';
 
           console.log(this.venta);
 
           this._clienteService.registro_compra_cliente(this.venta,this.token).subscribe(
             response =>{
-              console.log(response);
+              this._router.navigate(['cuenta/ordenes/' + response.data._id]);
             }
-
           );
-
-          
         },
         onError : (err : any)=>{
           console.log("Error Paypal *****");
@@ -183,5 +184,14 @@ export class CarritoComponent implements OnInit {
         this.init_Data();
       }
     );
+  }
+
+  ordenar(): void{
+    if(this.venta.metodoPago){
+      alert(this.venta.metodoPago);
+    }else{
+      alert("no hay metodo de pago");
+    }
+    alert("Error");
   }
 }

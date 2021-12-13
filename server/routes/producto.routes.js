@@ -35,4 +35,5 @@ router.get('/listar_producto_nuevo_publico',productoController.listar_producto_n
 router.get('/listar_producto_masvendido_publico',productoController.listar_producto_masvendido_publico);
 
 router.get('/obtener_reviews_producto/:id', productoController.obtener_review_producto);
+router.put('/actualizar_estrellas/:id', productoController.actualizar_estrellas);
 module.exports = router;

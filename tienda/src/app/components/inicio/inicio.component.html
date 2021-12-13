@@ -6,8 +6,6 @@
     <section class="cs-carousel cs-controls-onhover">
         <div class="cs-carousel-inner" data-carousel-options=''>
     
-          
-    
           <!-- Slide 4 -->
           <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/04.jpg);">
             <div class="container pt-5 pb-6">
@@ -16,7 +14,7 @@
                   <h3 class="font-size-lg text-uppercase cs-from-top cs-delay-1">Mejores precios</h3>
                   <h2 class="display-2 mb-lg-5 pb-3 cs-scale-down">Revisa nuestras ofertas</h2>
                   <div class="mb-4 cs-scale-down cs-delay-2">
-                    <a href="shop-catalog.html" class="btn btn-outline-warning btn-lg">Tienda</a>
+                    <a [routerLink]="['/productos']" class="btn btn-outline-warning btn-lg">Tienda</a>
                   </div>
                 </div>
               </div>
@@ -43,21 +41,21 @@
         <div class="cs-carousel cs-nav-outside">
           <div class="cs-carousel-inner cs-carousel-inner-two" data-carousel-options=''>
             <!-- Category -->
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
+            <a [routerLink]="['/productos/categoria/pinturas']" class="d-block cs-image-scale cs-heading-highlight text-center">
               <div class="cs-image-inner mb-3 rounded">
                 <img src="../../assets/img/ecommerce/home/categories/pintuta.jpg" alt="">
               </div>
               <h3 class="h5 mb-1">Pinturas</h3>
             </a>
             <!-- Category -->
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
+            <a [routerLink]="['/productos/categoria/metales']" class="d-block cs-image-scale cs-heading-highlight text-center">
               <div class="cs-image-inner mb-3 rounded">
                 <img src="../../assets/img/ecommerce/home/categories/metal.jpg" alt="">
               </div>
               <h3 class="h5 mb-1">Metales</h3>
             </a>
             <!-- Category -->
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
+            <a [routerLink]="['/productos']" class="d-block cs-image-scale cs-heading-highlight text-center">
               <div class="cs-image-inner mb-3 rounded">
                 <img src="../../assets/img/ecommerce/home/categories/ottt.jpg" alt="">
               </div>
@@ -177,118 +175,7 @@
         </div>
     </section>
 
-    <!-- Popular categories -->
-    <section class="container mt-1 mb-3 my-sm-4 py-5 py-lg-6">
-        <h2 class="h1 mb-5 pb-3 text-center">Categorias populares</h2>
-        <div class="cs-carousel cs-nav-outside">
-          <div class="cs-carousel-inner cs-carousel-inner-five" data-carousel-options='{
-            
-          }'>
 
-            <!-- Category -->
-            <div class="pb-2" *ngFor="let item of categorias">
-              <a [routerLink]="['/productos/categoria/', item.titulo.toLowerCase()]" class="d-block cs-image-scale cs-heading-highlight text-center">
-                <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                  <img src="../../assets/img/ecommerce/home/categories/01.png" alt="Category image">
-                </div>
-                <h3 class="h5 mb-3">{{item.titulo}}</h3>
-              </a>
-            </div>
-
-            
-          </div>
-        </div>
-    </section>
-
-    <!-- Mobile app CTA -->
-    <section class="bg-dark">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-5">
-              <img src="../../assets/img/ecommerce/home/" class="d-block mx-auto my-4 mb-lg-0 mt-lg-n4" width="498" alt="Illustartion">
-            </div>
-            <div class="col-md-7 col-lg-6 pt-3 pb-5 pt-md-5 pb-md-4 ml-auto">
-              <h2 class="text-light text-center text-md-left pb-3">POR SI ACASO TENEMOS</h2>
-              <div class="d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-md-start">
-                <a href="#" class="btn-market btn-apple mb-3 mx-2 ml-md-0 mr-md-3" role="button">
-                  <span class="btn-market-subtitle">Download on the</span>
-                  <span class="btn-market-title">App Store</span>
-                </a>
-                <a href="#" class="btn-market btn-google mb-3 mx-2 mx-md-0" role="button">
-                  <span class="btn-market-subtitle">Download on the</span>
-                  <span class="btn-market-title">Google Play</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section class="container pt-5 pb-2 pb-sm-5 py-md-5 py-lg-6">
-        <div class="row py-3">
-          <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
-            <img class="mb-4" src="../../assets/img/ecommerce/home/services/delivery.svg" width="48" alt="Worldwide Shipping">
-            <h5 class="h5 mb-2">Envio rapido</h5>
-            <p class="mb-0 text-muted">$$$</p>
-          </div>
-          <span class="divider-vertical d-sm-block d-none"></span>
-          <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
-            <img class="mb-4" src="../../assets/img/ecommerce/home/services/support.svg" width="48" alt="Customer Support">
-            <h5 class="h5 mb-2">24/7 Soporte</h5>
-            <p class="mb-0 text-muted">Atención al cliente amigable las 24 horas, los 7 días de la semana</p>
-          </div>
-          <span class="divider-vertical d-sm-block d-none"></span>
-          <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
-            <img class="mb-4" src="../../assets/img/ecommerce/home/services/guarantee.svg" width="48" alt="Customer Support">
-            <h5 class="h5 mb-2">Garantía de devolución del dinero</h5>
-            <p class="mb-0 text-muted">Devolvemos el dinero en un plazo de 30 días.</p>
-          </div>
-          <span class="divider-vertical d-sm-block d-none"></span>
-          <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
-            <img class="mb-4" src="../../assets/img/ecommerce/home/services/payment.svg" width="48" alt="Customer Support">
-            <h5 class="h5 mb-2">Pago seguro en línea</h5>
-            <p class="mb-0 text-muted">Aceptamos efectivo :D</p>
-          </div>
-        </div>
-    </section>
-
-
-    <!-- Insagram -->
-    <section class="pt-5 pb-4 pt-lg-6 pb-lg-5 border-top border-bottom">
-        <div class="container pt-md-4 pb-2 pt-lg-0 pb-lg-0">
-          <div class="row">
-            <div class="col-md-4 text-center text-md-left pb-2 pb-md-0 mb-4 mb-md-0">
-              <p class="text-dark text-uppercase mb-2">Siguenos en Instagram</p>
-              <h2 class="h1 pb-2 pb-md-3">@Dimport</h2>
-              <a href="#" class="btn btn-outline-primary btn-lg">
-                <i class="cxi-instagram font-size-lg mr-1"></i>
-                 Instagram
-              </a>
-            </div>
-            <div class="col-md-8">
-              <div class="cs-carousel cs-nav-outside">
-                <div class="cs-carousel-inner cs-carousel-inner-six" data-carousel-options='{
-                  
-                }'>
-                  <!-- Image -->
-                  <div>
-                    <img src="../../assets/img/ecommerce/home/instagram/01.png" alt="Image">
-                  </div>
-                  <!-- Image -->
-                  <div>
-                    <img src="../../assets/img/ecommerce/home/instagram/01.png" alt="Image">
-                  </div>
-                  <!-- Image -->
-                  <div>
-                    <img src="../../assets/img/ecommerce/home/instagram/01.png" alt="Image">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 </main>
 
 <app-footer></app-footer>
