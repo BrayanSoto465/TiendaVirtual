@@ -88,6 +88,8 @@ export class CarritoComponent implements OnInit {
           this.venta.detalles = this.dventa;
           this.venta.direccion = this.direccion._id;
           this.venta.estadoPago = 'Pago Efectuado';
+          this.venta.metodoPago = 'PayPal';
+
 
           console.log(this.venta);
 
